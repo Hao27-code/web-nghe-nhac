@@ -1,0 +1,43 @@
+.header-container{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: Lexend, "sans-serif";
+  font-size: 20px;
+  font-weight: 500;
+}
+.left{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 60px;
+  margin-left: 15px;
+}
+.right{
+  margin-right: 15px;
+}
+
+.logo-icon{
+  width: 36px;
+  height: 36px;
+}
+ion-toolbar {
+  --background: #111827;
+  --color: #FFFFFF;
+
+}
+.search-btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #242e46;
+
+}
+.search-btn img {
+  width: 25px;
+  height: 25px;
+}
+
