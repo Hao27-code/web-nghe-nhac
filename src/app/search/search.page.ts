@@ -11,13 +11,14 @@ import { Location } from '@angular/common';
   imports: [ IonicModule]
 })
 
-export class SearchPage  {
+export class SearchPage {
   private router: any;
 
   // eslint-disable-next-line @angular-eslint/prefer-inject
   // @ts-ignore
   // eslint-disable-next-line @angular-eslint/prefer-inject
-  constructor(private location: Location) { }
+  constructor(private location: Location) {
+  }
 
   //Quay về trang trước
   goBack() {
@@ -25,6 +26,29 @@ export class SearchPage  {
   }
 
   protected onSearch($event: any) {
+
+  }
+
+  suggestions = [
+    '50 năm về sau',
+    'cô dại và hoa dành dành',
+    'hạt mưa vương vấn',
+    'mở lòng vì ai'
+  ];
+  history = [
+    {
+      name: 'Sóng Gió',
+      artist: 'Jack, K-ICM',
+      image: 'assets/img/song1.jpg'
+    },
+    {
+      name: 'Bạc Phận',
+      artist: 'Jack, K-ICM',
+      image: 'assets/img/song2.jpg'
+    }
+  ];
+
+  protected clearHistory() {
 
   }
 }
