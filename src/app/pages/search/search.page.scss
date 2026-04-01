@@ -1,0 +1,103 @@
+.search-header{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 10px;
+
+}
+.suggest{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px;
+}
+.suggest span {
+  background: #1F2937;
+  padding: 8px 12px;
+  border-radius: 20px;
+  color: white;
+  font-size: 13px;
+}
+.section{
+  padding: 10px;
+}
+.title-row{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.title{
+  color: white;
+  font-weight: 500;
+}
+.clear {
+  color: #194bff;
+  font-size: 15px;
+}
+ion-content{
+  --background: #11192C;
+}
+ion-toolbar{
+  --background: #11192C;
+  --border-width: 0 !important;
+}
+ion-searchbar {
+  --background: #1F2937;
+  --color: white;               /* chữ */
+  --placeholder-color: #9CA3AF; /* placeholder */
+  --icon-color: #9CA3AF;        /* icon kính lúp */
+}
+.info{
+  color: white;
+}
+
+//đường kẻ dưới header
+ion-header,
+ion-toolbar,
+ion-content {
+  --background: #0B0F14 !important;
+  background: #0B0F14 !important;
+}
+.header-md::after,
+.header-ios::after {
+  display: none !important;
+}
+ion-header {
+  box-shadow: none !important;
+}
+
+.suggest-list{
+  color: #FFFFFF;
+}
+.result-list{
+  color: #FFFFFF;
+}
+.suggest-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  border-bottom: 1px solid #1F2937;
+}
+.result-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+}
+.result-item img {
+  width: 65px;
+  border-radius: 6px;
+  justify-items: center;
+}
+.item img{
+  width: 65px;
+  border-radius: 6px;
+  justify-items: center;
+}
+.item{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+}

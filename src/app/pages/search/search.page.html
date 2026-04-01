@@ -1,0 +1,67 @@
+<ion-header >
+  <ion-toolbar>
+    <div class="search-header">
+      <img src="assets/icon/muiten-trai.svg" (click)="goBack()" class="icon-arrow">
+      <ion-searchbar placeholder="Tìm kiếm bài hát, nghệ sĩ..."(ionInput)="onSearch($event)"></ion-searchbar>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+  @if (!keyword) {
+    <!--    //đề xuất-->
+    <div class="section">
+      <div class="title">Đề xuất cho bạn</div>
+      <div class="suggest">
+        @for (item of filteredSuggestions; track item){
+          <span>{{item}}</span>
+        }
+      </div>
+    </div>
+    <!--    //lịch sử-->
+    <div class="section">
+      <div class="title-row">
+        <div class="title">Tìm kiếm gần đây</div>
+        <span class="clear" (click)="clearHistory()">xóa</span>
+      </div>
+
+      @for (item of history; track  item){
+        <div class="item">
+          <img [src]="item.image" (error)="item.image='assets/img/default.jpg'" class="result-img">
+          <div class="info">
+            <div class="name">{{item.name}}</div>
+            <div class="artist">{{item.artist}}</div>
+          </div>
+          <img src="" class="more">
+        </div>
+      }
+    </div>
+  }
+  @else {
+    <!--    //gợi ý-->
+    <div class="suggest-list">
+      @for (item of filteredSuggestions; track item){
+        <div class="suggest-item">
+          <img src="assets/icon/timkiem.svg">
+          <span>{{item}}</span>
+        </div>
+      }
+    </div>
+    <!--    //kết quả-->
+    <div class="result-list">
+      @for (item of results; track item){
+        <div class="result-item">
+          <img [src]="item.image" (error)="item.image='assets/img/default.jpg'">
+          <div class="info">
+            <div class="name">{{item.name}}</div>
+            <div class="artist">{{item.artist}}</div>
+          </div>
+          <img src="">
+        </div>
+      }
+    </div>
+  }
+</ion-content>
+

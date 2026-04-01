@@ -1,16 +1,16 @@
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import {IonicModule} from "@ionic/angular";
-import {Component} from "@angular/core";
 import { Location } from '@angular/common';
-
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.page.html',
   styleUrls: ['./search.page.scss'],
   standalone: true,
-  imports: [ IonicModule]
+  imports: [ CommonModule, FormsModule, IonicModule]
 })
-
 export class SearchPage {
   private router: any;
 
@@ -25,15 +25,21 @@ export class SearchPage {
     this.location.back();
   }
 
-  protected onSearch($event: any) {
+  keyword = '';
 
+  onSearch($event: any) {
+    this.keyword = $event.target.value;
   }
-
+  get filteredSuggestions() {
+    return this.suggestions.filter(item =>
+      item.toLowerCase().includes(this.keyword.toLowerCase())
+    );
+  }
   suggestions = [
-    '50 năm về sau',
-    'cô dại và hoa dành dành',
-    'hạt mưa vương vấn',
-    'mở lòng vì ai'
+    'hoa nở bên đường',
+    'hoàng dũng',
+    'hoa có lau',
+    'cô dại và hoa dành dành'
   ];
   history = [
     {
@@ -44,11 +50,17 @@ export class SearchPage {
     {
       name: 'Bạc Phận',
       artist: 'Jack, K-ICM',
-      image: 'assets/img/song2.jpg'
+      image: 'assets/img/bac_phan.jpg',
     }
   ];
 
   protected clearHistory() {
 
   }
+  get results() {
+    return this.history.filter(item =>
+      item.name.toLowerCase().includes(this.keyword.toLowerCase())
+    );
+  }
 }
+

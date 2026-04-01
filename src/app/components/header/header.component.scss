@@ -34,10 +34,20 @@ ion-toolbar {
   height: 40px;
   border-radius: 50%;
   background: #242e46;
-
+  border: 1px solid #334155;
+  transition: 0.3s;
+}
+.search-btn:hover {
+  border-color: #34b5f8;
+  background: #323846;
 }
 .search-btn img {
   width: 25px;
   height: 25px;
 }
+.search-btn:active {
+  transform: scale(0.95);
+  background: #334155;
+}
+
 
