@@ -22,9 +22,33 @@
               {{item.name}}
             </div>
           </div>
-h
         </ion-card>
       }
     </div>
+  </section>
+
+  <section class="album-section">
+    <ion-card class="album-card">
+      <img src="assets/img/album_banner.jpg" class="album-img">
+      <ion-card-content>
+        <div class="album-text-banner">
+          <p class="label">ALBUM NỔI BẬT</p>
+          <h2 class="title">Midnight Echoes</h2>
+          <p class="desc">
+            Khám phá những bản nhạc thịnh hành và nghệ sĩ hàng đầu
+          </p>
+        </div>
+        <div class="actions">
+          <ion-button class="btn-play">
+            <ion-icon [icon]="icons.play"></ion-icon>
+            Phát ngay
+          </ion-button>
+          <ion-button fill="outline" class="btn-more">
+            <ion-icon [icon]="icons.informationCircle"></ion-icon>
+            Xem thêm
+          </ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
   </section>
 </ion-content>

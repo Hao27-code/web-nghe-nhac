@@ -36,12 +36,11 @@
 }
 .playlist-card {
   min-width: 100%;
-  height: 180px;
+  height: 140px;
   border-radius: 20px;
   overflow: hidden;
   position: relative;
   scroll-snap-align: start; /* dính từng slide */
-  padding: 24px 0 0;
 }
 .playlist-card img {
   width: 100%;
@@ -81,5 +80,114 @@
   margin: 0 0 10px;
 }
 ion-content {
-  --background: #11192C;
+  --background: #10182B;
 }
+.album-card {
+  border-radius: 20px;
+  background: linear-gradient(180deg, #152035, #1d2948);
+  height: 390px;
+}
+
+.label {
+  color: #30d9ff;
+  font-size: 14px;
+  font-weight: 600;
+}
+.title {
+  color: #ffffff;
+  font-weight: 800;
+  margin: 5px 0;
+  font-size: clamp(16px, 2.5vw, 22px);    //Tự scale theo màn hình
+}
+.desc {
+  color: #949494;
+  font-size: 14px;
+  font-weight: 400;
+}
+.album-section{
+  padding:25px 15px 0;
+}
+ion-card{
+  margin: 0;
+}
+.actions {
+  display: flex;
+  justify-content: space-between;   //đẩy 2 nút ra 2 mép
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+  height: 50%;
+  overflow: visible;    //Cho phép nội dung bên trong được “tràn ra ngoài” container
+}
+.actions ion-button {
+  --min-height: 48px;
+}
+.album-img {
+  border-radius: 20px;
+  object-fit: cover;   //không méo ảnh
+  overflow: hidden;
+  width: 40%;
+  min-width: 35%;
+  margin: 22px;
+  aspect-ratio: 1/1;  //giữ tỉ lệ vuông
+}
+ion-card-content{
+  padding: 0 22px 22px ;
+}
+ion-button{
+  --border-radius: 50px;    // nút phát ngay và xem thêm
+}
+ion-button ion-icon {        //khoảng cách icon đến chữ của nút phát ngay và xem thêm
+  margin-right: 8px;
+}
+@media (min-width: 768px) {
+  .album-card {
+    display: flex;
+    gap: 20px;
+  }
+}
+.btn-play{
+  height: 50px;
+  width: 45%;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --background: linear-gradient(90deg, #00a6ff, #0458f5);
+  --color: #fff;
+}
+.btn-play::part(native):hover {
+  filter: brightness(1.2);
+  transform: scale(1.05) translateY(-2px);
+}
+ion-button::part(native) {
+  transition: transform 0.25s ease, filter 0.25s ease;    //animation mượt nút phát ngay
+}
+.btn-more{
+  height: 50px;
+  width: 45%;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --background: #242e46;    //nền
+  --color: #ffffff;
+  --border-color: #334155;    //viền
+  --border-width: 2px;
+}
+.btn-more::part(native):hover {
+  background: #323846;
+  border-color: #34b5f8;
+}
+
+.btn-more::part(native):hover {
+  transform: scale(1.05);
+}
+:root {
+  --ion-font-family: 'Lexend',sans-serif;
+}
+* {
+  font-family: 'Lexend',sans-serif;
+}
+.title {
+  font-size: 24px;
+}
+
+

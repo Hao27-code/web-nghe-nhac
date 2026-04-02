@@ -2,6 +2,7 @@ import {Component, ElementRef, ViewChild} from '@angular/core';
 import {HeaderComponent} from "../components/header/header.component";
 import {IonicModule} from "@ionic/angular";
 import {NgClass, NgOptimizedImage} from "@angular/common";
+import { play, informationCircle } from 'ionicons/icons';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +12,7 @@ import {NgClass, NgOptimizedImage} from "@angular/common";
 
 })
 export class HomePage {
-
+  icons = { play, informationCircle };
   currentIndex: number = 0;
   constructor() {}
   greeting='';
@@ -75,10 +76,7 @@ export class HomePage {
           }, 50);
 
         }, 300);
-
       }
-
-
     }, 3000);
 
   }
