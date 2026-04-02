@@ -8,8 +8,8 @@
       {{greeting}}
     </div>
 
-    <div class="playlist-row">
-      @for (item of playlists; track item){
+    <div class="playlist-row" #scrollContainer>
+      @for (item of loopPlaylists; track item){
         <ion-card class="playlist-card">
           <img [src]="item.image">
 
@@ -22,7 +22,7 @@
               {{item.name}}
             </div>
           </div>
-
+h
         </ion-card>
       }
     </div>
