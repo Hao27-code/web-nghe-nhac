@@ -1,7 +1,7 @@
 <ion-header >
   <ion-toolbar>
     <div class="search-header">
-      <img src="assets/icon/muiten-trai.svg" (click)="goBack()" class="icon-arrow">
+      <img src="../../assets/icon/muiten-trai.svg" (click)="goBack()" class="icon-arrow">
       <ion-searchbar placeholder="Tìm kiếm bài hát, nghệ sĩ..."(ionInput)="onSearch($event)"></ion-searchbar>
     </div>
   </ion-toolbar>
@@ -44,7 +44,7 @@
     <div class="suggest-list">
       @for (item of filteredSuggestions; track item){
         <div class="suggest-item">
-          <img src="assets/icon/timkiem.svg">
+          <img src="../../assets/icon/timkiem.svg">
           <span>{{item}}</span>
         </div>
       }
