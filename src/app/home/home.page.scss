@@ -357,5 +357,8 @@ ion-card-content {
   flex-direction: column;
   height: 100%;
 }
+ion-content {
+  --padding-bottom: 90px;
+}
 
 

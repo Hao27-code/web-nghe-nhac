@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 import {IonicModule} from "@ionic/angular";
 import {RouterLink} from "@angular/router";
+import { addIcons } from 'ionicons';
+import { homeOutline, albumsOutline, heartOutline, personOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-tabs',
@@ -18,3 +20,9 @@ export class TabsPage  {
 
 
 }
+addIcons({
+  'home-outline': homeOutline,
+  'albums-outline': albumsOutline,
+  'heart-outline': heartOutline,
+  'person-outline': personOutline
+});

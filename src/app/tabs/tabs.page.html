@@ -2,14 +2,39 @@
 
   <ion-router-outlet></ion-router-outlet>
 
-  <ion-tab-bar slot="bottom">
-
+  <ion-tab-bar slot="bottom" class="custom-tab-bar">
     <ion-tab-button tab="home" href="/tabs/home">
-      <ion-icon name="home-outline"></ion-icon>
+      <div class="icon-wrapper">
+        <img src="assets/icon/home-outline.svg" class="icon-default">
+        <img src="assets/icon/home-fill.svg" class="icon-active">
+      </div>
       <ion-label>Trang chủ</ion-label>
     </ion-tab-button>
 
+    <ion-tab-button tab="library" href="/tabs/library">
+      <div class="icon-wrapper">
+        <img src="assets/icon/library-outline.svg" class="icon-default">
+        <img src="assets/icon/library-fill.svg" class="icon-active">
+      </div>
+      <ion-label>Thư viện</ion-label>
+    </ion-tab-button>
 
+    <ion-tab-button tab="favorite" href="/tabs/favorite">
+      <div class="icon-wrapper">
+        <img src="assets/icon/heart-outline.svg" class="icon-default">
+        <img src="assets/icon/heart-fill.svg" class="icon-active">
+      </div>
+      <ion-label>Yêu thích</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="profile" href="/tabs/profile">
+      <div class="icon-wrapper">
+        <img src="assets/icon/user-outline.svg" class="icon-default">
+        <img src="assets/icon/user-fill.svg" class="icon-active">
+      </div>
+      <ion-label>Cá nhân</ion-label>
+    </ion-tab-button>
   </ion-tab-bar>
+
 
 </ion-tabs>
