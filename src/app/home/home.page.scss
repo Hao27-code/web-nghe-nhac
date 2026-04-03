@@ -83,10 +83,15 @@ ion-content {
   --background: #10182B;
 }
 .album-card {
+  min-height: 300px;
   border-radius: 20px;
-  background: linear-gradient(180deg, #152035, #1d2948);
-  height: 390px;
+  background: linear-gradient(135deg, #1e2a44, #0f172a);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
+
 
 .label {
   color: #30d9ff;
@@ -103,6 +108,10 @@ ion-content {
   color: #949494;
   font-size: 14px;
   font-weight: 400;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 .album-section{
   padding:25px 15px 0;
@@ -119,9 +128,12 @@ ion-card{
   flex-wrap: wrap;
   height: 50%;
   overflow: visible;    //Cho phép nội dung bên trong được “tràn ra ngoài” container
+  padding-top: 20px;
 }
 .actions ion-button {
+  flex: 1;    //chia đều không gian
   --min-height: 48px;
+  min-width: 0;    //cho phép co lại đúng
 }
 .album-img {
   border-radius: 20px;
@@ -131,24 +143,71 @@ ion-card{
   min-width: 35%;
   margin: 22px;
   aspect-ratio: 1/1;  //giữ tỉ lệ vuông
+
+  box-shadow: 10px 10px 20px rgba(112, 224, 255, 0.3);
 }
 ion-card-content{
   padding: 0 22px 22px ;
 }
 ion-button{
   --border-radius: 50px;    // nút phát ngay và xem thêm
+  white-space: nowrap;    //cho chữ nằm 1 dòng
 }
 ion-button ion-icon {        //khoảng cách icon đến chữ của nút phát ngay và xem thêm
-  margin-right: 8px;
+  margin-right: 6px;
 }
-@media (min-width: 768px) {
-  .album-card {
-    display: flex;
-    gap: 20px;
+
+@media (max-width: 400px) {
+  ion-button {
+    font-size: 12px;
+  }
+  .actions {
+    margin-bottom: 16px;
   }
 }
+@media (max-width: 360px) {
+  ion-button span {
+    display: none;
+  }
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+  .album-card {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 24px;
+    height: 310px;
+  }
+  .album-img {
+    width: 250px;
+    height: 250px;
+  }
+  .album-card .title {
+    font-size: 32px;
+  }
+  .desc {
+    max-width: 400px;
+  }
+  .actions {
+    width: 85%;
+    gap: 12px;
+    padding-top: 16px;
+  }
+  .label{
+    display: inline-block;
+    align-self: flex-start;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: rgba(0, 198, 255, 0.1);
+    border: 1px solid rgba(0, 198, 255, 0.3);
+    color: #00c6ff;
+    width: auto;
+    font-size: 12px;
+  }
+
+}
 .btn-play{
-  height: 50px;
+  height: 45px;
   width: 45%;
   --padding-top: 0;
   --padding-bottom: 0;
@@ -161,9 +220,11 @@ ion-button ion-icon {        //khoảng cách icon đến chữ của nút phát
 }
 ion-button::part(native) {
   transition: transform 0.25s ease, filter 0.25s ease;    //animation mượt nút phát ngay
+  padding-left: 12px;
+  padding-right: 12px;
 }
 .btn-more{
-  height: 50px;
+  height: 45px;
   width: 45%;
   --padding-top: 0;
   --padding-bottom: 0;
@@ -188,6 +249,113 @@ ion-button::part(native) {
 }
 .title {
   font-size: 24px;
+}
+ion-button ion-icon {
+  flex-shrink: 0;   //icon không bị “biến mất”
+
+}
+ion-icon{
+  font-size: 16px;
+}
+
+@media (min-width: 1024px) {
+  .album-card {
+    background: none;
+    box-shadow: none;
+    border: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 100px;
+    align-items: center;
+  }
+  .img-wrapper {
+    width: 380px;
+    height: 380px;
+  }
+
+  .album-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .title {
+    font-size: 56px;
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  .desc {
+    font-size: 18px;
+    max-width: 500px;
+  }
+  .actions {
+    margin-top: 20px;
+    gap: 16px;
+    width: 60%;
+  }
+  .album-card {
+    position: relative;
+    z-index: 2;
+  }
+  ion-content {
+    --background: radial-gradient(
+        600px circle at 200px 300px,
+        rgba(0, 198, 255, 0.15),
+        transparent 60%
+    ),
+    linear-gradient(
+        180deg,
+        #0f172a 0%,
+        #0b2230 40%,
+        #081018 100%
+    );
+  }
+  ion-content::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background: radial-gradient(
+        800px circle at left center,
+        rgba(0, 198, 255, 0.1),
+        transparent 70%
+    );
+
+    pointer-events: none;
+  }
+  .album-card {
+    background: transparent;
+    box-shadow: none;
+  }
+  .label{
+    display: inline-block;
+    align-self: flex-start;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: rgba(0, 198, 255, 0.1);
+    border: 1px solid rgba(0, 198, 255, 0.3);
+    color: #00c6ff;
+    width: auto;
+    font-size: 12px;
+  }
+}
+ion-content {
+  min-height: 100vh;
+}
+ion-content::part(scroll) {
+  min-height: 100%;
+}
+.album-card {
+  padding-bottom: 10px;
+}
+ion-card-content {
+  padding-bottom: 20px !important;
+}
+.album-text-banner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 

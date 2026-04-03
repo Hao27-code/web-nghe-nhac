@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {IonicModule} from "@ionic/angular";
 import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -12,12 +13,11 @@ import { Location } from '@angular/common';
   imports: [ CommonModule, FormsModule, IonicModule]
 })
 export class SearchPage {
-  private router: any;
 
   // eslint-disable-next-line @angular-eslint/prefer-inject
   // @ts-ignore
   // eslint-disable-next-line @angular-eslint/prefer-inject
-  constructor(private location: Location) {
+  constructor(private location: Location,private router: Router) {
   }
 
   //Quay về trang trước

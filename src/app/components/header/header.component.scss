@@ -50,4 +50,15 @@ ion-toolbar {
   background: #334155;
 }
 
+:host {
+  position: relative;
+  z-index: 1000;
+}
+ion-header {
+  position: relative;
+  z-index: 1000;
+}
+
+
+
 

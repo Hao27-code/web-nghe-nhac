@@ -9,7 +9,7 @@
     </div>
 
     <div class="playlist-row" #scrollContainer>
-      @for (item of loopPlaylists; track item){
+      @for (item of loopPlaylists; track $index){
         <ion-card class="playlist-card">
           <img [src]="item.image">
 
@@ -27,28 +27,33 @@
     </div>
   </section>
 
-  <section class="album-section">
-    <ion-card class="album-card">
-      <img src="assets/img/album_banner.jpg" class="album-img">
-      <ion-card-content>
-        <div class="album-text-banner">
-          <p class="label">ALBUM NỔI BẬT</p>
-          <h2 class="title">Midnight Echoes</h2>
-          <p class="desc">
-            Khám phá những bản nhạc thịnh hành và nghệ sĩ hàng đầu
-          </p>
+  <div class="page-container">
+    <section class="album-section">
+      <ion-card class="album-card">
+        <div class="img-wrapper">
+          <img src="assets/img/album_banner.jpg" class="album-img">
         </div>
-        <div class="actions">
-          <ion-button class="btn-play">
-            <ion-icon [icon]="icons.play"></ion-icon>
-            Phát ngay
-          </ion-button>
-          <ion-button fill="outline" class="btn-more">
-            <ion-icon [icon]="icons.informationCircle"></ion-icon>
-            Xem thêm
-          </ion-button>
-        </div>
-      </ion-card-content>
-    </ion-card>
-  </section>
+        <ion-card-content>
+          <div class="album-text-banner">
+            <p class="label">ALBUM NỔI BẬT</p>
+            <h2 class="title">Midnight Echoes</h2>
+            <p class="desc">
+              Khám phá những giai điệu êm dịu cho đêm muộn. Thư giãn cùng các bản nhạc được tuyển chọn kỹ lưỡng.
+            </p>
+          </div>
+          <div class="actions">
+            <ion-button class="btn-play">
+              <ion-icon slot="start" [icon]="icons.play"></ion-icon>
+              Phát ngay
+            </ion-button>
+            <ion-button fill="outline" class="btn-more">
+              <ion-icon slot="start" [icon]="icons.informationCircle"></ion-icon>
+              Xem thêm
+            </ion-button>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </section>
+  </div>
+
 </ion-content>

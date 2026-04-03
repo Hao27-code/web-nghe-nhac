@@ -7,7 +7,7 @@ import {Router} from "@angular/router";
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
   imports: [
-    IonicModule
+    IonicModule,
   ]
 })
 export class HeaderComponent   {
@@ -15,9 +15,8 @@ export class HeaderComponent   {
   // eslint-disable-next-line @angular-eslint/prefer-inject
   constructor(private router:Router) { }
 
-
-
   goSearch() {
+    console.log('clicked');
     this.router.navigate(['/search']);
   }
 }
