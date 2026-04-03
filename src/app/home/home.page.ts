@@ -3,12 +3,13 @@ import {HeaderComponent} from "../components/header/header.component";
 import {IonicModule} from "@ionic/angular";
 import {NgClass, NgOptimizedImage} from "@angular/common";
 import { play, informationCircle } from 'ionicons/icons';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [HeaderComponent, IonicModule, NgClass, NgOptimizedImage],
+  imports: [HeaderComponent, IonicModule, NgClass, NgOptimizedImage,CommonModule ],
 
 })
 export class HomePage {

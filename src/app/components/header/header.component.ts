@@ -16,7 +16,6 @@ export class HeaderComponent   {
   constructor(private router:Router) { }
 
   goSearch() {
-    console.log('clicked');
-    this.router.navigate(['/search']);
+    this.router.navigate(['/tabs/search']);
   }
 }

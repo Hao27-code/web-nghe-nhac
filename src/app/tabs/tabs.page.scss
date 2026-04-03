@@ -1,0 +1,15 @@
+ion-router-outlet {
+  position: relative;
+  z-index: 1;
+}
+ion-tab-bar {
+  position: relative;
+  z-index: 10;
+}
+.tabs-inner {
+  pointer-events: none;
+}
+
+ion-router-outlet > *:not(app-tabs) {
+  display: none;
+}
