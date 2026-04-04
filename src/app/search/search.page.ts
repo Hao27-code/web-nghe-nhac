@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {IonicModule} from "@ionic/angular";
 import { Location } from '@angular/common';
-import { Router } from '@angular/router';
+import { SearchService } from '../services/search.service';
 
 @Component({
   selector: 'app-search',
@@ -14,53 +14,29 @@ import { Router } from '@angular/router';
 })
 export class SearchPage {
 
+   keyword = '';
   // eslint-disable-next-line @angular-eslint/prefer-inject
   // @ts-ignore
   // eslint-disable-next-line @angular-eslint/prefer-inject
-  constructor(private location: Location,private router: Router) {
+  constructor(private location: Location,private searchService: SearchService) {
   }
-
+  onSearch(event: any) {
+    this.keyword = event.target.value;
+  }
   //Quay về trang trước
   goBack() {
     this.location.back();
   }
+  protected clearHistory() {}
 
-  keyword = '';
-
-  onSearch($event: any) {
-    this.keyword = $event.target.value;
+  get suggestions(): string[] {
+    return this.searchService.getFiltered(this.keyword);
   }
-  get filteredSuggestions() {
-    return this.suggestions.filter(item =>
-      item.toLowerCase().includes(this.keyword.toLowerCase())
-    );
+  get results(): any[] {
+    return this.searchService.getHistory(this.keyword);
   }
-  suggestions = [
-    'hoa nở bên đường',
-    'hoàng dũng',
-    'hoa có lau',
-    'cô dại và hoa dành dành'
-  ];
-  history = [
-    {
-      name: 'Sóng Gió',
-      artist: 'Jack, K-ICM',
-      image: 'assets/img/song1.jpg'
-    },
-    {
-      name: 'Bạc Phận',
-      artist: 'Jack, K-ICM',
-      image: 'assets/img/bac_phan.jpg',
-    }
-  ];
-
-  protected clearHistory() {
-
-  }
-  get results() {
-    return this.history.filter(item =>
-      item.name.toLowerCase().includes(this.keyword.toLowerCase())
-    );
+  get history() {
+    return this.searchService.getHistory(this.keyword);
   }
 }
 

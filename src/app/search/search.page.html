@@ -15,7 +15,7 @@
     <div class="section">
       <div class="title">Đề xuất cho bạn</div>
       <div class="suggest">
-        @for (item of filteredSuggestions; track item){
+        @for (item of suggestions; track item){
           <span>{{item}}</span>
         }
       </div>
@@ -42,7 +42,7 @@
   @else {
     <!--    //gợi ý-->
     <div class="suggest-list">
-      @for (item of filteredSuggestions; track item){
+    @for (item of suggestions; track item){
         <div class="suggest-item">
           <img src="../../assets/icon/timkiem.svg">
           <span>{{item}}</span>

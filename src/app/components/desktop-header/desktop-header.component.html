@@ -1,3 +1,61 @@
-<p>
-  desktop-header works!
-</p>
+<ion-header>
+  <ion-toolbar>
+    <div class="desktop-header">
+
+      <div class="left">
+        <img src="assets/logo/logo.svg" class="logo-icon">
+        <span>SoundWave</span>
+      </div>
+
+      <div class="center">
+        <div class="search-wrapper" cdkOverlayOrigin #origin="cdkOverlayOrigin">
+          <ion-icon name="search-outline" class="search-icon"></ion-icon>
+          <input
+            class="search"
+            type="text"
+            [(ngModel)]="keyword"
+            (input)="onSearch($event)"
+            placeholder="Tìm kiếm bài hát, nghệ sĩ..."
+          />
+
+
+          <!-- 🔥 overlay -->
+          <ng-template
+            cdk-connected-overlay
+            [cdkConnectedOverlayOrigin]="origin"
+            [cdkConnectedOverlayOpen]="suggestions.length > 0"
+            [cdkConnectedOverlayPositions]="positions"
+          >
+            <div class="suggest-box">
+              <div class="suggest-item" *ngFor="let item of suggestions">
+                {{ item }}
+              </div>
+            </div>
+          </ng-template>
+
+        </div>
+      </div>
+
+
+      <div class="right">
+
+        <div class="menu-item active">
+          <ion-icon name="home-outline"></ion-icon>
+          <span>Trang chủ</span>
+        </div>
+
+        <div class="menu-item">
+          <ion-icon name="albums-outline"></ion-icon>
+          <span>Thư viện</span>
+        </div>
+
+        <div class="menu-item">
+          <ion-icon name="heart-outline"></ion-icon>
+          <span>Yêu thích</span>
+        </div>
+
+      </div>
+      <button class="btn-login">Đăng nhập</button>
+    </div>
+  </ion-toolbar>
+</ion-header>
