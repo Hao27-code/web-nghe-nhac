@@ -1,3 +1,19 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+
+  <!-- DESKTOP -->
+  <ng-container *ngIf="isDesktop; else mobileLayout">
+
+    <app-desktop-header></app-desktop-header>
+
+    <div class="desktop-container">
+      <ion-router-outlet></ion-router-outlet>
+    </div>
+
+  </ng-container>
+
+  <!-- MOBILE -->
+  <ng-template #mobileLayout>
+    <ion-router-outlet></ion-router-outlet>
+  </ng-template>
+
 </ion-app>

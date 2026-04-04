@@ -108,3 +108,6 @@ ion-tab-button {
   --background-focused: transparent;
 }
 
+ion-router-outlet {
+  margin-top: 60px; // chiều cao header
+}

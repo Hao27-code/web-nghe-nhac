@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonTitle } from '@ionic/angular/standalone';
+import { IonTitle} from '@ionic/angular/standalone';
 import {HeaderComponent} from "../components/header/header.component";
 import {IonicModule} from "@ionic/angular";
 
 @Component({
-  selector: 'app-library',
-  templateUrl: './library.page.html',
-  styleUrls: ['./library.page.scss'],
+  selector: 'app-profile',
+  templateUrl: './profile.page.html',
+  styleUrls: ['./profile.page.scss'],
   standalone: true,
   imports: [IonTitle, CommonModule, FormsModule, HeaderComponent, IonicModule]
 })
-export class LibraryPage implements OnInit {
+export class ProfilePage implements OnInit {
 
   constructor() { }
 

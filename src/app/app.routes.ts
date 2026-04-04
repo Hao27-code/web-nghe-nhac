@@ -1,11 +1,7 @@
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'tabs/home',
-    pathMatch: 'full'
-  },
+  //mobile(tabs)
   {
     path: 'tabs',
     loadComponent: () =>
@@ -25,9 +21,46 @@ export const routes: Routes = [
         path: 'library',
         loadComponent: () =>
           import('./library/library.page').then( m => m.LibraryPage)
+      },
+      {
+        path: 'favorite',
+        loadComponent: () =>
+          import('./favorite/favorite.page').then( m => m.FavoritePage)
+      },
+      {
+        path: 'profile',
+        loadComponent: () =>
+          import('./profile/profile.page').then( m => m.ProfilePage)
+      },
+      {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full'
       }
     ]
   },
+
+
+  //Desktop
+  {
+    path: 'home',
+    loadComponent: () => import('./home/home.page').then(m => m.HomePage)
+  },
+  {
+    path: 'library',
+    loadComponent: () => import('./library/library.page').then(m => m.LibraryPage)
+  },
+  {
+    path: 'favorite',
+    loadComponent: () => import('./favorite/favorite.page').then(m => m.FavoritePage)
+  },
+
+  // Mặc định
+  {
+    path: '',
+    redirectTo: 'tabs/home',
+    pathMatch: 'full'
+  }
 
 ];
 
