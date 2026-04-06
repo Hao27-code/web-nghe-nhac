@@ -11,6 +11,7 @@ import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
 import { addIcons } from 'ionicons';
 import { searchOutline } from 'ionicons/icons';
+
 addIcons({
   'search-outline': searchOutline,
 });

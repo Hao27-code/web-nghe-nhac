@@ -11,12 +11,46 @@
       {{greeting}}
     </div>
 
+    <div class="custom-slider-container">
+      <!-- Navigation Arrows -->
+      <div class="nav-arrow prev-arrow" (click)="prevSlide()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </div>
+
+      <div class="slider-viewport" #sliderViewport
+           (mousedown)="onDragStart($event)"
+           (touchstart)="onDragStart($event)">
+        <div class="slider-track" #sliderTrack
+             [style.transform]="'translateX(' + currentTranslate + 'px)'">
+          <div class="slide" *ngFor="let slide of slides; let i = index">
+            <div class="slide-item">
+              <img [src]="slide.image" [alt]="'Slide ' + (i+1)">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-arrow next-arrow" (click)="nextSlide()">
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+      </div>
+    </div>
+
+    <div class="playlist-row" #scrollContainer>
+      <ion-card class="playlist-card" *ngFor="let item of loopPlaylists; let i = index">
+        <img [src]="item.image">
+        <div class="overlay">
+          <div class="type">{{item.type}}</div>
+          <div class="name">{{item.name}}</div>
+        </div>
+      </ion-card>
+    </div>
+
     <div class="playlist-row" #scrollContainer>
       @for (item of loopPlaylists; track $index){
         <ion-card class="playlist-card">
           <img [src]="item.image">
 
-            <!--lớp phủ-->
+          <!--lớp phủ-->
           <div class="overlay">
             <div class="type">
               {{item.type}}
@@ -29,6 +63,8 @@
       }
     </div>
   </section>
+
+
 
   <div class="page-container">
     <section class="album-section">

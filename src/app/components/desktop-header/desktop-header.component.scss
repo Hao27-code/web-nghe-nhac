@@ -20,19 +20,28 @@
   gap: 15px;
 
 }
-
 .center {
+  flex: 0 0 auto; /* 🔥 không cho giãn nữa */
   display: flex;
-  justify-content: start;
-  flex: 1;
-  align-items: center;
-  margin-left: 100px;
+  justify-content: center;
+}
+.left {
+  flex: 0 0 auto;
+  padding-right: 20px;
+}
+
+.right {
+  flex: 0 0 auto;
+  width: 420px;
+  gap: 40px;
+  padding-left: 30px;
 }
 
 /* search */
 .search-wrapper {
-  width: 420px;
+  width: 490px;
   position: relative;
+  margin-right: 30px;
 }
 
 .search {
@@ -117,4 +126,97 @@
 .suggest-item {
   padding: 10px 16px;
   cursor: pointer;
+}
+.icon-wrapper {
+  position: relative;
+  width: 20px;
+  height: 20px;
+}
+
+/* icon chồng lên nhau */
+.icon-wrapper img {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  transition: 0.2s ease;
+
+}
+.icon-default {
+  opacity: 0.7;
+}
+
+.icon-active {
+  opacity: 0;
+}
+/* active */
+.menu-item.active .icon-default {
+  opacity: 0;
+}
+.menu-item.active .icon-active {
+  opacity: 1;
+}
+
+
+.menu-item{
+  color: #6A717C;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 16px;
+  line-height: 1;
+}
+.menu-item:hover{
+  color: #ffffff;
+}
+
+.menu-item:hover .icon-default {
+  opacity: 0;
+}
+
+.menu-item:hover .icon-active {
+  opacity: 1;
+}
+
+.menu-item.active {
+  color: #ffffff;
+  position: relative;
+}
+.menu-item.active {
+  position: relative;
+}
+
+.menu-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+
+  width: 100%;
+  height: 2px;
+  background: #38bdf8;
+  border-radius: 2px;
+}
+
+.btn-login {
+  background: linear-gradient(90deg, #00a6ff, #0458f5);
+
+  border: none;
+  padding: 10px 22px;
+  border-radius: 999px; /* 🔥 bo tròn full */
+
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+.btn-login:hover {
+  filter: brightness(1.2);
+  transform: scale(1.05) translateY(-2px);
 }
