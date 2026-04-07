@@ -6,17 +6,20 @@ import { CommonModule } from '@angular/common';
 import { AfterViewInit, OnDestroy, HostListener } from '@angular/core';
 import { addIcons } from 'ionicons';
 import {chevronBackOutline, chevronForwardOutline} from 'ionicons/icons';
+import { play, informationCircle } from 'ionicons/icons';
+import {ContinueListeningComponent} from "../components/continue-listening/continue-listening.component";
 
 interface Slide {
   id: number;
   image: string;
+  mobileImage?: string;
 }
 @Component({
   selector: 'app-home',
   standalone: true,
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [HeaderComponent, IonicModule, NgClass, NgOptimizedImage,CommonModule ],
+  imports: [HeaderComponent, IonicModule, NgClass, NgOptimizedImage, CommonModule, ContinueListeningComponent],
 
 })
 export class HomePage implements OnInit, AfterViewInit, OnDestroy {
@@ -34,15 +37,66 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
       this.greeting='Chào buổi tối'
     }
   }
-  originalSlides: Slide[] = [
+  desktopSlides: Slide[] = [
     { id: 1, image: 'assets/img/banner_1.webp'},
     { id: 2, image: 'assets/img/banner_2.webp'},
     { id: 3, image: 'assets/img/banner_3.webp'},
     { id: 4, image: 'assets/img/banner_4.webp'},
     { id: 5, image: 'assets/img/banner_5.webp'}
   ];
+  mobileSlides: Slide[] = [
+    { id: 1, image: 'assets/img/banner_1_mb.jpg' },
+    { id: 2, image: 'assets/img/banner_2_mb.jpg' },
+    { id: 3, image: 'assets/img/banner_3_mb.jpg' }
+  ];
   // Slides đã được nhân bản để tạo infinite loop
   slides: Slide[] = [];
+
+  //phát nhạc
+  audio = new Audio();
+  currentSong: any = null;
+  playSong(song: any) {
+    this.currentSong = song;
+
+    this.audio.src = song.src;
+    this.audio.currentTime = 0;
+    this.audio.play();
+
+    this.saveHistory();
+  }
+  saveHistory() {
+    let lastSave = 0;
+
+    this.audio.ontimeupdate = () => {
+      if (!this.currentSong) return;
+
+      // tránh spam
+      if (Date.now() - lastSave < 1000) return;
+      lastSave = Date.now();
+
+      // lấy list cũ (mảng)
+      let list = JSON.parse(localStorage.getItem('continueList') || '[]');
+
+      // xóa nếu trùng bài
+      list = list.filter((item: any) => item.src !== this.currentSong.src);
+
+      // thêm bài mới lên đầu
+      list.unshift({
+        title: this.currentSong.title,
+        artist: this.currentSong.artist,
+        image: this.currentSong.image,
+        src: this.currentSong.src,
+        currentTime: this.audio.currentTime,
+        duration: this.audio.duration
+      });
+
+      // giới hạn 5 bài
+      list = list.slice(0, 5);
+
+      // lưu lại
+      localStorage.setItem('continueList', JSON.stringify(list));
+    };
+  }
 
   currentIndex: number = 0;
   currentTranslate: number = 0;
@@ -55,19 +109,29 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
   dragThreshold: number = 50;
   realIndex: number = 0;
   slidesPerView: number = 2; // Hiển thị 2 ảnh cùng lúc
+  originalSlides: Slide[] = [];
+  isMobile = window.innerWidth <= 991;
 
   loopPlaylists: any[] = []; // Dữ liệu playlist của bạn
-  icons: any = {
-    play: 'play-circle',
-    informationCircle: 'information-circle'
+  icons = {
+    play,
+    informationCircle
   };
   constructor() {
+    this.isMobile = window.innerWidth <= 991;
+
+    this.originalSlides = this.isMobile
+      ? this.mobileSlides
+      : this.desktopSlides;
+
     this.initInfiniteSlides();
+
     addIcons({
       chevronBackOutline,
       chevronForwardOutline
     });
   }
+
   initInfiniteSlides() {
     // Clone slides để tạo infinite loop
     const cloneCount = this.slidesPerView;
@@ -95,6 +159,18 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
 
   @HostListener('window:resize')
   onResize() {
+    const newIsMobile = window.innerWidth <= 991;
+
+    if (newIsMobile !== this.isMobile) {
+      this.isMobile = newIsMobile;
+
+      this.originalSlides = this.isMobile
+        ? this.mobileSlides
+        : this.desktopSlides;
+
+      this.initInfiniteSlides(); // reload lại slider
+    }
+
     this.updateSlideWidth();
     this.updateTranslate();
   }
@@ -124,9 +200,15 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
   }
 
   updateSlideWidth() {
-    if (this.sliderViewport) {
-      const viewportWidth = this.sliderViewport.nativeElement.clientWidth;
-      this.slideWidth = viewportWidth / this.slidesPerView;
+    if (window.innerWidth <= 991) {
+      this.slidesPerView = 1; // 🔥 mobile = 1 ảnh
+    } else {
+      this.slidesPerView = 2; // desktop = 2 ảnh
+    }
+
+    const container = this.sliderViewport?.nativeElement;
+    if (container) {
+      this.slideWidth = container.offsetWidth / this.slidesPerView;
     }
   }
 

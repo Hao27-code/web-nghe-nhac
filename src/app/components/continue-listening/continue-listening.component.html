@@ -1,0 +1,33 @@
+<div class="continue-section">
+
+  <h2 class="section-title">Tiếp tục nghe</h2>
+
+  <div class="continue-grid">
+
+    <div class="continue-card" *ngFor="let item of continueList">
+
+      <div class="thumb">
+        <img [src]="item.image" />
+      </div>
+
+      <div class="info">
+        <div class="name">{{ item.title }}</div>
+        <div class="artist">{{ item.artist }}</div>
+
+        <div class="progress">
+          <div class="progress-bar"
+               [style.width.%]="(item.currentTime / (item.duration || 1)) * 100">
+          </div>
+        </div>
+
+        <div class="time">
+          <span>{{ item.currentTime | number:'1.0-0' }}</span>
+          <span>{{ item.duration | number:'1.0-0' }}</span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

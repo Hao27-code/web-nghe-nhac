@@ -1,3 +1,28 @@
+:root {
+  --ion-font-family: 'Lexend', sans-serif;
+}
+
+* {
+  font-family: 'Lexend', sans-serif;
+}
+
+ion-content {
+  --background: #10182B;
+  min-height: 100vh;
+  --padding-bottom: 90px;
+}
+
+/* container chung */
+.page-container {
+  width: 100%;
+}
+
+/* section spacing */
+.album-section,
+.continue-wrapper {
+  padding: 20px 16px 0;
+}
+
 #container {
   text-align: center;
 
@@ -67,11 +92,7 @@ ion-content {
 .album-card {
   min-height: 300px;
   border-radius: 20px;
-  background: linear-gradient(135deg, #1e2a44, #0f172a);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow:
-    0 10px 30px rgba(0, 0, 0, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 
@@ -123,10 +144,8 @@ ion-card{
   overflow: hidden;
   width: 40%;
   min-width: 35%;
-  margin: 22px;
+  margin: 10px;
   aspect-ratio: 1/1;  //giữ tỉ lệ vuông
-
-  box-shadow: 10px 10px 20px rgba(112, 224, 255, 0.3);
 }
 ion-card-content{
   padding: 0 22px 22px ;
@@ -275,7 +294,7 @@ ion-icon{
   .actions {
     margin-top: 20px;
     gap: 16px;
-    width: 60%;
+    width: 50%;
   }
   .album-card {
     position: relative;
@@ -321,6 +340,13 @@ ion-icon{
     color: #00c6ff;
     width: auto;
     font-size: 12px;
+  }
+  .album-section{
+    width: 1420px;
+  }
+  .page-container{
+    display: flex;
+    justify-content: center;
   }
 }
 ion-content {
@@ -381,6 +407,7 @@ ion-content {
   ion-icon {
     font-size: 50px;
   }
+
 }
 
 .slider-viewport {
@@ -413,7 +440,7 @@ ion-content {
 
     img {
       width: 100%;
-      height: 120px;
+      height: 100%;
       display: block;
       object-fit: cover;
       aspect-ratio: 1 / 1;
@@ -423,6 +450,9 @@ ion-content {
 
 
 @media (max-width: 768px) {
+  .album-card{
+    background: rgb(19, 27, 42);
+  }
   .nav-arrow {
     font-size: 32px;
     width: 36px;
@@ -437,3 +467,129 @@ ion-content {
     gap: 8px;
   }
 }
+
+@media (max-width: 767px) {
+
+  .slider-track {
+    gap: 0; /* bỏ khoảng cách */
+  }
+
+  .nav-arrow {
+    display: none !important;
+  }
+  .greeting {
+    display: none;
+  }
+  .slide {
+    min-width: 100% !important;
+    height: 200px !important;// giảm chiều cao
+    flex: 0 0 100% !important;
+    width: 100% !important;
+  }
+
+  .slide-item {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    aspect-ratio: 16/7; // 🔥 auto scale đẹp
+  }
+  .slide-item img {
+    height: 100%;
+    object-fit: cover;
+  }
+  .custom-slider-container {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .slider-track {
+    gap: 0; /* bỏ khoảng cách */
+  }
+  .slide {
+    min-width: 100% !important;
+    height: 400px !important;// giảm chiều cao
+    flex: 0 0 100% !important;
+
+  }
+
+  .slide-item {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    aspect-ratio: 16/7; // 🔥 auto scale đẹp
+  }
+  .slide-item img {
+    height: 100%;
+    object-fit: cover;
+  }
+  .custom-slider-container {
+    width: 100%;
+    margin: 0;
+  }
+  .slider-track {
+    gap: 0; /* bỏ khoảng cách */
+  }
+
+  .nav-arrow {
+    display: none !important;
+  }
+  .greeting {
+    display: none;
+  }
+  .page-container {
+    max-width: 900px;
+    margin: auto;
+  }
+
+  .continue-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .continue-card {
+    padding: 12px;
+  }
+
+  .continue-name {
+    font-size: 15px;
+  }
+
+  .continue-artist {
+    font-size: 13px;
+  }
+
+}
+
+@media (min-width: 1024px) {
+
+  .page-container {
+    max-width: 1200px;
+    margin: auto;
+  }
+
+  .continue-wrapper {
+    padding: 0 20px;
+  }
+
+  .continue-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  .continue-card {
+    padding: 14px;
+  }
+
+  .continue-name {
+    font-size: 16px;
+  }
+
+  .continue-artist {
+    font-size: 13px;
+  }
+
+}
+
+

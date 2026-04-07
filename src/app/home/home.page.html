@@ -24,7 +24,7 @@
              [style.transform]="'translateX(' + currentTranslate + 'px)'">
           <div class="slide" *ngFor="let slide of slides; let i = index">
             <div class="slide-item">
-              <img [src]="slide.image" [alt]="'Slide ' + (i+1)">
+              <img [src]="isMobile ? (slide.mobileImage || slide.image) : slide.image">
             </div>
           </div>
         </div>
@@ -92,7 +92,14 @@
           </div>
         </ion-card-content>
       </ion-card>
+      <h2 style="color:white">Album</h2>
     </section>
+
   </div>
+  <section class="continue-section">
+    <div>
+      <app-continue-listening [audio]="audio"></app-continue-listening>
+    </div>
+  </section>
 
 </ion-content>
