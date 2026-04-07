@@ -145,7 +145,7 @@ ion-card{
   width: 40%;
   min-width: 35%;
   margin: 10px;
-  aspect-ratio: 1/1;  //giữ tỉ lệ vuông
+  aspect-ratio: 1/1;  //giữ// tỉ lệ vuông
 }
 ion-card-content{
   padding: 0 22px 22px ;
@@ -261,6 +261,25 @@ ion-icon{
 }
 
 @media (min-width: 1024px) {
+  .slide {
+    flex: 0 0 50%; /* Mỗi slide chiếm 50% chiều rộng = 2 ảnh cùng lúc */
+    padding: 0 6px;
+    box-sizing: border-box;
+
+    .slide-item {
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+      img {
+        width: 100%;
+        height: 120px;
+        display: block;
+        object-fit: cover;
+        aspect-ratio: 1 / 1;
+      }
+    }
+  }
   .album-card {
     background: none;
     box-shadow: none;
@@ -428,25 +447,7 @@ ion-content {
   will-change: transform;
 }
 
-.slide {
-  flex: 0 0 50%; /* Mỗi slide chiếm 50% chiều rộng = 2 ảnh cùng lúc */
-  padding: 0 6px;
-  box-sizing: border-box;
 
-  .slide-item {
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-
-    img {
-      width: 100%;
-      height: 100%;
-      display: block;
-      object-fit: cover;
-      aspect-ratio: 1 / 1;
-    }
-  }
-}
 
 
 @media (max-width: 768px) {
@@ -562,34 +563,7 @@ ion-content {
 
 }
 
-@media (min-width: 1024px) {
-
-  .page-container {
-    max-width: 1200px;
-    margin: auto;
-  }
-
-  .continue-wrapper {
-    padding: 0 20px;
-  }
-
-  .continue-grid {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-  }
-
-  .continue-card {
-    padding: 14px;
-  }
-
-  .continue-name {
-    font-size: 16px;
-  }
-
-  .continue-artist {
-    font-size: 13px;
-  }
-
+.slide-item[_ngcontent-ng-c2799600510] img[_ngcontent-ng-c2799600510]{
+  width: 100%;
 }
-
 

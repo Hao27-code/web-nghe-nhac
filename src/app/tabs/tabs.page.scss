@@ -6,10 +6,6 @@ ion-tab-bar {
   position: relative;
   z-index: 10;
 }
-.tabs-inner {
-  pointer-events: none;
-}
-
 ion-router-outlet > *:not(app-tabs) {
   display: none;
 }
@@ -57,19 +53,18 @@ ion-tab-button {
   --background: rgba(0, 31, 75, 0.74); /* nền xanh đậm */
   backdrop-filter: blur(12px); /* hiệu ứng kính mờ */
   border-top: 1px solid rgba(54, 54, 54, 0.7); /* viền nhẹ */
-  border-radius: 20px;
-  width: 90%;
-  position: absolute;
-  left: 20px;
-  right: 20px;
+  width: 100%;
 
   background: rgba(10, 20, 40, 0.9);
 
-  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-  bottom: calc(20px + env(safe-area-inset-bottom));
-  margin: 0 auto;
   max-width: 500px;
   height: 70px;
+  position: fixed; /* luôn dính đáy */
+  bottom: 0;       /* sát mép */
+  left: 0;
+  right: 0;
+
+  padding-bottom: env(safe-area-inset-bottom); /* hỗ trợ iPhone */
 }
 ion-tab-button ion-label {
   color: #8a9bb5;
@@ -111,3 +106,4 @@ ion-tab-button {
 ion-router-outlet {
   margin-top: 60px; // chiều cao header
 }
+

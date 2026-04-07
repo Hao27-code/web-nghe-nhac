@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import {Component, NgModule} from '@angular/core';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 import {Router} from "@angular/router";
 import {NgIf} from "@angular/common";
 import { DesktopHeaderComponent } from './components/desktop-header/desktop-header.component';
+import { IonicStorageModule } from '@ionic/storage-angular';
+
 
 @Component({
   selector: 'app-root',
@@ -10,6 +12,11 @@ import { DesktopHeaderComponent } from './components/desktop-header/desktop-head
   imports: [IonApp, IonRouterOutlet, NgIf, DesktopHeaderComponent],
 })
 export class AppComponent {
+  @NgModule({
+    imports: [
+      IonicStorageModule.forRoot()
+    ]
+  })
   isDesktop = false;
 
   // eslint-disable-next-line @angular-eslint/prefer-inject

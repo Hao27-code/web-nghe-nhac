@@ -8,6 +8,8 @@ import { addIcons } from 'ionicons';
 import {chevronBackOutline, chevronForwardOutline} from 'ionicons/icons';
 import { play, informationCircle } from 'ionicons/icons';
 import {ContinueListeningComponent} from "../components/continue-listening/continue-listening.component";
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
 
 interface Slide {
   id: number;
@@ -20,6 +22,7 @@ interface Slide {
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   imports: [HeaderComponent, IonicModule, NgClass, NgOptimizedImage, CommonModule, ContinueListeningComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 
 })
 export class HomePage implements OnInit, AfterViewInit, OnDestroy {
