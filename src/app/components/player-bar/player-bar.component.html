@@ -1,0 +1,39 @@
+<div class="player-bar" *ngIf="currentMusic">
+  <div class="player-content">
+    <!-- Left section -->
+    <div class="left-section">
+      <img [src]="currentMusic.coverUrl" [alt]="currentMusic.title" class="thumbnail">
+      <div class="song-info">
+        <div class="song-title">{{ currentMusic.title }}</div>
+        <div class="song-artist">{{ currentMusic.artist }}</div>
+      </div>
+    </div>
+
+    <!-- Center section - progress bar -->
+    <div class="center-section">
+      <div class="progress-container">
+        <span class="time">{{ formatTime(currentTime) }}</span>
+        <input
+          type="range"
+          class="progress-bar"
+          [value]="getProgressPercent()"
+          (input)="onSeek($event)"
+          step="0.1">
+        <span class="time">{{ formatTime(duration) }}</span>
+      </div>
+    </div>
+
+    <!-- Right section - controls -->
+    <div class="right-section">
+      <button class="control-btn" (click)="onToggleFavorite()">
+        <ion-icon [name]="isFavorite() ? 'heart' : 'heart-outline'"></ion-icon>
+      </button>
+      <button class="control-btn" (click)="onNext()">
+        <ion-icon name="play-skip-forward"></ion-icon>
+      </button>
+      <button class="control-btn play-btn" (click)="onPlayPause()">
+        <ion-icon [name]="isPlaying ? 'pause' : 'play'"></ion-icon>
+      </button>
+    </div>
+  </div>
+</div>

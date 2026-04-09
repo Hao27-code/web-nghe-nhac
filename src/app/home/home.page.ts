@@ -3,13 +3,16 @@ import {HeaderComponent} from "../components/header/header.component";
 import {IonicModule} from "@ionic/angular";
 import {NgClass, NgOptimizedImage} from "@angular/common";
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, OnDestroy, HostListener } from '@angular/core';
+import { AfterViewInit, OnDestroy, HostListener, inject } from '@angular/core';
 import { addIcons } from 'ionicons';
 import {chevronBackOutline, chevronForwardOutline} from 'ionicons/icons';
 import { play, informationCircle } from 'ionicons/icons';
-import {ContinueListeningComponent} from "../components/continue-listening/continue-listening.component";
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-
+import {PlayerBarComponent} from "../components/player-bar/player-bar.component";
+import {MusicCardComponent} from "../components/music-card/music-card.component";
+import { MusicService } from '../services/music.service';
+import { Music } from '../models/music.model';
+import { Subscription } from 'rxjs';
 
 interface Slide {
   id: number;
@@ -21,7 +24,7 @@ interface Slide {
   standalone: true,
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [HeaderComponent, IonicModule, NgClass, NgOptimizedImage, CommonModule, ContinueListeningComponent],
+  imports: [HeaderComponent, IonicModule, NgClass, NgOptimizedImage, CommonModule, PlayerBarComponent, MusicCardComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 
 })
@@ -29,7 +32,26 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('sliderViewport') sliderViewport!: ElementRef<HTMLDivElement>;
   @ViewChild('sliderTrack') sliderTrack!: ElementRef<HTMLDivElement>;
 
+  // ==================== THÊM PHƯƠNG THỨC XEM TẤT CẢ ====================
+  viewAllRecentlyPlayed() {
+    // Chuyển đến trang lịch sử nghe
+    console.log('Xem tất cả bài hát đã nghe');
+    // this.router.navigate(['/history']);
+  }
+
+  viewAllMusic() {
+    // Chuyển đến trang tất cả nhạc
+    console.log('Xem tất cả bài hát');
+    // this.router.navigate(['/library']);
+  }
+//
+
   greeting='';
+
+  private musicService = inject(MusicService);
+  musicList: Music[] = [];
+  recentlyPlayed: Music[] = [];
+  private subscriptions: Subscription = new Subscription();
   ngOnInit() {
     const hour = new Date().getHours();
     if (hour < 12) {
@@ -39,7 +61,25 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
     }else {
       this.greeting='Chào buổi tối'
     }
+    this.musicList = this.musicService.getMusicList();
+    this.subscriptions.add(
+      this.musicService.recentlyPlayed$.subscribe(recently => {
+        this.recentlyPlayed = recently;
+      })
+    );
   }
+// ==================== THÊM PHƯƠNG THỨC MỚI ====================
+  onPlayMusic(music: Music) {
+    this.musicService.playMusic(music);
+  }
+  isFavorite(music: Music): boolean {
+    return this.musicService.isFavorite(music);
+  }
+  toggleFavorite(music: Music) {
+    this.musicService.toggleFavorite(music);
+  }
+
+
   desktopSlides: Slide[] = [
     { id: 1, image: 'assets/img/banner_1.webp'},
     { id: 2, image: 'assets/img/banner_2.webp'},
@@ -55,51 +95,51 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
   // Slides đã được nhân bản để tạo infinite loop
   slides: Slide[] = [];
 
-  //phát nhạc
-  audio = new Audio();
-  currentSong: any = null;
-  playSong(song: any) {
-    this.currentSong = song;
-
-    this.audio.src = song.src;
-    this.audio.currentTime = 0;
-    this.audio.play();
-
-    this.saveHistory();
-  }
-  saveHistory() {
-    let lastSave = 0;
-
-    this.audio.ontimeupdate = () => {
-      if (!this.currentSong) return;
-
-      // tránh spam
-      if (Date.now() - lastSave < 1000) return;
-      lastSave = Date.now();
-
-      // lấy list cũ (mảng)
-      let list = JSON.parse(localStorage.getItem('continueList') || '[]');
-
-      // xóa nếu trùng bài
-      list = list.filter((item: any) => item.src !== this.currentSong.src);
-
-      // thêm bài mới lên đầu
-      list.unshift({
-        title: this.currentSong.title,
-        artist: this.currentSong.artist,
-        image: this.currentSong.image,
-        src: this.currentSong.src,
-        currentTime: this.audio.currentTime,
-        duration: this.audio.duration
-      });
-
-      // giới hạn 5 bài
-      list = list.slice(0, 5);
-
-      // lưu lại
-      localStorage.setItem('continueList', JSON.stringify(list));
-    };
-  }
+  // //phát nhạc
+  // audio = new Audio();
+  // currentSong: any = null;
+  // playSong(song: any) {
+  //   this.currentSong = song;
+  //
+  //   this.audio.src = song.src;
+  //   this.audio.currentTime = 0;
+  //   this.audio.play();
+  //
+  //   this.saveHistory();
+  // }
+  // saveHistory() {
+  //   let lastSave = 0;
+  //
+  //   this.audio.ontimeupdate = () => {
+  //     if (!this.currentSong) return;
+  //
+  //     // tránh spam
+  //     if (Date.now() - lastSave < 1000) return;
+  //     lastSave = Date.now();
+  //
+  //     // lấy list cũ (mảng)
+  //     let list = JSON.parse(localStorage.getItem('continueList') || '[]');
+  //
+  //     // xóa nếu trùng bài
+  //     list = list.filter((item: any) => item.src !== this.currentSong.src);
+  //
+  //     // thêm bài mới lên đầu
+  //     list.unshift({
+  //       title: this.currentSong.title,
+  //       artist: this.currentSong.artist,
+  //       image: this.currentSong.image,
+  //       src: this.currentSong.src,
+  //       currentTime: this.audio.currentTime,
+  //       duration: this.audio.duration
+  //     });
+  //
+  //     // giới hạn 5 bài
+  //     list = list.slice(0, 5);
+  //
+  //     // lưu lại
+  //     localStorage.setItem('continueList', JSON.stringify(list));
+  //   };
+  // }
 
   currentIndex: number = 0;
   currentTranslate: number = 0;
@@ -158,6 +198,9 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy() {
     this.stopAutoPlay();
+    if (this.subscriptions) {
+      this.subscriptions.unsubscribe();
+    }
   }
 
   @HostListener('window:resize')
@@ -349,6 +392,9 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
       }
     }
   }
+
+
+
 }
 
 

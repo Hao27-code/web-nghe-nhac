@@ -567,3 +567,100 @@ ion-content {
   width: 100%;
 }
 
+
+
+
+// ==================== MUSIC SECTION STYLES ====================
+.music-section {
+  margin: 24px 16px;
+  padding: 0 8px;
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 16px;
+
+    h2 {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--ion-color-dark);
+      margin: 0;
+      position: relative;
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -4px;
+        width: 40px;
+        height: 3px;
+        background: linear-gradient(90deg, #667eea, #764ba2);
+        border-radius: 2px;
+      }
+    }
+
+    .view-all {
+      font-size: 13px;
+      color: #667eea;
+      cursor: pointer;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .music-horizontal-scroll {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding-bottom: 12px;
+    scrollbar-width: thin;
+
+    &::-webkit-scrollbar {
+      height: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.05);
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      border-radius: 4px;
+    }
+  }
+}
+
+// ==================== RESPONSIVE ====================
+@media (max-width: 767px) {
+  .music-section {
+    margin: 16px 12px;
+
+    .section-header h2 {
+      font-size: 18px;
+    }
+
+    .music-horizontal-scroll {
+      gap: 12px;
+    }
+  }
+}
+
+// Tablet styles
+@media (min-width: 768px) and (max-width: 1023px) {
+  .music-section {
+    margin: 20px 16px;
+
+    .section-header h2 {
+      font-size: 20px;
+    }
+
+    .music-horizontal-scroll {
+      gap: 14px;
+    }
+  }
+}

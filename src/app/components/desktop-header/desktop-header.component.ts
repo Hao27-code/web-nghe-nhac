@@ -17,6 +17,7 @@ import { ConnectedPosition } from '@angular/cdk/overlay';
 })
 export class DesktopHeaderComponent {
 
+  activeMenu: string = 'home';
   // eslint-disable-next-line @angular-eslint/prefer-inject
   constructor(private router: Router,private searchService: SearchService) {}
   // 👇 gọi service

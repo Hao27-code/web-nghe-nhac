@@ -1,0 +1,15 @@
+<div class="music-card"
+     (mouseenter)="isHovered = true"
+     (mouseleave)="isHovered = false">
+  <div class="image-container">
+    <img [src]="music.coverUrl" [alt]="music.title" class="cover-image">
+    <button class="play-button" [class.visible]="isHovered" (click)="onPlayClick($event)">
+      <img src="assets/icons/play.svg" alt="Play">
+    </button>
+  </div>
+  <div class="music-info">
+    <div class="title">{{ music.title }}</div>
+    <div class="artist">{{ music.artist }}</div>
+  </div>
+  <div class="duration">{{ formatDuration(music.duration) }}</div>
+</div>
