@@ -1,24 +1,15 @@
+<!-- app.component.html -->
 <ion-app>
+  <ion-split-pane contentId="main-content" when="md">
 
-  <!-- Layout chính của ứng dụng -->
-  <div class="app-container">
+    <!-- MENU BÊN TRÁI -->
+    <ion-menu contentId="main-content" menuId="main-menu" side="start">
+      <app-desktop-header></app-desktop-header>
+    </ion-menu>
 
-    <!-- Hiển thị header dựa trên thiết bị -->
-    @if (isDesktop) {
-      <app-desktop-header />
-    } @else {
-      <app-header />
-    }
+    <!-- NỘI DUNG CHÍNH BÊN PHẢI -->
+    <ion-router-outlet id="main-content"></ion-router-outlet>
 
-    <!-- Nội dung chính - CHỈ 1 router-outlet -->
-    <div class="main-content" [class.has-sidebar]="isDesktop">
-      <router-outlet />
-    </div>
-
-    <!-- Player bar hiển thị mọi nơi -->
-    <app-player-bar />
-
-  </div>
-
+  </ion-split-pane>
 </ion-app>
 

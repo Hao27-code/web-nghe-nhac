@@ -1,36 +1,30 @@
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
-  //mobile(tabs)
+  // ========== MOBILE (có tabs) ==========
   {
     path: 'tabs',
-    loadComponent: () =>
-      import('./tabs/tabs.page').then(m => m.TabsPage),
+    loadComponent: () => import('./tabs/tabs.page').then(m => m.TabsPage),
     children: [
       {
         path: 'home',
-        loadComponent: () =>
-          import('./home/home.page').then(m => m.HomePage)
+        loadComponent: () => import('./home/home.page').then(m => m.HomePage)
       },
       {
         path: 'search',
-        loadComponent: () =>
-          import('./search/search.page').then(m => m.SearchPage)
+        loadComponent: () => import('./search/search.page').then(m => m.SearchPage)
       },
       {
         path: 'library',
-        loadComponent: () =>
-          import('./library/library.page').then( m => m.LibraryPage)
+        loadComponent: () => import('./library/library.page').then(m => m.LibraryPage)
       },
       {
         path: 'favorite',
-        loadComponent: () =>
-          import('./favorite/favorite.page').then( m => m.FavoritePage)
+        loadComponent: () => import('./favorite/favorite.page').then(m => m.FavoritePage)
       },
       {
         path: 'profile',
-        loadComponent: () =>
-          import('./profile/profile.page').then( m => m.ProfilePage)
+        loadComponent: () => import('./profile/profile.page').then(m => m.ProfilePage)
       },
       {
         path: '',
@@ -40,11 +34,14 @@ export const routes: Routes = [
     ]
   },
 
-
-  //Desktop
+  // ========== DESKTOP (không tabs, trực tiếp) ==========
   {
     path: 'home',
     loadComponent: () => import('./home/home.page').then(m => m.HomePage)
+  },
+  {
+    path: 'search',
+    loadComponent: () => import('./search/search.page').then(m => m.SearchPage)
   },
   {
     path: 'library',
@@ -54,14 +51,21 @@ export const routes: Routes = [
     path: 'favorite',
     loadComponent: () => import('./favorite/favorite.page').then(m => m.FavoritePage)
   },
+  {
+    path: 'profile',
+    loadComponent: () => import('./profile/profile.page').then(m => m.ProfilePage)
+  },
 
-  // Mặc định
+  // ========== MẶC ĐỊNH ==========
   {
     path: '',
-    redirectTo: 'tabs/home',
+    redirectTo: 'home',
     pathMatch: 'full'
+  },
+
+  // Fallback
+  {
+    path: '**',
+    redirectTo: '/tabs/home'
   }
-
 ];
-
-

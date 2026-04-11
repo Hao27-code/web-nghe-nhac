@@ -1,222 +1,191 @@
+
 .desktop-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   min-height: 65px;
   padding: 0 25px;
-
   background: linear-gradient(to right, #1b2944, #182236);
   color: white;
-
   position: relative;
   z-index: 1000;
 }
 
-/* layout */
-.left, .right {
+/* Logo */
+.logo{
   display: flex;
   align-items: center;
-  gap: 15px;
-
-}
-.center {
-  flex: 0 0 auto; /* 🔥 không cho giãn nữa */
-  display: flex;
-  justify-content: center;
-}
-.left {
-  flex: 0 0 auto;
-  padding-right: 20px;
-}
-
-.right {
-  flex: 0 0 auto;
-  width: 420px;
-  gap: 40px;
-  padding-left: 30px;
-}
-
-/* search */
-.search-wrapper {
-  width: 490px;
-  position: relative;
-  margin-right: 30px;
-}
-
-.search {
-  width: 100%;
-  border-radius: 999px;
-  background: #232e3d;
-  border: 1px solid rgba(255, 255, 255, 0.21);
-  color: white;
-  padding: 10px 18px 10px 42px; /* 🔥 chừa chỗ icon */
-}
-/* icon */
-.search-icon {
-  position: absolute;
-  left: 16px; /* 🔥 tăng chút cho đẹp */
-  top: 50%;
-  transform: translateY(-50%);
-
-  font-size: 18px;
-  color: rgb(155, 155, 155);
-}
-.search::placeholder {
-  color: rgb(155, 155, 155);
-  font-size: 14px;
-}
-
-.search:focus {
-  outline: none;
-  border: 1px solid #38bdf8;
-  box-shadow: 0 0 0 2px rgba(56,189,248,0.2);
-}
-
-/* dropdown */
-.suggest-box {
-  position: fixed;
-
-  background: rgba(2, 6, 23, 0.95);
-  backdrop-filter: blur(10px);
-
-  border-radius: 14px;
-  padding: 8px 0;
-
-  border: 1px solid rgba(255,255,255,0.08);
-
-  z-index: 9999;
-}
-
-/* item */
-.suggest-item {
-  padding: 10px 16px;
-  cursor: pointer;
-  color: #cbd5f5;
-  transition: 0.2s;
-}
-
-.suggest-item:hover {
-  background: rgba(255,255,255,0.08);
+  gap: 12px;
+  padding: 20px 25px ;
   color: white;
 }
-.suggest-box {
-  width: 420px;
-  background: rgba(15, 23, 42, 0.25);
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 12px;
-  padding: 8px 0;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  box-shadow:
-    0 10px 30px rgba(0,0,0,0.4),
-    inset 0 1px 0 rgba(255,255,255,0.15); /* hiệu ứng glass */
 
-  overflow: hidden; /* giữ bo góc đẹp */
-
-}
-.suggest-item {
-  color: rgba(255,255,255,0.9); /* tăng độ rõ */
-}
-.suggest-item:hover {
-  background: rgba(255,255,255,0.08);
-  color: #fff;
-}
-
-.suggest-item {
-  padding: 10px 16px;
-  cursor: pointer;
-}
-.icon-wrapper {
-  position: relative;
-  width: 20px;
-  height: 20px;
-}
-
-/* icon chồng lên nhau */
-.icon-wrapper img {
-  position: absolute;
-  top: 0;
-  left: 0;
-
-  width: 100%;
-  height: 100%;
-
-  transition: 0.2s ease;
-
-}
-.icon-default {
-  opacity: 0.7;
-}
-
-.icon-active {
-  opacity: 0;
-}
-/* active */
-.menu-item.active .icon-default {
-  opacity: 0;
-}
-.menu-item.active .icon-active {
-  opacity: 1;
-}
-
-
-.menu-item{
-  color: #6A717C;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 16px;
-  line-height: 1;
-}
-.menu-item:hover{
-  color: #ffffff;
-}
-
-.menu-item:hover .icon-default {
-  opacity: 0;
-}
-
-.menu-item:hover .icon-active {
-  opacity: 1;
-}
-
-.menu-item.active {
-  color: #ffffff;
-  position: relative;
-}
-.menu-item.active {
-  position: relative;
-}
-
-.menu-item.active::after {
-  content: '';
-  position: absolute;
-  bottom: -6px;
-  left: 0;
-
-  width: 100%;
-  height: 2px;
-  background: #38bdf8;
-  border-radius: 2px;
-}
-
+/* Login button */
 .btn-login {
   background: linear-gradient(90deg, #00a6ff, #0458f5);
-
   border: none;
   padding: 10px 22px;
   border-radius: 999px; /* 🔥 bo tròn full */
-
   color: white;
   font-size: 14px;
   font-weight: 600;
-
   cursor: pointer;
-
   transition: transform 0.25s ease, filter 0.25s ease;
 }
 .btn-login:hover {
   filter: brightness(1.2);
   transform: scale(1.05) translateY(-2px);
+}
+
+// desktop-header.component.scss
+ion-content {
+  --overflow: hidden; // Tắt overflow
+  --offset-bottom: 0;
+  --padding-bottom: 0;
+  font-family: 'Lexend', sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  --background: #070f18;
+}
+ion-list {
+  background: transparent;
+}
+
+// Ẩn scrollbar hoàn toàn
+.menu-content {
+  overflow-y: hidden !important;
+
+  &::-webkit-scrollbar {
+    display: none !important;
+  }
+}
+// desktop-header.component.scss
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+ion-header {
+  flex-shrink: 0;
+}
+
+ion-content {
+  --overflow: hidden;
+  flex: 1;
+
+  .scroll-y {
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: 4px;
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.2);
+      border-radius: 4px;
+    }
+  }
+}
+
+// Hoặc ẩn hoàn toàn
+.no-scroll {
+  overflow: hidden !important;
+  --overflow: hidden !important;
+}
+
+// Menu item
+ion-item {
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --min-height: 52px;
+  --background: transparent;
+  --color: #6A717C;
+  cursor: pointer;
+
+  ion-label {
+    font-size: 15px;
+    font-weight: 500;
+    margin-left: 8px;
+  }
+
+  // HOVER: đổi icon và màu chữ
+  &:hover {
+    --color: white;
+
+    .icon-wrapper {
+      .icon-default {
+        opacity: 0;
+      }
+      .icon-active {
+        opacity: 1;
+      }
+    }
+  }
+
+  // ACTIVE: icon fill, chữ xanh, background nhạt
+  &.active {
+    --color: #38bdf8;
+    --background: rgba(56, 189, 248, 0.1);
+    border-right: 3px solid #38bdf8;
+
+    .icon-wrapper {
+      .icon-default {
+        opacity: 0;
+      }
+      .icon-active {
+        opacity: 1;
+      }
+    }
+  }
+}
+.icon-wrapper {
+  position: relative;
+  width: 22px;
+  height: 22px;
+  display: inline-block;
+
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.2s ease;
+  }
+
+  // Icon mặc định (outline)
+  .icon-default {
+    opacity: 1;
+  }
+
+  // Icon active (fill) - mặc định ẨN
+  .icon-active {
+    opacity: 0;
+  }
+}
+
+// KHI HOVER: đổi icon
+ion-item:hover {
+  .icon-wrapper {
+    .icon-default {
+      opacity: 0 !important;
+    }
+    .icon-active {
+      opacity: 1 !important;
+    }
+  }
+}
+
+// KHI ACTIVE: đổi icon
+ion-item.active {
+  .icon-wrapper {
+    .icon-default {
+      opacity: 0 !important;
+    }
+    .icon-active {
+      opacity: 1 !important;
+    }
+  }
 }

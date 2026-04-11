@@ -1,66 +1,61 @@
-<!-- Desktop Sidebar (thay thế header ngang) -->
-<div class="desktop-sidebar">
-  <div class="sidebar-logo">
-    <img src="assets/logo/logo.svg" class="logo-icon">
-    <span>SoundWave</span>
-  </div>
 
-  <div class="sidebar-search">
-    <div class="search-wrapper" cdkOverlayOrigin #origin="cdkOverlayOrigin">
-      <ion-icon name="search-outline" class="search-icon"></ion-icon>
-      <input
-        class="search"
-        type="text"
-        [(ngModel)]="keyword"
-        (input)="onSearch($event)"
-        placeholder="Tìm kiếm bài hát, nghệ sĩ..."
-      />
-      <ng-template
-        cdk-connected-overlay
-        [cdkConnectedOverlayOrigin]="origin"
-        [cdkConnectedOverlayOpen]="suggestions.length > 0"
-        [cdkConnectedOverlayPositions]="positions"
-      >
-        <div class="suggest-box">
-          <div class="suggest-item" *ngFor="let item of suggestions">{{ item }}</div>
-        </div>
-      </ng-template>
+
+<ion-content>
+
+  <ion-list>
+    <div class="logo">
+      <img src="assets/logo/logo.svg" class="logo-icon">
+      <span>SoundWave</span>
     </div>
-  </div>
-
-  <div class="sidebar-menu">
-    <div class="menu-item" [class.active]="activeMenu === 'home'">
+    <ion-item
+      [button]="true"
+      [class.active]="activeMenu === 'home'"
+      (click)="navigateTo('/home')">
       <div class="icon-wrapper">
         <img src="assets/icon/home-menu-outline.svg" class="icon-default">
         <img src="assets/icon/home-menu-fill.svg" class="icon-active">
       </div>
-      <span>Trang chủ</span>
-    </div>
 
-    <div class="menu-item" [class.active]="activeMenu === 'library'">
+
+      <ion-label>Trang chủ</ion-label>
+    </ion-item>
+
+    <ion-item
+      [button]="true"
+      [class.active]="activeMenu === 'library'"
+      (click)="navigateTo('/library')">
       <div class="icon-wrapper">
         <img src="assets/icon/library-menu-outline.svg" class="icon-default">
         <img src="assets/icon/library-menu-fill.svg" class="icon-active">
       </div>
-      <span>Thư viện</span>
-    </div>
 
-    <div class="menu-item" [class.active]="activeMenu === 'favorite'">
+      <ion-label>Thư viện</ion-label>
+    </ion-item>
+
+    <ion-item
+      [button]="true"
+      [class.active]="activeMenu === 'favorite'"
+      (click)="navigateTo('/favorite')">
       <div class="icon-wrapper">
         <img src="assets/icon/heart-menu-outline.svg" class="icon-default">
         <img src="assets/icon/heart-menu-fill.svg" class="icon-active">
       </div>
-      <span>Yêu thích</span>
-    </div>
-  </div>
+      <ion-label>Yêu thích</ion-label>
+    </ion-item>
+
+    <ion-item
+      [button]="true"
+      [class.active]="activeMenu === 'profile'"
+      (click)="navigateTo('/profile')">
+      <div class="icon-wrapper">
+        <img src="assets/icon/heart-menu-outline.svg" class="icon-default">
+        <img src="assets/icon/heart-menu-fill.svg" class="icon-active">
+      </div>
+      <ion-label>Hồ sơ</ion-label>
+    </ion-item>
+  </ion-list>
 
   <div class="sidebar-footer">
     <button class="btn-login">Đăng nhập</button>
   </div>
-</div>
-
-<!-- Nội dung chính bên phải -->
-<div class="main-content">
-  <!-- Nội dung album, danh sách nhạc của bạn -->
-  <ng-content></ng-content>
-</div>
+</ion-content>

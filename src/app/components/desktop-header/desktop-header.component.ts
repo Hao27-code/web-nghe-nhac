@@ -1,43 +1,54 @@
-import { Component } from '@angular/core';
+import {Component, inject, Input, OnInit} from '@angular/core';
 import {IonicModule} from "@ionic/angular";
-import {Router} from "@angular/router";
+import {Router, RouterOutlet} from "@angular/router";
 import { FormsModule } from '@angular/forms';
 import { NgIf, NgFor } from '@angular/common';
 import { SearchService } from '../../services/search.service';
 import {CdkConnectedOverlay, CdkOverlayOrigin} from "@angular/cdk/overlay";
-import { ConnectedPosition } from '@angular/cdk/overlay';
+import { NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-desktop-header',
   templateUrl: './desktop-header.component.html',
   styleUrls: ['./desktop-header.component.scss'],
   imports: [
-    IonicModule, FormsModule, NgIf, NgFor, CdkConnectedOverlay, CdkOverlayOrigin
+    IonicModule, FormsModule, NgIf, NgFor, CdkConnectedOverlay, CdkOverlayOrigin, RouterOutlet
   ]
 })
-export class DesktopHeaderComponent {
-
+export class DesktopHeaderComponent implements OnInit {
   activeMenu: string = 'home';
+
   // eslint-disable-next-line @angular-eslint/prefer-inject
-  constructor(private router: Router,private searchService: SearchService) {}
-  // 👇 gọi service
-  keyword: string = '';
+  constructor(private router: Router) {}
 
-  get suggestions(): string[] {
-    return this.searchService.getFiltered(this.keyword);
+  ngOnInit() {
+    // Theo dõi route hiện tại để active menu
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe((event: any) => {
+      const url = event.urlAfterRedirects;
+      if (url.includes('/home')) {
+        this.activeMenu = 'home';
+      } else if (url.includes('/library')) {
+        this.activeMenu = 'library';
+      } else if (url.includes('/favorite')) {
+        this.activeMenu = 'favorite';
+      } else if (url.includes('/profile')) {
+        this.activeMenu = 'profile';
+      }
+    });
   }
 
-  onSearch(event: any) {
-    this.keyword = event.target.value;
+  navigateTo(route: string) {
+    this.router.navigate([route]);
   }
-  positions: ConnectedPosition[] = [
-    {
-      originX: 'start',
-      originY: 'bottom',
-      overlayX: 'start',
-      overlayY: 'top',
-      offsetY: 8
-    }
-  ];
+
+  onLogin() {
+    // Xử lý đăng nhập
+    console.log('Đăng nhập');
+  }
 }
+
 
