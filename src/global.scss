@@ -36,33 +36,12 @@
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
 
-
-// Cấu hình split-pane
-ion-split-pane {
-  --side-min-width: 280px;
-  --side-max-width: 320px;
+ion-content::part(scroll) {
+  scrollbar-width: none; /* Firefox */
 }
 
-// Đảm bảo nội dung không bị đè
-ion-router-outlet {
-  display: block;
-  height: 100%;
+ion-content::part(scroll)::-webkit-scrollbar {
+  display: none; /* Chrome */
 }
 
-// Điều chỉnh layout cho desktop
-@media (min-width: 768px) {
-  .split-pane-visible > .split-pane-side {
-    --min-width: 280px !important;
-  }
 
-  .split-pane-visible > .split-pane-main {
-    --min-width: calc(100% - 280px) !important;
-  }
-}
-
-// Ẩn header mobile trên desktop (màn hình >= 768px)
-@media (min-width: 768px) {
-  app-header {
-    display: none !important;
-  }
-}

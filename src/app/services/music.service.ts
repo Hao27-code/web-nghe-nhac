@@ -30,8 +30,8 @@ export class MusicService {
       title: 'Midnight Echoes',
       artist: 'Electric Dreams',
       duration: 300,
-      coverUrl: 'assets/img/music1.jpg',
-      audioUrl: 'assets/audio/song1.mp3'
+      coverUrl: 'assets/img/domdom.jpg',    //đương dẫn ảnh
+      audioUrl: 'assets/music/domdom_J97.mp3'
     },
     {
       id: 2,

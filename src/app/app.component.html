@@ -1,15 +1,19 @@
-<!-- app.component.html -->
 <ion-app>
-  <ion-split-pane contentId="main-content" when="md">
 
-    <!-- MENU BÊN TRÁI -->
-    <ion-menu contentId="main-content" menuId="main-menu" side="start">
-      <app-desktop-header></app-desktop-header>
-    </ion-menu>
+  <!-- DESKTOP -->
+  <ng-container *ngIf="isDesktop; else mobileLayout">
 
-    <!-- NỘI DUNG CHÍNH BÊN PHẢI -->
-    <ion-router-outlet id="main-content"></ion-router-outlet>
+    <app-desktop-header></app-desktop-header>
 
-  </ion-split-pane>
+    <div class="desktop-container">
+      <ion-router-outlet></ion-router-outlet>
+    </div>
+
+  </ng-container>
+
+  <!-- MOBILE -->
+  <ng-template #mobileLayout>
+    <ion-router-outlet></ion-router-outlet>
+  </ng-template>
+
 </ion-app>
-

@@ -14,6 +14,7 @@ import { MusicService } from '../services/music.service';
 import { Music } from '../models/music.model';
 import { Subscription } from 'rxjs';
 
+
 interface Slide {
   id: number;
   image: string;
@@ -37,6 +38,11 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
     // Chuyển đến trang lịch sử nghe
     console.log('Xem tất cả bài hát đã nghe');
     // this.router.navigate(['/history']);
+  }
+
+
+  onPlaySong(music: Music) {
+    this.musicService.playMusic(music);
   }
 
   viewAllMusic() {
@@ -160,7 +166,12 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
     play,
     informationCircle
   };
-  constructor() {
+  // eslint-disable-next-line @angular-eslint/prefer-inject
+  // @ts-ignore
+  // eslint-disable-next-line @angular-eslint/prefer-inject
+  constructor(private musicService: MusicService) {
+    this.musicList = this.musicService.getMusicList();
+
     this.isMobile = window.innerWidth <= 991;
 
     this.originalSlides = this.isMobile

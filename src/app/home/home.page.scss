@@ -5,9 +5,10 @@
 * {
   font-family: 'Lexend', sans-serif;
 }
-
 ion-content {
-  --background: #10182B;
+  --background: radial-gradient(circle at 20% 30%, #1e1e32, #0a0a12);
+}
+ion-content {
   min-height: 100vh;
   --padding-bottom: 90px;
 }
@@ -54,45 +55,18 @@ ion-content {
   padding:24px 15px 0;
 }
 
-.overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-
-  padding: 12px;
-
-  background: linear-gradient(
-      to top,
-      rgba(0,0,0,1),
-      rgba(0,0,0,0.7),
-      transparent
-  );
-}
-.type {
-  color: #ffffff;
-  opacity: 0.8;
-}
-
-.name {
-  font-size: 18px;
-  font-weight: 700;
-  color: #ffffff;
-}
-
 .greeting{
   font-size: 32px;
   font-weight: 600;
   color: #ffffff;
   margin: 10px 65px 15px;
 }
-ion-content {
-  --background: #10182B;
-}
+
 .album-card {
   min-height: 300px;
+  border: 1px solid rgb(76, 110, 131);
+  background: #192438;
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 
@@ -104,7 +78,6 @@ ion-content {
 .title {
   color: #ffffff;
   font-weight: 800;
-  margin: 5px 0;
   font-size: clamp(16px, 2.5vw, 22px);    //Tự scale theo màn hình
 }
 .desc {
@@ -116,9 +89,6 @@ ion-content {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-.album-section{
-  padding:25px 15px 0;
-}
 ion-card{
   margin: 0;
 }
@@ -127,7 +97,6 @@ ion-card{
   justify-content: space-between;   //đẩy 2 nút ra 2 mép
   align-items: center;
   gap: 8px;
-  margin-top: 10px;
   flex-wrap: wrap;
   height: 50%;
   overflow: visible;    //Cho phép nội dung bên trong được “tràn ra ngoài” container
@@ -144,7 +113,6 @@ ion-card{
   overflow: hidden;
   width: 40%;
   min-width: 35%;
-  margin: 10px;
   aspect-ratio: 1/1;  //giữ// tỉ lệ vuông
 }
 ion-card-content{
@@ -177,12 +145,14 @@ ion-button ion-icon {        //khoảng cách icon đến chữ của nút phát
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 24px;
     height: 310px;
   }
   .album-img {
     width: 250px;
     height: 250px;
+  }
+  .img-wrapper{
+    padding: 22px;
   }
   .album-card .title {
     font-size: 32px;
@@ -198,7 +168,6 @@ ion-button ion-icon {        //khoảng cách icon đến chữ của nút phát
   .label{
     display: inline-block;
     align-self: flex-start;
-    padding: 6px 14px;
     border-radius: 999px;
     background: rgba(0, 198, 255, 0.1);
     border: 1px solid rgba(0, 198, 255, 0.3);
@@ -261,6 +230,14 @@ ion-icon{
 }
 
 @media (min-width: 1024px) {
+
+.album-section{
+  border: 1px solid rgb(76, 110, 131);
+  background: #192438;
+  padding: 20px;
+  border-radius: 20px;
+}
+
   .slide {
     flex: 0 0 50%; /* Mỗi slide chiếm 50% chiều rộng = 2 ảnh cùng lúc */
     padding: 0 6px;
@@ -293,6 +270,7 @@ ion-icon{
   .img-wrapper {
     width: 380px;
     height: 380px;
+
   }
 
   .album-img {
@@ -319,32 +297,7 @@ ion-icon{
     position: relative;
     z-index: 2;
   }
-  ion-content {
-    --background: radial-gradient(
-        600px circle at 200px 300px,
-        rgba(0, 198, 255, 0.15),
-        transparent 60%
-    ),
-    linear-gradient(
-        180deg,
-        #0f172a 0%,
-        #0b2230 40%,
-        #081018 100%
-    );
-  }
-  ion-content::before {
-    content: "";
-    position: absolute;
-    inset: 0;
 
-    background: radial-gradient(
-        800px circle at left center,
-        rgba(0, 198, 255, 0.1),
-        transparent 70%
-    );
-
-    pointer-events: none;
-  }
   .album-card {
     background: transparent;
     box-shadow: none;
@@ -352,7 +305,6 @@ ion-icon{
   .label{
     display: inline-block;
     align-self: flex-start;
-    padding: 6px 14px;
     border-radius: 999px;
     background: rgba(0, 198, 255, 0.1);
     border: 1px solid rgba(0, 198, 255, 0.3);
@@ -366,6 +318,7 @@ ion-icon{
   .page-container{
     display: flex;
     justify-content: center;
+    padding: 25px 80px;
   }
 }
 ion-content {
@@ -374,9 +327,7 @@ ion-content {
 ion-content::part(scroll) {
   min-height: 100%;
 }
-.album-card {
-  padding-bottom: 10px;
-}
+
 ion-card-content {
   padding-bottom: 20px !important;
 }
@@ -454,6 +405,7 @@ ion-content {
   .album-card{
     background: rgb(19, 27, 42);
   }
+
   .nav-arrow {
     font-size: 32px;
     width: 36px;
@@ -467,6 +419,7 @@ ion-content {
   .custom-slider-container {
     gap: 8px;
   }
+
 }
 
 @media (max-width: 767px) {
@@ -475,6 +428,9 @@ ion-content {
     gap: 0; /* bỏ khoảng cách */
   }
 
+  .img-wrapper{
+    padding: 20px 22px;
+  }
   .nav-arrow {
     display: none !important;
   }
@@ -496,6 +452,7 @@ ion-content {
   }
   .slide-item img {
     height: 100%;
+    width: 100%;
     object-fit: cover;
   }
   .custom-slider-container {
@@ -505,6 +462,10 @@ ion-content {
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
+  .album-card{
+    background: rgb(19, 27, 42);
+  }
+
   .slider-track {
     gap: 0; /* bỏ khoảng cách */
   }
@@ -523,6 +484,7 @@ ion-content {
   }
   .slide-item img {
     height: 100%;
+    width: 100%;
     object-fit: cover;
   }
   .custom-slider-container {
@@ -572,42 +534,34 @@ ion-content {
 
 // ==================== MUSIC SECTION STYLES ====================
 .music-section {
-  margin: 24px 16px;
-  padding: 0 8px;
+  margin: 24px 20px;
+  padding: 0;
 
   .section-header {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: 16px;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 0 4px;
 
     h2 {
-      font-size: 20px;
-      font-weight: 600;
-      color: var(--ion-color-dark);
+      font-size: 22px;
+      font-weight: 700;
+      color: #1a1a1a;
       margin: 0;
-      position: relative;
-
-      &::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        bottom: -4px;
-        width: 40px;
-        height: 3px;
-        background: linear-gradient(90deg, #667eea, #764ba2);
-        border-radius: 2px;
-      }
+      letter-spacing: -0.3px;
     }
 
     .view-all {
       font-size: 13px;
+      font-weight: 500;
       color: #667eea;
       cursor: pointer;
-      text-decoration: none;
+      transition: opacity 0.2s ease;
 
       &:hover {
-        text-decoration: underline;
+        opacity: 0.8;
+        text-decoration: none;
       }
     }
   }
@@ -616,8 +570,16 @@ ion-content {
     display: flex;
     gap: 16px;
     overflow-x: auto;
-    padding-bottom: 12px;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 16px;
+    -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
+
+    // Ẩn scrollbar nhưng vẫn kéo được (tuỳ chọn)
+    // &::-webkit-scrollbar {
+    //   display: none;
+    // }
 
     &::-webkit-scrollbar {
       height: 4px;
@@ -632,35 +594,96 @@ ion-content {
       background: linear-gradient(90deg, #667eea, #764ba2);
       border-radius: 4px;
     }
+
+    scrollbar-color: #667eea rgba(0, 0, 0, 0.05);
+
+    > * {
+      scroll-snap-align: start;
+      flex-shrink: 0;
+    }
+
+    // QUAN TRỌNG: Card có kích thước CỐ ĐỊNH và BẰNG NHAU
+    app-music-card {
+      width: 180px;  // Chiều rộng cố định
+      flex-shrink: 0;
+      display: block;
+    }
   }
 }
 
 // ==================== RESPONSIVE ====================
+
+// Mobile (dưới 768px)
 @media (max-width: 767px) {
   .music-section {
     margin: 16px 12px;
 
-    .section-header h2 {
-      font-size: 18px;
+    .section-header {
+      margin-bottom: 14px;
+
+      h2 {
+        font-size: 18px;
+      }
+
+      .view-all {
+        font-size: 12px;
+      }
     }
 
     .music-horizontal-scroll {
       gap: 12px;
+      padding-bottom: 12px;
+
+      app-music-card {
+        width: 140px;  // Card nhỏ hơn trên mobile
+      }
     }
   }
 }
 
-// Tablet styles
+// Tablet (768px - 1023px)
 @media (min-width: 768px) and (max-width: 1023px) {
   .music-section {
     margin: 20px 16px;
 
-    .section-header h2 {
-      font-size: 20px;
+    .section-header {
+      margin-bottom: 18px;
+
+      h2 {
+        font-size: 20px;
+      }
     }
 
     .music-horizontal-scroll {
       gap: 14px;
+
+      app-music-card {
+        width: 160px;  // Card vừa trên tablet
+      }
+    }
+  }
+}
+
+// Desktop (≥ 1024px)
+@media (min-width: 1024px) {
+  .music-section {
+    margin: 28px 24px;
+    max-width: 1400px;
+
+    .section-header {
+      margin-bottom: 22px;
+
+      h2 {
+        font-size: 24px;
+      }
+    }
+
+    .music-horizontal-scroll {
+      gap: 20px;
+
+      app-music-card {
+        width: 200px;  // Card lớn hơn trên desktop
+      }
     }
   }
 }

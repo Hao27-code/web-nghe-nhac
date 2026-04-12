@@ -4,7 +4,7 @@
   <div class="image-container">
     <img [src]="music.coverUrl" [alt]="music.title" class="cover-image">
     <button class="play-button" [class.visible]="isHovered" (click)="onPlayClick($event)">
-      <img src="assets/icons/play.svg" alt="Play">
+      <img src="assets/icon/play.svg" alt="Play">
     </button>
   </div>
   <div class="music-info">
@@ -12,4 +12,8 @@
     <div class="artist">{{ music.artist }}</div>
   </div>
   <div class="duration">{{ formatDuration(music.duration) }}</div>
+
+  <div class="progress-bar" *ngIf="isPlaying">
+    <div class="progress-fill" [style.width.%]="progressPercent"></div>
+  </div>
 </div>

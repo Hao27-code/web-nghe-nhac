@@ -1,12 +1,12 @@
 .music-card {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: rgba(54, 68, 105, 0.63);
   border-radius: 12px;
   padding: 16px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
+  border: 1px solid rgba(80, 108, 161, 0.63);
 
   &:hover {
-    transform: translateY(-8px);
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
   }
 
@@ -28,10 +28,7 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 56px;
-      height: 56px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.9);
       border: none;
       cursor: pointer;
       opacity: 0;
@@ -39,6 +36,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      background: transparent; // Không có nền trắng
 
       &.visible {
         opacity: 1;
@@ -46,12 +44,11 @@
 
       &:hover {
         transform: translate(-50%, -50%) scale(1.1);
-        background: white;
       }
 
       img {
-        width: 24px;
-        height: 24px;
+        width: 50px;
+        height: 50px;
       }
     }
   }
@@ -114,6 +111,103 @@
 
     .music-info .artist {
       font-size: 11px;
+    }
+  }
+}
+
+// Trong file .scss của app-music-card component
+:host {
+  display: block;
+  width: 100%;  // Quan trọng: chiếm full width của parent đã set
+}
+
+.card {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  }
+
+  .card-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;  // Hình vuông
+    object-fit: cover;
+  }
+
+  .card-content {
+    padding: 12px;
+
+    .song-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin: 0 0 4px 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .artist-name {
+      font-size: 12px;
+      color: #666;
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .duration {
+      font-size: 11px;
+      color: #999;
+      margin-top: 6px;
+    }
+  }
+}
+.music-card {
+  position: relative;
+  cursor: pointer;
+
+  .card-image {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      display: block;
+    }
+
+    // Nút play - không có vòng tròn trắng
+    .play-btn {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      background: transparent; // Bỏ nền trắng
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+
+      // Hoặc dùng icon play dạng text
+      &::before {
+        content: "▶";
+        font-size: 28px;
+        color: white;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+      }
+    }
+
+    // Hiện nút play khi hover vào card
+    &:hover .play-btn {
+      opacity: 1;
     }
   }
 }

@@ -1,6 +1,11 @@
-<app-header></app-header>
+<ion-header>
+  <ion-toolbar>
+    <app-header></app-header>
+  </ion-toolbar>
+</ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
+
+<ion-content [fullscreen]="true">
   <section class="home-section">
     <div class="greeting">
       {{greeting}}
@@ -28,36 +33,6 @@
       <div class="nav-arrow next-arrow" (click)="nextSlide()">
         <ion-icon name="chevron-forward-outline"></ion-icon>
       </div>
-    </div>
-
-
-
-    <div class="playlist-row" #scrollContainer>
-      <ion-card class="playlist-card" *ngFor="let item of loopPlaylists; let i = index">
-        <img [src]="item.image">
-        <div class="overlay">
-          <div class="type">{{item.type}}</div>
-          <div class="name">{{item.name}}</div>
-        </div>
-      </ion-card>
-    </div>
-
-    <div class="playlist-row" #scrollContainer>
-      @for (item of loopPlaylists; track $index){
-        <ion-card class="playlist-card">
-          <img [src]="item.image">
-
-          <!--lớp phủ-->
-          <div class="overlay">
-            <div class="type">
-              {{item.type}}
-            </div>
-            <div class="name">
-              {{item.name}}
-            </div>
-          </div>
-        </ion-card>
-      }
     </div>
   </section>
 
@@ -100,9 +75,9 @@
     </div>
     <div class="music-horizontal-scroll">
       <app-music-card
-        *ngFor="let music of recentlyPlayed"
-        [music]="music"
-        (play)="onPlayMusic($event)">
+        *ngFor="let song of musicList"
+        [music]="song"
+        (play)="onPlaySong($event)">
       </app-music-card>
     </div>
   </div>
