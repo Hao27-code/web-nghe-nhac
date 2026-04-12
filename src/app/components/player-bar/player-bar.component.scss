@@ -1,147 +1,311 @@
+// player-bar.component.scss
+// ==================== THANH PHÁT NHẠC CHÍNH ====================
+
 .player-bar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  backdrop-filter: blur(10px);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 12px 20px;
-  z-index: 1000;
+  position: fixed;           // Cố định ở cuối màn hình
+  bottom: 0;                 // Dính đáy
+  left: 0;                   // Dính trái
+  right: 0;                  // Dính phải
+  background: rgba(18, 22, 35, 0.95);  // Nền tối mờ
+  backdrop-filter: blur(12px);         // Hiệu ứng mờ phía sau
+  border-top: 1px solid rgba(255, 255, 255, 0.08);  // Viền trên mờ
+  padding: 12px 24px;        // Khoảng cách bên trong
+  z-index: 1000;             // Lớp cao nhất
 
+  // Nội dung bên trong thanh phát nhạc
   .player-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    max-width: 1200px;
-    margin: 0 auto;
-    gap: 20px;
+    display: flex;           // Hiển thị dạng flex
+    align-items: center;     // Căn giữa theo chiều dọc
+    justify-content: space-between;  // Căn đều 2 đầu
+    max-width: 1600px;       // Chiều rộng tối đa
+    margin: 0 auto;          // Căn giữa
+  }
 
-    .left-section {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      min-width: 200px;
+  // ==================== PHẦN BÊN TRÁI ====================
+  .left-section {
+    display: flex;           // Hiển thị dạng flex
+    align-items: center;     // Căn giữa theo chiều dọc
+    gap: 12px;               // Khoảng cách giữa các phần tử
+    min-width: 250px;        // Chiều rộng tối thiểu
 
-      .thumbnail {
-        width: 48px;
-        height: 48px;
-        border-radius: 8px;
-        object-fit: cover;
+    // Ảnh bìa bài hát
+    .thumbnail {
+      width: 48px;           // Chiều rộng
+      height: 48px;          // Chiều cao
+      border-radius: 8px;    // Bo góc
+      object-fit: cover;     // Ảnh phủ kín khung
+    }
+
+    // Thông tin bài hát
+    .song-info {
+      .song-title {
+        font-size: 14px;     // Cỡ chữ
+        font-weight: 600;    // Chữ đậm
+        color: white;        // Màu trắng
+        margin-bottom: 4px;  // Khoảng cách dưới
       }
-
-      .song-info {
-        .song-title {
-          font-size: 14px;
-          font-weight: 600;
-          color: white;
-          margin-bottom: 4px;
-        }
-
-        .song-artist {
-          font-size: 12px;
-          color: rgba(255, 255, 255, 0.8);
-        }
+      .song-artist {
+        font-size: 12px;     // Cỡ chữ nhỏ
+        color: rgba(255, 255, 255, 0.6);  // Màu trắng mờ
       }
     }
 
-    .center-section {
-      flex: 1;
-      max-width: 400px;
-
-      .progress-container {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-
-        .time {
-          font-size: 12px;
-          color: white;
-          min-width: 40px;
-        }
-
-        .progress-bar {
-          flex: 1;
-          height: 4px;
-          -webkit-appearance: none;
-          background: rgba(255, 255, 255, 0.2);
-          border-radius: 2px;
-          outline: none;
-
-          &::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: white;
-            cursor: pointer;
-          }
-        }
-      }
-    }
-
-    .right-section {
+    // Nút yêu thích (tim) và nút 3 chấm
+    .like-btn, .menu-btn {
+      background: none;      // Không nền
+      border: none;          // Không viền
+      cursor: pointer;       // Con trỏ chuột
+      color: rgb(255, 255, 255);  // Màu trắng mờ
       display: flex;
       align-items: center;
-      gap: 16px;
+      justify-content: center;
+      transition: all 0.2s;  // Hiệu ứng chuyển động
+
+      ion-icon {
+        font-size: 20px;     // Cỡ icon
+      }
+
+      &:hover {
+        color: #ffffff;      // Đổi màu xanh khi hover
+      }
+    }
+  }
+
+  // ==================== PHẦN Ở GIỮA ====================
+  .center-section {
+    flex: 1;                 // Chiếm phần không gian còn lại
+    max-width: 600px;        // Chiều rộng tối đa
+    margin: 0 20px;          // Khoảng cách 2 bên
+
+    // Các nút điều khiển (play, next, prev, shuffle, repeat)
+    .controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;             // Khoảng cách giữa các nút
+      margin-bottom: 8px;    // Khoảng cách dưới
 
       .control-btn {
         background: none;
         border: none;
         cursor: pointer;
-        padding: 8px;
-        transition: transform 0.2s ease;
-
-        &:hover {
-          transform: scale(1.1);
-        }
+        color: rgba(255, 255, 255, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
 
         ion-icon {
-          font-size: 24px;
+          font-size: 20px;
+        }
+
+        &:hover {
+          color: #ffffff;    // Đổi màu xanh khi hover
+        }
+
+        // Nút play/pause đặc biệt (có nền xanh)
+        &.play-btn {
+          width: 36px;
+          height: 36px;
+          border-radius: 50%;
           color: white;
+
+          ion-icon {
+            font-size: 18px;
+
+          }
+
+          &:hover {
+            background: rgba(22, 172, 227, 0.95);  // Xanh sáng hơn khi hover
+            transform: scale(1.05);  // Phóng to nhẹ
+          }
         }
       }
+    }
 
-      .play-btn {
-        background: white;
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
+    // ===== THANH PROGRESS (THANH CHẠY THỜI GIAN) =====
+    .progress-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      // Hiển thị thời gian (00:00 / 05:00)
+      .time {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.6);
+        font-family: monospace;  // Phông chữ đều
+        min-width: 45px;          // Chiều rộng tối thiểu
+      }
+
+      // Thanh progress tùy chỉnh
+      .custom-progress {
+        flex: 1;                 // Chiếm hết không gian
+        cursor: pointer;         // Con trỏ chuột
+
+        .progress-bg {
+          position: relative;    // Để làm nền cho fill
+          height: 4px;           // Chiều cao mặc định
+          background: rgba(255, 255, 255, 0.15);  // Nền mờ
+          border-radius: 4px;    // Bo góc
+          transition: height 0.2s;  // Hiệu ứng khi hover
+
+          // Phần đã phát (màu xanh)
+          .progress-fill {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            background: white;  // Màu xanh gradient
+            border-radius: 4px;
+            transition: width 0.1s linear;  // Chạy mượt
+          }
+
+          // Nút tròn kéo
+          .progress-thumb {
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            background: white;    // Màu trắng
+            border-radius: 50%;
+            opacity: 0;           // Ẩn mặc định
+            transition: opacity 0.2s, transform 0.2s;
+          }
+        }
+
+        // Khi hover vào thanh progress
+        &:hover {
+          .progress-bg {
+            height: 5px;         // Cao hơn
+
+            .progress-thumb {
+              opacity: 1;        // Hiện nút tròn
+              transform: translate(-50%, -50%) scale(1.2);  // Phóng to
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // ==================== PHẦN BÊN PHẢI ====================
+  .right-section {
+    min-width: 120px;          // Chiều rộng tối thiểu
+    display: flex;
+    justify-content: flex-end;  // Canh phải
+
+    // ===== ĐIỀU KHIỂN ÂM LƯỢNG =====
+    .volume-control {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      // Nút bật/tắt âm lượng
+      .volume-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: rgba(255, 255, 255, 0.7);
         display: flex;
         align-items: center;
         justify-content: center;
 
         ion-icon {
-          color: #667eea;
           font-size: 20px;
+        }
+
+        &:hover {
+          color: #ffffff;      // Đổi màu xanh khi hover
+        }
+      }
+
+      // Thanh âm lượng tùy chỉnh
+      .custom-volume {
+        width: 80px;           // Chiều rộng
+        cursor: pointer;
+
+        .volume-bg {
+          position: relative;
+          height: 4px;
+          background: rgba(255, 255, 255, 0.15);
+          border-radius: 4px;
+          transition: height 0.2s;
+
+          // Phần âm lượng đã chọn
+          .volume-fill {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            background: white;
+            border-radius: 4px;
+            transition: width 0.1s linear;
+          }
+
+          // Nút tròn kéo
+          .volume-thumb {
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            background: white;  // Màu xanh
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.2s, transform 0.2s;
+          }
+        }
+
+        // Khi hover vào thanh âm lượng
+        &:hover {
+          .volume-bg {
+            height: 6px;
+
+            .volume-thumb {
+              opacity: 1;
+              transform: translate(-50%, -50%) scale(1.2);
+            }
+          }
         }
       }
     }
   }
 }
 
-@media (max-width: 767px) {
+// ==================== GIAO DIỆN ĐIỆN THOẠI (DƯỚI 768px) ====================
+@media (max-width: 768px) {
   .player-bar {
-    padding: 8px 12px;
+    padding: 10px 16px;      // Giảm padding
+  }
 
-    .player-content {
-      flex-direction: column;
-      gap: 12px;
+  .left-section {
+    min-width: 180px;        // Thu nhỏ chiều rộng
 
-      .left-section {
-        width: 100%;
-        min-width: auto;
+    .thumbnail {
+      width: 40px;
+      height: 40px;
+    }
+
+    .song-info {
+      .song-title {
+        font-size: 12px;     // Chữ nhỏ hơn
       }
-
-      .center-section {
-        width: 100%;
-        max-width: none;
-      }
-
-      .right-section {
-        width: 100%;
-        justify-content: center;
+      .song-artist {
+        font-size: 10px;
       }
     }
+  }
+
+  .controls {
+    gap: 12px;               // Giảm khoảng cách
+
+    .control-btn ion-icon {
+      font-size: 18px;       // Icon nhỏ hơn
+    }
+  }
+
+  .custom-volume {
+    width: 60px;             // Thanh âm lượng ngắn hơn
   }
 }

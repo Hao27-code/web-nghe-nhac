@@ -34,6 +34,7 @@
         <ion-icon name="chevron-forward-outline"></ion-icon>
       </div>
     </div>
+
   </section>
 
 
@@ -70,14 +71,14 @@
   <!-- ==================== THÊM PHẦN TIẾP TỤC NGHE ==================== -->
   <div class="music-section" *ngIf="recentlyPlayed.length > 0">
     <div class="section-header">
-      <h2>🎧 Tiếp tục nghe</h2>
+      <h2>Tiếp tục nghe</h2>
       <a class="view-all" (click)="viewAllRecentlyPlayed()">Xem tất cả</a>
     </div>
     <div class="music-horizontal-scroll">
       <app-music-card
-        *ngFor="let song of musicList"
-        [music]="song"
-        (play)="onPlaySong($event)">
+        *ngFor="let music of recentlyPlayed"
+        [music]="music"
+        (play)="onPlayMusic($event)">
       </app-music-card>
     </div>
   </div>
@@ -86,7 +87,7 @@
   <!-- ==================== THÊM PHẦN DÀNH CHO BẠN ==================== -->
   <div class="music-section">
     <div class="section-header">
-      <h2>🎵 Dành cho bạn</h2>
+      <h2>Dành cho bạn</h2>
       <a class="view-all" (click)="viewAllMusic()">Xem tất cả</a>
     </div>
     <div class="music-horizontal-scroll">

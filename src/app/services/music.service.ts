@@ -18,49 +18,56 @@ export class MusicService {
   private durationSubject = new BehaviorSubject<number>(0);
   duration$ = this.durationSubject.asObservable();
 
+  // ========== LỊCH SỬ NGHE NHẠC ==========
   private listeningHistory: ListeningHistory[] = [];
   private recentlyPlayedSubject = new BehaviorSubject<Music[]>([]);
   recentlyPlayed$ = this.recentlyPlayedSubject.asObservable();
 
+  getAudioElement(): HTMLAudioElement | null {
+    return this.audio;
+  }
   private audio: HTMLAudioElement | null = null;
 
   private sampleMusic: Music[] = [
     {
       id: 1,
-      title: 'Midnight Echoes',
-      artist: 'Electric Dreams',
+      title: 'Đom Đóm',
+      artist: 'Jack - J97',
       duration: 300,
-      coverUrl: 'assets/img/domdom.jpg',    //đương dẫn ảnh
+      coverUrl: 'assets/img/domdom.jpg',
       audioUrl: 'assets/music/domdom_J97.mp3'
     },
     {
       id: 2,
-      title: 'Vinyl Dreams',
-      artist: 'Jazz Masters',
-      duration: 268,
-      coverUrl: 'assets/img/music2.jpg',
-      audioUrl: 'assets/audio/song2.mp3'
+      title: 'Đứa Trẻ Mùa Đông Chí',
+      artist: 'Jack - J97',
+      duration: 288,
+      coverUrl: 'assets/img/duatremuadongchi.jpg',
+      audioUrl: 'assets/music/duatremuadongchi_J97.mp3'
     },
     {
       id: 3,
-      title: 'Ocean Waves',
-      artist: 'Ambient Soul',
+      title: 'Liễu Thanh Yên',
+      artist: 'Jack - J97',
       duration: 245,
-      coverUrl: 'assets/img/music3.jpg',
-      audioUrl: 'assets/audio/song3.mp3'
+      coverUrl: 'assets/img/lieuthanhyen.jpg',
+      audioUrl: 'assets/music/lieuthanhyen_J97.mp3'
     },
     {
       id: 4,
-      title: 'City Lights',
-      artist: 'Night Riders',
+      title: 'Ngoại Lệ',
+      artist: 'Jack - J97',
       duration: 320,
-      coverUrl: 'assets/img/music4.jpg',
-      audioUrl: 'assets/audio/song4.mp3'
+      coverUrl: 'assets/img/ngoaile.jpg',
+      audioUrl: 'assets/music/ngoaile_J97.mp3'
     }
   ];
 
   constructor() {
     this.loadHistory();
+  }
+  getAudio(): HTMLAudioElement | null {
+    return this.audio;
   }
 
   getMusicList(): Music[] {
@@ -168,7 +175,7 @@ export class MusicService {
     }
   }
 
-  private getSavedTime(musicId: number): number {
+  getSavedTime(musicId: number): number {
     const history = this.listeningHistory.find(h => h.musicId === musicId);
     return history ? history.currentTime : 0;
   }
@@ -200,4 +207,5 @@ export class MusicService {
     const saved = localStorage.getItem('favorites');
     return saved ? JSON.parse(saved) : [];
   }
+
 }

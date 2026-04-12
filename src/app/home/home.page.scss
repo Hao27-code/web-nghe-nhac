@@ -230,7 +230,10 @@ ion-icon{
 }
 
 @media (min-width: 1024px) {
-
+.music-section{
+  margin-top: 40px;
+  padding: 0 80px;
+}
 .album-section{
   border: 1px solid rgb(76, 110, 131);
   background: #192438;
@@ -530,38 +533,36 @@ ion-content {
 }
 
 
-
-
-// ==================== MUSIC SECTION STYLES ====================
+// ==================== TIẾP TỤC NGHE SECTION ====================
+// Chỉ áp dụng cho phần có class .music-section chứa "Tiếp tục nghe"
 .music-section {
-  margin: 24px 20px;
-  padding: 0;
+
 
   .section-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
-    padding: 0 4px;
+    margin-bottom: 16px;
 
     h2 {
-      font-size: 22px;
+      font-size: 20px;
       font-weight: 700;
-      color: #1a1a1a;
+      color: white;
       margin: 0;
-      letter-spacing: -0.3px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .view-all {
       font-size: 13px;
-      font-weight: 500;
-      color: #667eea;
+      color: #fafafa;
       cursor: pointer;
-      transition: opacity 0.2s ease;
+      transition: opacity 0.2s;
 
       &:hover {
+        text-decoration: underline;
         opacity: 0.8;
-        text-decoration: none;
       }
     }
   }
@@ -570,120 +571,60 @@ ion-content {
     display: flex;
     gap: 16px;
     overflow-x: auto;
-    overflow-y: hidden;
-    scroll-snap-type: x mandatory;
+    overflow-y: visible;
     padding-bottom: 16px;
-    -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
-
-    // Ẩn scrollbar nhưng vẫn kéo được (tuỳ chọn)
-    // &::-webkit-scrollbar {
-    //   display: none;
-    // }
 
     &::-webkit-scrollbar {
       height: 4px;
     }
 
     &::-webkit-scrollbar-track {
-      background: rgba(0, 0, 0, 0.05);
+      background: rgba(255, 255, 255, 0.1);
       border-radius: 4px;
     }
 
     &::-webkit-scrollbar-thumb {
-      background: linear-gradient(90deg, #667eea, #764ba2);
+      background: #fafafa;
       border-radius: 4px;
     }
 
-    scrollbar-color: #667eea rgba(0, 0, 0, 0.05);
-
-    > * {
-      scroll-snap-align: start;
-      flex-shrink: 0;
-    }
-
-    // QUAN TRỌNG: Card có kích thước CỐ ĐỊNH và BẰNG NHAU
     app-music-card {
-      width: 180px;  // Chiều rộng cố định
       flex-shrink: 0;
+      width: 200px;
       display: block;
+      transition: transform 0.2s ease;
+
+
     }
   }
 }
 
-// ==================== RESPONSIVE ====================
-
-// Mobile (dưới 768px)
+// Responsive cho phần Tiếp tục nghe
 @media (max-width: 767px) {
   .music-section {
-    margin: 16px 12px;
+    margin: 20px 16px;
 
-    .section-header {
-      margin-bottom: 14px;
-
-      h2 {
-        font-size: 18px;
-      }
-
-      .view-all {
-        font-size: 12px;
-      }
+    .section-header h2 {
+      font-size: 18px;
     }
 
     .music-horizontal-scroll {
       gap: 12px;
-      padding-bottom: 12px;
 
       app-music-card {
-        width: 140px;  // Card nhỏ hơn trên mobile
+        width: 160px;
       }
     }
   }
 }
 
-// Tablet (768px - 1023px)
-@media (min-width: 768px) and (max-width: 1023px) {
+@media (min-width: 768px) and (max-width: 1024px) {
   .music-section {
-    margin: 20px 16px;
-
-    .section-header {
-      margin-bottom: 18px;
-
-      h2 {
-        font-size: 20px;
-      }
-    }
-
-    .music-horizontal-scroll {
-      gap: 14px;
-
-      app-music-card {
-        width: 160px;  // Card vừa trên tablet
-      }
+    .music-horizontal-scroll app-music-card {
+      width: 180px;
     }
   }
 }
 
-// Desktop (≥ 1024px)
-@media (min-width: 1024px) {
-  .music-section {
-    margin: 28px 24px;
-    max-width: 1400px;
 
-    .section-header {
-      margin-bottom: 22px;
-
-      h2 {
-        font-size: 24px;
-      }
-    }
-
-    .music-horizontal-scroll {
-      gap: 20px;
-
-      app-music-card {
-        width: 200px;  // Card lớn hơn trên desktop
-      }
-    }
-  }
-}

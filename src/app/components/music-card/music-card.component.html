@@ -1,19 +1,25 @@
+<!-- music-card.component.html -->
 <div class="music-card"
      (mouseenter)="isHovered = true"
-     (mouseleave)="isHovered = false">
+     (mouseleave)="isHovered = false"
+     >
+
   <div class="image-container">
     <img [src]="music.coverUrl" [alt]="music.title" class="cover-image">
     <button class="play-button" [class.visible]="isHovered" (click)="onPlayClick($event)">
-      <img src="assets/icon/play.svg" alt="Play">
+      <img [src]="isPlaying ? 'assets/icon/play.svg' : 'assets/icon/play.svg'"
+           alt="Play/Pause"
+           class="play-icon">
     </button>
+    <!-- Badge hiển thị thời gian đã nghe (cho phần tiếp tục nghe) -->
+    <div class="resume-badge" *ngIf="resumeTime > 0 && !isPlaying">
+      {{ formatTime(resumeTime) }}
+    </div>
   </div>
+
   <div class="music-info">
     <div class="title">{{ music.title }}</div>
     <div class="artist">{{ music.artist }}</div>
   </div>
-  <div class="duration">{{ formatDuration(music.duration) }}</div>
 
-  <div class="progress-bar" *ngIf="isPlaying">
-    <div class="progress-fill" [style.width.%]="progressPercent"></div>
-  </div>
 </div>

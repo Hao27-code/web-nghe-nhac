@@ -44,4 +44,47 @@ ion-content::part(scroll)::-webkit-scrollbar {
   display: none; /* Chrome */
 }
 
+// ========== CUSTOM CSS ĐỂ HIỂN THỊ % CHO VOLUME ==========
+// Thêm vào component hoặc global styles
+.progress-bar, .volume-slider {
+  --progress-color: #1db954;
+  --bg-color: rgba(255, 255, 255, 0.15);
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .player-bar {
+    padding: 10px 16px;
+  }
+
+  .left-section {
+    min-width: 180px;
+
+    .thumbnail {
+      width: 40px;
+      height: 40px;
+    }
+
+    .song-info .song-title {
+      font-size: 12px;
+    }
+
+    .song-info .song-artist {
+      font-size: 10px;
+    }
+  }
+
+  .controls {
+    gap: 12px;
+
+    .control-btn ion-icon {
+      font-size: 18px;
+    }
+  }
+
+  .volume-control .volume-slider {
+    width: 60px;
+  }
+}
+
 
