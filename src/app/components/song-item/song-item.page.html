@@ -1,0 +1,29 @@
+<div class="song-card" (click)="playSong($event)">
+
+  <!-- Ảnh trái 60x60 -->
+  <div class="song-image-wrapper">
+    <img [src]="song.imageUrl" [alt]="song.title" class="song-image">
+    <div class="image-overlay">
+      <ion-button fill="clear" class="play-btn">
+        <ion-icon name="play-circle" slot="icon-only"></ion-icon>
+      </ion-button>
+    </div>
+  </div>
+
+  <!-- Nội dung phải -->
+  <div class="song-info">
+    <div class="song-text">
+      <h3 class="song-title">{{ song.title }}</h3>
+      <p class="song-artist">{{ song.artist }}</p>
+    </div>
+    <div class="song-actions">
+      <ion-button fill="clear" size="small" class="action-btn" (click)="toggleLike($event)">
+        <ion-icon [name]="isLiked ? 'heart' : 'heart-outline'"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" size="small" class="action-btn" (click)="showOptions($event)">
+        <ion-icon name="ellipsis-horizontal"></ion-icon>
+      </ion-button>
+    </div>
+  </div>
+
+</div>

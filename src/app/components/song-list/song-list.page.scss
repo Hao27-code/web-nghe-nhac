@@ -1,0 +1,93 @@
+.song-list-container {
+  padding: 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ===== DESKTOP: 3 cột ===== */
+.desktop-grid {
+  display: none;
+}
+
+.grid-3cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+/* ===== TABLET: 2 cột ===== */
+.tablet-grid {
+  display: none;
+}
+
+.grid-2cols {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+/* ===== MOBILE: Slide, mỗi slide 3 bài ===== */
+.mobile-slider {
+  display: none;
+}
+
+.slider-container {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  scrollbar-width: none;
+}
+
+.slider-track {
+  display: flex;
+  gap: 16px;
+  padding: 4px 0;
+}
+
+.slider-slide {
+  flex: 0 0 90%;
+  scroll-snap-align: start;
+  background: transparent;
+}
+
+.slide-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ===== RESPONSIVE ===== */
+
+/* MOBILE: < 577px */
+@media (max-width: 576px) {
+  .mobile-slider {
+    display: block;
+  }
+}
+
+/* TABLET: 577px - 992px */
+@media (min-width: 577px) and (max-width: 992px) {
+  .tablet-grid {
+    display: block;
+  }
+}
+
+/* DESKTOP: >= 993px */
+@media (min-width: 993px) {
+  .desktop-grid {
+    display: block;
+  }
+}
+
+/* Màn hình rất nhỏ */
+@media (max-width: 480px) {
+  .slider-slide {
+    flex: 0 0 95%;
+  }
+}

@@ -67,5 +67,13 @@ export const routes: Routes = [
   {
     path: '**',
     redirectTo: '/tabs/home'
+  },
+  {
+    path: 'song-item',
+    loadComponent: () => import('./components/song-item/song-item.page').then(m => m.SongItemPage)
+  },
+  {
+    path: 'song-list',
+    loadComponent: () => import('./components/song-list/song-list.page').then(m => m.SongListPage)
   }
 ];

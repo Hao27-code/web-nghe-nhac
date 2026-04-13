@@ -627,4 +627,37 @@ ion-content {
   }
 }
 
+// ==================== PHẦN TIẾP TỤC NGHE (CARD NHỎ HƠN) ====================
+.music-section.resume-section {
+  padding: 12px;
 
+  .section-header {
+    margin-bottom: 12px;
+    padding: 0 8px;
+
+    h2 {
+      font-size: 18px;  // Chữ nhỏ hơn
+    }
+
+    .view-all {
+      font-size: 12px;
+    }
+  }
+
+  .resume-scroll {
+    gap: 12px;  // Khoảng cách giữa các card nhỏ hơn
+
+    app-music-card {
+      width: 160px;  // Card nhỏ hơn (mặc định là 180-200px)
+
+      // Responsive cho card nhỏ
+      @media (max-width: 767px) {
+        width: 130px;
+      }
+
+      @media (min-width: 768px) and (max-width: 1023px) {
+        width: 150px;
+      }
+    }
+  }
+}

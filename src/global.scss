@@ -36,6 +36,13 @@
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
 
+
+@import 'swiper/css';
+@import 'swiper/css/navigation';
+@import 'swiper/css/pagination';
+
+
+
 ion-content::part(scroll) {
   scrollbar-width: none; /* Firefox */
 }

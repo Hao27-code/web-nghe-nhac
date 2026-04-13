@@ -13,6 +13,7 @@ import {MusicCardComponent} from "../components/music-card/music-card.component"
 import { MusicService } from '../services/music.service';
 import { Music } from '../models/music.model';
 import { Subscription } from 'rxjs';
+import { SongListPage } from '../components/song-list/song-list.page';
 
 interface Slide {
   id: number;
@@ -24,7 +25,7 @@ interface Slide {
   standalone: true,
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [HeaderComponent, IonicModule, NgClass, NgOptimizedImage, CommonModule, PlayerBarComponent, MusicCardComponent],
+  imports: [HeaderComponent, IonicModule, NgClass, NgOptimizedImage, CommonModule, PlayerBarComponent, MusicCardComponent, SongListPage],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 
 })

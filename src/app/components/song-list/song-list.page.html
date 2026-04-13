@@ -1,0 +1,40 @@
+<div class="song-list-container">
+
+  <!-- DESKTOP: Grid 3 cột -->
+  <div class="desktop-grid" *ngIf="isDesktop">
+    <div class="grid-3cols">
+      <app-song-item
+        *ngFor="let song of displaySongs"
+        [song]="song"
+      ></app-song-item>
+    </div>
+  </div>
+
+  <!-- TABLET: Grid 2 cột, bỏ 3 cái cuối -->
+  <div class="tablet-grid" *ngIf="isTablet">
+    <div class="grid-2cols">
+      <app-song-item
+        *ngFor="let song of displaySongs"
+        [song]="song"
+      ></app-song-item>
+    </div>
+  </div>
+
+  <!-- MOBILE: Slide ngang, mỗi slide có 3 bài (3 hàng) -->
+  <div class="mobile-slider" *ngIf="isMobile">
+    <div class="slider-container">
+      <div class="slider-track">
+        <!-- Mỗi slide là 1 group có 3 bài -->
+        <div class="slider-slide" *ngFor="let group of getSongGroups()">
+          <div class="slide-content">
+            <app-song-item
+              *ngFor="let song of group"
+              [song]="song"
+            ></app-song-item>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

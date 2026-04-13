@@ -68,20 +68,28 @@
     </section>
   </div>
 
-  <!-- ==================== THÊM PHẦN TIẾP TỤC NGHE ==================== -->
-  <div class="music-section" *ngIf="recentlyPlayed.length > 0">
-    <div class="section-header">
-      <h2>Tiếp tục nghe</h2>
-      <a class="view-all" (click)="viewAllRecentlyPlayed()">Xem tất cả</a>
-    </div>
-    <div class="music-horizontal-scroll">
-      <app-music-card
-        *ngFor="let music of recentlyPlayed"
-        [music]="music"
-        (play)="onPlayMusic($event)">
-      </app-music-card>
-    </div>
+
+  <div>
+    <!-- Sử dụng component song-list -->
+    <app-song-list></app-song-list>
   </div>
+  <!-- ==================== THÊM PHẦN TIẾP TỤC NGHE ==================== -->
+  <section class="music-section resume-section">
+    <div class="music-section" *ngIf="recentlyPlayed.length > 0">
+      <div class="section-header">
+        <h2>Tiếp tục nghe</h2>
+        <a class="view-all" (click)="viewAllRecentlyPlayed()">Xem tất cả</a>
+      </div>
+      <div class="music-horizontal-scroll resume-scroll">
+        <app-music-card
+          *ngFor="let music of recentlyPlayed"
+          [music]="music"
+          (play)="onPlayMusic($event)">
+        </app-music-card>
+      </div>
+    </div>
+  </section>
+
   <!-- ==================== END THÊM ==================== -->
 
   <!-- ==================== THÊM PHẦN DÀNH CHO BẠN ==================== -->
