@@ -55,6 +55,10 @@ export const routes: Routes = [
     path: 'profile',
     loadComponent: () => import('./profile/profile.page').then(m => m.ProfilePage)
   },
+  {
+    path: 'category',
+    loadComponent: () => import('./category/category.page').then( m => m.CategoryPage)
+  },
 
   // ========== MẶC ĐỊNH ==========
   {
@@ -75,5 +79,6 @@ export const routes: Routes = [
   {
     path: 'song-list',
     loadComponent: () => import('./components/song-list/song-list.page').then(m => m.SongListPage)
-  }
+  },
+
 ];

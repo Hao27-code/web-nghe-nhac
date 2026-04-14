@@ -1,18 +1,20 @@
 import { Component } from '@angular/core';
 import {IonicModule} from "@ionic/angular";
-import {Router} from "@angular/router";
+import {Router, RouterLinkActive} from "@angular/router";
 import { FormsModule } from '@angular/forms';
 import { NgIf, NgFor } from '@angular/common';
 import { SearchService } from '../../services/search.service';
 import {CdkConnectedOverlay, CdkOverlayOrigin} from "@angular/cdk/overlay";
 import { ConnectedPosition } from '@angular/cdk/overlay';
+import { RouterModule } from '@angular/router';
+
 
 @Component({
   selector: 'app-desktop-header',
   templateUrl: './desktop-header.component.html',
   styleUrls: ['./desktop-header.component.scss'],
   imports: [
-    IonicModule, FormsModule, NgIf, NgFor, CdkConnectedOverlay, CdkOverlayOrigin
+    IonicModule, FormsModule, NgIf, NgFor, CdkConnectedOverlay, CdkOverlayOrigin, RouterLinkActive, RouterModule
   ]
 })
 export class DesktopHeaderComponent {
