@@ -5,14 +5,9 @@ import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/stan
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { SongItemPage } from '../song-item/song-item.page';
+import { Music } from '../../models/music.model';
+import { MusicService } from '../../services/music.service';
 
-
-export interface Song {
-  id: number;
-  title: string;
-  artist: string;
-  imageUrl: string;
-}
 
 @Component({
   selector: 'app-song-list',
@@ -24,15 +19,25 @@ export interface Song {
 })
 export class SongListPage implements OnInit {
 
-  allSongs: Song[] = [];
-  displaySongs: Song[] = [];  // Sẽ thay đổi theo device
+  allSongs: Music[] = [];
+  displaySongs: Music[] = [];
   isMobile: boolean = false;
   isTablet: boolean = false;
   isDesktop: boolean = false;
 
+  // eslint-disable-next-line @angular-eslint/prefer-inject
+  constructor(private musicService: MusicService) {}
+
   ngOnInit(): void {
-    this.loadSongs();
+    // Lấy danh sách nhạc từ service
+    this.allSongs = this.musicService.getMusicList();
     this.checkScreenSize();
+
+    // Lắng nghe sự kiện phát nhạc để cập nhật UI
+    this.musicService.currentMusic$.subscribe(() => {
+      // Force update UI
+      this.displaySongs = [...this.displaySongs];
+    });
   }
 
   @HostListener('window:resize', ['$event'])
@@ -45,38 +50,21 @@ export class SongListPage implements OnInit {
     this.isMobile = width < 577;
     this.isTablet = width >= 577 && width <= 992;
     this.isDesktop = width > 992;
-
     this.updateDisplaySongs();
   }
 
   updateDisplaySongs(): void {
     if (this.isTablet) {
-      // Tablet: bỏ 3 cái cuối, chỉ hiện 6 bài (2 cột x 3 hàng)
+      // Tablet: chỉ hiện 6 bài (2 cột x 3 hàng)
       this.displaySongs = this.allSongs.slice(0, 6);
     } else {
-      // Mobile và Desktop: hiện tất cả
       this.displaySongs = [...this.allSongs];
     }
   }
 
-  loadSongs(): void {
-    this.allSongs = [
-      { id: 1, title: 'Thiên Lý Ơi', artist: 'Jack - J97', imageUrl: 'assets/images/song1.jpg' },
-      { id: 2, title: 'Vực Thảm Của Bình Yên', artist: 'Hồ Jack - J97', imageUrl: 'assets/images/song2.jpg' },
-      { id: 3, title: 'Chúng Ta Rồi Sẽ Hạnh Phúc', artist: 'Hồ Jack - J97', imageUrl: 'assets/images/song3.jpg' },
-      { id: 4, title: 'SỚM MUỘN THÌ', artist: 'ANH TRAI "SAY HI", Hustlang Robber', imageUrl: 'assets/images/song4.jpg' },
-      { id: 5, title: 'Pin Dự Phòng', artist: 'Dương Domic, Lou Hoàng ★', imageUrl: 'assets/images/song5.jpg' },
-      { id: 6, title: 'Là Ngang Trời', artist: 'Hồ Nhì, A Tuân', imageUrl: 'assets/images/song6.jpg' },
-      { id: 7, title: 'Còn Gì Đẹp Hơn', artist: 'Nguyễn Hùng', imageUrl: 'assets/images/song7.jpg' },
-      { id: 8, title: 'Muốn Cua Anh Làm Bỏ', artist: 'Dương Ái Vy, HTM', imageUrl: 'assets/images/song8.jpg' },
-      { id: 9, title: 'Thiệp Hồng Sai Tên', artist: 'Nguyễn Thành Đạt', imageUrl: 'assets/images/song9.jpg' }
-    ];
-    this.updateDisplaySongs();
-  }
-
-  // Chia mảng thành các nhóm 3 bài cho mobile slide
-  getSongGroups(): Song[][] {
-    const groups: Song[][] = [];
+  // Chia mảng thành nhóm 3 bài cho mobile slide
+  getSongGroups(): Music[][] {
+    const groups: Music[][] = [];
     for (let i = 0; i < this.displaySongs.length; i += 3) {
       groups.push(this.displaySongs.slice(i, i + 3));
     }

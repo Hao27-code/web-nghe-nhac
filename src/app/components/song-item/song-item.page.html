@@ -1,21 +1,39 @@
-<div class="song-card" (click)="playSong($event)">
 
-  <!-- Ảnh trái 60x60 -->
+
+<div class="song-card">
+
   <div class="song-image-wrapper">
-    <img [src]="song.imageUrl" [alt]="song.title" class="song-image">
+    <!-- Ảnh bìa -->
+    <img [src]="song.coverUrl" [alt]="song.title" class="song-image">
+
+    <!-- Lớp phủ hiện nút Play/Pause khi hover -->
     <div class="image-overlay">
-      <ion-button fill="clear" class="play-btn">
-        <ion-icon name="play-circle" slot="icon-only"></ion-icon>
+      <ion-button fill="clear" class="play-btn" (click)="handlePlayClick($event)">
+        <ion-icon
+          [name]="isCurrentSong && isPlaying ? 'pause-circle' : 'play-circle'"
+          slot="icon-only">
+        </ion-icon>
       </ion-button>
+    </div>
+
+    <!-- Hiển thị indicator đang phát (góc trên phải) -->
+    <div class="playing-indicator" *ngIf="isCurrentSong && isPlaying">
+      <ion-icon name="volume-high"></ion-icon>
+      <span class="playing-wave">
+        <span></span><span></span><span></span>
+      </span>
     </div>
   </div>
 
-  <!-- Nội dung phải -->
   <div class="song-info">
     <div class="song-text">
-      <h3 class="song-title">{{ song.title }}</h3>
+      <h3 class="song-title">
+        {{ song.title }}
+        <span class="playing-text" *ngIf="isCurrentSong && isPlaying">● Đang phát</span>
+      </h3>
       <p class="song-artist">{{ song.artist }}</p>
     </div>
+
     <div class="song-actions">
       <ion-button fill="clear" size="small" class="action-btn" (click)="toggleLike($event)">
         <ion-icon [name]="isLiked ? 'heart' : 'heart-outline'"></ion-icon>

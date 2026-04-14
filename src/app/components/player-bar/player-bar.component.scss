@@ -55,7 +55,7 @@
       background: none;      // Không nền
       border: none;          // Không viền
       cursor: pointer;       // Con trỏ chuột
-      color: rgb(255, 255, 255);  // Màu trắng mờ
+      color: rgb(6, 92, 248);  // Màu trắng mờ
       display: flex;
       align-items: center;
       justify-content: center;
@@ -66,7 +66,7 @@
       }
 
       &:hover {
-        color: #ffffff;      // Đổi màu xanh khi hover
+        transform: scale(1.06)     // Đổi màu xanh khi hover
       }
     }
   }

@@ -1,10 +1,10 @@
 .song-list-container {
   padding: 16px;
-  max-width: 1200px;
+  max-width: 1420px;
   margin: 0 auto;
 }
 
-/* ===== DESKTOP: 3 cột ===== */
+/* DESKTOP */
 .desktop-grid {
   display: none;
 }
@@ -15,7 +15,7 @@
   gap: 12px;
 }
 
-/* ===== TABLET: 2 cột ===== */
+/* TABLET */
 .tablet-grid {
   display: none;
 }
@@ -26,7 +26,7 @@
   gap: 12px;
 }
 
-/* ===== MOBILE: Slide, mỗi slide 3 bài ===== */
+/* MOBILE SLIDER */
 .mobile-slider {
   display: none;
 }
@@ -53,7 +53,6 @@
 .slider-slide {
   flex: 0 0 90%;
   scroll-snap-align: start;
-  background: transparent;
 }
 
 .slide-content {
@@ -62,30 +61,25 @@
   gap: 8px;
 }
 
-/* ===== RESPONSIVE ===== */
-
-/* MOBILE: < 577px */
+/* RESPONSIVE */
 @media (max-width: 576px) {
   .mobile-slider {
     display: block;
   }
 }
 
-/* TABLET: 577px - 992px */
 @media (min-width: 577px) and (max-width: 992px) {
   .tablet-grid {
     display: block;
   }
 }
 
-/* DESKTOP: >= 993px */
 @media (min-width: 993px) {
   .desktop-grid {
     display: block;
   }
 }
 
-/* Màn hình rất nhỏ */
 @media (max-width: 480px) {
   .slider-slide {
     flex: 0 0 95%;

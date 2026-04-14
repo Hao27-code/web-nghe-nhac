@@ -60,6 +60,70 @@ export class MusicService {
       duration: 320,
       coverUrl: 'assets/img/ngoaile.jpg',
       audioUrl: 'assets/music/ngoaile_J97.mp3'
+    },
+    {
+      id: 5,
+      title: 'Chúng Ta Rồi Sẽ Hạnh Phúc',
+      artist: 'Jack - J97',
+      duration: 320,
+      coverUrl: 'assets/img/chungtaroisehanhphuc.jpg',
+      audioUrl: 'assets/music/chungtaroisehanhphuc.mp3'
+    },
+    {
+      id: 6,
+      title: 'Có mình và ta',
+      artist: 'Nguyễn Vi',
+      duration: 320,
+      coverUrl: 'assets/img/cominhvata.jpg',
+      audioUrl: 'assets/music/cominhvata.mp3'
+    },
+    {
+      id: 7,
+      title: 'Cuối Cùng Thì',
+      artist: 'Jack - J97',
+      duration: 320,
+      coverUrl: 'assets/img/cuoicungthi.jpg',
+      audioUrl: 'assets/music/cuoicungthi.mp3'
+    },
+    {
+      id: 8,
+      title: 'Đám Cưới Miền Tây',
+      artist: 'Hana Cẩm Tiên',
+      duration: 320,
+      coverUrl: 'assets/img/damcuoimientay.jpg',
+      audioUrl: 'assets/music/damcuoimientay.mp3'
+    },
+    {
+      id: 9,
+      title: 'Mạnh Bà',
+      artist: 'Linh Hương Luz',
+      duration: 320,
+      coverUrl: 'assets/img/manhba.jpg',
+      audioUrl: 'assets/music/manhba.mp3'
+    },
+    {
+      id: 10,
+      title: 'Trạm Dừng Chân',
+      artist: 'Jack - J97',
+      duration: 320,
+      coverUrl: 'assets/img/tramdungchan.jpg',
+      audioUrl: 'assets/music/tramdungchan.mp3'
+    },
+    {
+      id: 11,
+      title: 'Trịnh Gia',
+      artist: 'Jack - J97',
+      duration: 320,
+      coverUrl: 'assets/img/trinhgia.jpg',
+      audioUrl: 'assets/music/trinhgia.mp3'
+    },
+    {
+      id: 12,
+      title: 'Vực Thẩm Của Bình Yên',
+      artist: 'Jack - J97',
+      duration: 320,
+      coverUrl: 'assets/img/vucthamcuabinhyen.jpg',
+      audioUrl: 'assets/music/vucthamcuabinhyen.mp3'
     }
   ];
 
