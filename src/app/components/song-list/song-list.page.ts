@@ -25,6 +25,7 @@ export class SongListPage implements OnInit {
   isTablet: boolean = false;
   isDesktop: boolean = false;
 
+
   // eslint-disable-next-line @angular-eslint/prefer-inject
   constructor(private musicService: MusicService) {}
 
@@ -54,10 +55,14 @@ export class SongListPage implements OnInit {
   }
 
   updateDisplaySongs(): void {
-    if (this.isTablet) {
-      // Tablet: chỉ hiện 6 bài (2 cột x 3 hàng)
+    if (this.isDesktop) {
+      // DESKTOP: Chỉ hiện 9 bài (3 cột x 3 hàng = 9 bài)
+      this.displaySongs = this.allSongs.slice(0, 9);
+    } else if (this.isTablet) {
+      // TABLET: Chỉ hiện 6 bài (2 cột x 3 hàng = 6 bài)
       this.displaySongs = this.allSongs.slice(0, 6);
     } else {
+      // MOBILE: Hiện tất cả để chia slide
       this.displaySongs = [...this.allSongs];
     }
   }

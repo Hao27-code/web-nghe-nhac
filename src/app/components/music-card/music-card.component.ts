@@ -25,11 +25,28 @@ export class MusicCardComponent implements OnInit, OnDestroy {
   constructor(private musicService: MusicService) {}
 
   ngOnInit() {
-    // Lấy thời gian đã lưu của bài hát (nếu có)
+    // Lấy thời gian đã lưu từ service
     this.resumeTime = this.musicService.getSavedTime(this.music.id);
 
-    // Đặt isPlaying = false cố định
-    this.isPlaying = false;
+    // Nếu cardType là 'resume' và music có resumeTime, ưu tiên dùng giá trị đó
+    if (this.cardType === 'resume' && (this.music as any).resumeTime) {
+      this.resumeTime = (this.music as any).resumeTime;
+    }
+
+    // Theo dõi trạng thái phát nhạc hiện tại
+    this.subscriptions.add(
+      this.musicService.currentMusic$.subscribe(currentMusic => {
+        if (currentMusic && currentMusic.id === this.music.id) {
+          this.subscriptions.add(
+            this.musicService.isPlaying$.subscribe(isPlaying => {
+              this.isPlaying = isPlaying;
+            })
+          );
+        } else {
+          this.isPlaying = false;
+        }
+      })
+    );
   }
 
   ngOnDestroy() {
@@ -49,6 +66,9 @@ export class MusicCardComponent implements OnInit, OnDestroy {
   }
 
   formatTime(seconds: number): string {
-    return this.formatDuration(seconds);
+    if (!seconds || seconds <= 0) return '';
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
   }
 }
