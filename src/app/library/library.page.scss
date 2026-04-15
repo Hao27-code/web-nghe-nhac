@@ -1,0 +1,75 @@
+// Toolbar header
+.library-toolbar {
+  --background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --color: white;
+}
+
+.library-header {
+  font-size: 28px;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 2px;
+  padding: 20px 0;
+}
+
+.library-container {
+  padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+// DESKTOP: Grid 4 cột
+.desktop-view {
+  .grid-4cols {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+}
+
+// TABLET: Grid 3 cột
+.tablet-view {
+  .grid-3cols {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+}
+
+// MOBILE: Slider
+.mobile-view {
+  ion-slides {
+    --bullet-background: #ddd;
+    --bullet-background-active: #667eea;
+
+    ion-slide {
+      height: auto;
+    }
+  }
+
+  .slide-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    padding: 4px;
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .library-header {
+    font-size: 24px;
+    padding: 16px 0;
+  }
+
+  .library-container {
+    padding: 12px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .library-container {
+    padding: 16px;
+  }
+}

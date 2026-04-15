@@ -272,4 +272,22 @@ export class MusicService {
     return saved ? JSON.parse(saved) : [];
   }
 
+  // Phát ngẫu nhiên một bài từ danh sách yêu thích
+  playRandomFromFavorites(): void {
+    const favorites = this.getFavorites();
+    if (favorites.length === 0) {
+      console.log('Chưa có bài hát yêu thích nào');
+      return;
+    }
+
+    const randomIndex = Math.floor(Math.random() * favorites.length);
+    const randomSong = favorites[randomIndex];
+    const savedTime = this.getSavedTime(randomSong.id);
+    this.playMusic(randomSong, savedTime);
+  }
+
+// Lấy danh sách yêu thích (public)
+  getFavoritesList(): Music[] {
+    return this.getFavorites();
+  }
 }

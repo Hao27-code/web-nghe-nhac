@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
 })
 export class MusicCardComponent implements OnInit, OnDestroy {
   @Input() music!: Music;
+
   @Input() cardType: 'default' | 'resume' = 'default'; // Thêm input để phân biệt loại card
   // eslint-disable-next-line @angular-eslint/no-output-native
   @Output() play = new EventEmitter<Music>();
