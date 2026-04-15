@@ -1,75 +1,53 @@
-// Toolbar header
-.library-toolbar {
-  --background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  --color: white;
+.ion-padding{
+  padding:0 60px;
 }
 
-.library-header {
-  font-size: 28px;
-  font-weight: 700;
-  text-align: center;
-  letter-spacing: 2px;
-  padding: 20px 0;
-}
 
-.library-container {
-  padding: 20px;
-  max-width: 1400px;
-  margin: 0 auto;
-}
+// Header bảng
+.table-header {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(61, 101, 138, 0.54);
+  font-size: 14px;
+  font-weight: 600;
+  color: #b0b0b0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 
-// DESKTOP: Grid 4 cột
-.desktop-view {
-  .grid-4cols {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+  .col-song {
+    flex: 3;
+  }
+
+  .col-album {
+    flex: 2;
+    padding-left: 8px;
+  }
+
+  .col-time {
+    flex: 1;
+    text-align: right;
+    padding-right: 10px;  // Căn chỉnh với action buttons
   }
 }
 
-// TABLET: Grid 3 cột
-.tablet-view {
-  .grid-3cols {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-  }
+.songs-list {
+  overflow: hidden;
 }
 
-// MOBILE: Slider
-.mobile-view {
-  ion-slides {
-    --bullet-background: #ddd;
-    --bullet-background-active: #667eea;
-
-    ion-slide {
-      height: auto;
-    }
-  }
-
-  .slide-group {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    width: 100%;
-    padding: 4px;
-  }
+.table-library {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(61, 101, 138, 0.54);
+  font-size: 16px;
+  font-weight: 600;
+  color: #f6f6f6;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  gap: 50px;
+  margin-bottom: 80px;
 }
+.library-header{
 
-// Responsive
-@media (max-width: 768px) {
-  .library-header {
-    font-size: 24px;
-    padding: 16px 0;
-  }
-
-  .library-container {
-    padding: 12px;
-  }
-}
-
-@media (min-width: 768px) and (max-width: 1024px) {
-  .library-container {
-    padding: 16px;
-  }
 }

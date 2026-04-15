@@ -1,43 +1,38 @@
-<!-- library.page.html -->
-<ion-header>
-  <ion-toolbar class="library-toolbar">
-    <ion-title class="library-header">THƯ VIỆN</ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content>
-  <div class="library-container">
+<ion-content class="ion-padding">
 
-    <!-- DESKTOP: Grid 4 cột -->
-    <div class="desktop-view" *ngIf="isDesktop">
-      <div class="grid-4cols">
-        <app-song-item
-          *ngFor="let song of allSongs"
-          [song]="song"
-        ></app-song-item>
-      </div>
-    </div>
-
-    <!-- TABLET: Grid 3 cột -->
-    <div class="tablet-view" *ngIf="isTablet">
-      <div class="grid-3cols">
-        <app-song-item
-          *ngFor="let song of allSongs"
-          [song]="song"
-        ></app-song-item>
-      </div>
-    </div>
-
-    <!-- MOBILE: Grid 1 cột (cuộn dọc) -->
-    <div class="mobile-view" *ngIf="isMobile">
-      <div class="grid-1col">
-        <app-song-item
-          *ngFor="let song of allSongs"
-          [song]="song"
-        ></app-song-item>
-      </div>
-    </div>
-
+  <!-- Tiêu đề trong content -->
+  <div class="library-header">
+    <h1>THƯ VIỆN</h1>
   </div>
+
+  <div class="table-library" *ngIf="!isMobile">
+    <div class="col-song-library">BÀI HÁT</div>
+    <div class="col-album-library">ALBUM</div>
+  </div>
+
+  <!-- Header bảng (chỉ hiển thị trên desktop/tablet) -->
+  <div class="table-header" *ngIf="!isMobile">
+    <div class="col-song">BÀI HÁT</div>
+    <div class="col-album">ALBUM</div>
+    <div class="col-time">THỜI GIAN</div>
+  </div>
+
+  <!-- Danh sách bài hát -->
+  <div class="songs-list">
+    <app-library-song-item
+      *ngFor="let song of favoriteSongs"
+      [song]="song">
+    </app-library-song-item>
+  </div>
+
+  <!-- Trống -->
+  <ng-template #emptyState>
+    <div class="empty-state">
+      <ion-icon name="heart-outline"></ion-icon>
+      <h3>Thư viện trống</h3>
+      <p>Hãy bấm tim ❤️ để thêm bài hát vào thư viện</p>
+    </div>
+  </ng-template>
+
 </ion-content>
-<app-player-bar></app-player-bar>

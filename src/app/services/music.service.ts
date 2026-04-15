@@ -288,6 +288,7 @@ export class MusicService {
 
 // Lấy danh sách yêu thích (public)
   getFavoritesList(): Music[] {
-    return this.getFavorites();
+    const saved = localStorage.getItem('favorites');
+    return saved ? JSON.parse(saved) : [];
   }
 }

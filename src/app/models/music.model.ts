@@ -1,10 +1,11 @@
 export interface Music {
   id: number;
-  title: string;
-  artist: string;
-  duration: number;
-  coverUrl: string;
-  audioUrl: string;
+  title: string;      // Tên bài hát
+  artist: string;     // Ca sĩ
+  duration: number;   // Thời gian (giây)
+  coverUrl: string;   // URL ảnh bìa
+  audioUrl: string;   // URL file nhạc
+  album?: string;     // Thêm album (tùy chọn, vì có bài không có album)
 }
 
 export interface ListeningHistory {

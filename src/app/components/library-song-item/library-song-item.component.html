@@ -1,0 +1,40 @@
+
+<div class="song-row">
+
+  <!-- Cột 1: BÀI Hát (ảnh + tên + ca sĩ) -->
+  <div class="col-song">
+    <div class="song-cover-wrapper"
+         (mouseenter)="isHovered = true"
+         (mouseleave)="isHovered = false">
+      <img [src]="song.coverUrl" class="song-cover">
+      <div class="play-overlay" *ngIf="isHovered">
+        <ion-icon [name]="isCurrentSong && isPlaying ? 'pause' : 'play'"
+                  (click)="handlePlayClick($event)"></ion-icon>
+      </div>
+    </div>
+    <div class="song-info">
+      <div class="song-title">{{ song.title }}</div>
+      <div class="song-artist">{{ song.artist }}</div>
+    </div>
+  </div>
+
+  <!-- Cột 2: ALBUM -->
+  <div class="col-album">
+    {{ song.album || 'Single' }}
+  </div>
+
+  <!-- Cột 3: THỜI GIAN + Action -->
+  <div class="col-time">
+    <span class="duration">{{ formatDuration(song.duration) }}</span>
+    <div class="action-icons">
+      <ion-icon [name]="isLiked ? 'heart' : 'heart-outline'"
+                (click)="toggleLike($event)"></ion-icon>
+      <ion-icon name="ellipsis-horizontal"
+                (click)="showOptions($event)"></ion-icon>
+    </div>
+  </div>
+
+</div>
+
+<!-- Đường kẻ ngăn cách -->
+<hr class="row-divider" />

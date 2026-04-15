@@ -43,9 +43,7 @@
 
 
 
-ion-content::part(scroll) {
-  scrollbar-width: none; /* Firefox */
-}
+
 
 ion-content::part(scroll)::-webkit-scrollbar {
   display: none; /* Chrome */
@@ -95,3 +93,31 @@ ion-content::part(scroll)::-webkit-scrollbar {
 }
 
 
+
+// Header cố định
+app-desktop-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 65px;
+  z-index: 1000;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+// Tất cả các trang ion-content đều có padding-top
+ion-content {
+  --padding-top: 60px !important;  /* Đẩy nội dung xuống dưới header */
+  --background: radial-gradient(circle at 20% 30%, #1f2a3b, #0c1017);
+}
+
+// Hoặc nếu dùng div thường
+.main-content {
+  padding-top: 60px;
+}
+@media (min-width: 1024px) {
+  ion-content::part(scroll) {
+    scrollbar-width: none;
+    padding: 80px 60px;
+  }
+}

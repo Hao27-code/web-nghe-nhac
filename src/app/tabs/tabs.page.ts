@@ -7,13 +7,15 @@ import {RouterLink} from "@angular/router";
 import { addIcons } from 'ionicons';
 import { homeOutline, albumsOutline, heartOutline, personOutline } from 'ionicons/icons';
 import {HeaderComponent} from "../components/header/header.component";
+import { LibraryPage } from '../library/library.page';
+import { FavoritePage } from '../favorite/favorite.page';
 
 @Component({
   selector: 'app-tabs',
   templateUrl: './tabs.page.html',
   styleUrls: ['./tabs.page.scss'],
   standalone: true,
-  imports: [IonContent, IonTitle, CommonModule, FormsModule, IonicModule, RouterLink, HeaderComponent]
+  imports: [IonContent, IonTitle, CommonModule, FormsModule, IonicModule, RouterLink, HeaderComponent, LibraryPage, FavoritePage  ]
 })
 export class TabsPage  {
 
