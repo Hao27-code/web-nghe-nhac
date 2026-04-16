@@ -1,0 +1,121 @@
+.playlist-slider-container {
+  padding: 16px;
+  width: 100%;
+
+  .slider-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 0 4px;
+
+    .slider-title {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 600;
+      color: #FFFFFF;
+    }
+
+    .view-all-btn {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      color: var(--ion-color-primary, #3880ff);
+      cursor: pointer;
+      font-size: 14px;
+    }
+  }
+
+  .slider-wrapper {
+    .slider-track-container {
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scroll-padding: 0 16px;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      .slider-track {
+        display: flex;
+        flex-direction: row;
+        gap: 16px;
+        width: max-content;
+        padding: 4px 0;
+
+        .slide-item {
+          flex-shrink: 0;
+          width: 200px; // Giảm từ 210 xuống 200 cho đẹp
+          transition: transform 0.2s ease;
+
+
+        }
+      }
+    }
+  }
+}
+
+// Mobile
+@media (max-width: 576px) {
+  .playlist-slider-container {
+    padding: 12px;
+
+    .slider-header {
+      margin-bottom: 16px;
+
+      .slider-title {
+        font-size: 18px;
+      }
+    }
+
+    .slider-wrapper {
+      .slider-track-container {
+        .slider-track {
+          gap: 12px;
+
+          .slide-item {
+            width: 150px; // Nhỏ hơn trên mobile
+          }
+        }
+      }
+    }
+  }
+}
+
+// Tablet
+@media (min-width: 577px) and (max-width: 768px) {
+  .playlist-slider-container {
+    .slider-wrapper {
+      .slider-track-container {
+        .slider-track {
+          .slide-item {
+            width: 180px;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Desktop: grid
+@media (min-width: 769px) {
+  .playlist-slider-container {
+    .slider-wrapper {
+      .slider-track-container {
+        overflow-x: visible;
+
+        .slider-track {
+          display: grid !important;
+          grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+          gap: 30px;
+          width: 100%;
+
+          .slide-item {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}

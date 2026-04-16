@@ -1,0 +1,19 @@
+<div class="playlist-slider-container">
+  <div class="slider-header">
+    <h2 class="slider-title">{{ title }}</h2>
+    <div class="view-all-btn" (click)="goToCategory()">
+      <span>Xem tất cả</span>
+      <ion-icon name="arrow-forward-outline"></ion-icon>
+    </div>
+  </div>
+
+  <div class="slider-wrapper">
+    <div class="slider-track-container">
+      <div class="slider-track">
+        <div *ngFor="let playlist of playlists" class="slide-item">
+          <app-playlist-card [playlist]="playlist"></app-playlist-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

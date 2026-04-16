@@ -50,7 +50,7 @@ ion-content {
   text-decoration: none;
 }
 .home-section{
-  padding:24px 15px 0;
+  padding:18px 0 0;
 }
 
 .greeting{
@@ -629,7 +629,7 @@ ion-content {
 
   .section-header {
     margin-bottom: 12px;
-    padding: 0 8px;
+
 
     h2 {
       font-size: 18px;  // Chữ nhỏ hơn
@@ -641,7 +641,7 @@ ion-content {
   }
 
   .resume-scroll {
-    gap: 20px;  // Khoảng cách giữa các card nhỏ hơn
+    gap: 5px;  // Khoảng cách giữa các card nhỏ hơn
 
     app-music-card {
       width: 160px;  // Card nhỏ hơn (mặc định là 180-200px)
@@ -693,8 +693,188 @@ ion-content {
       display: flex;
       align-items: center;
       gap: 8px;
-      padding: 40px 60px 0;
+      padding-top: 40px;
     }
 
   }
 }
+// Thêm vào cuối file CSS/SCSS của bạn
+
+// ==================== ẨN THANH KÉO (SCROLLBAR) ====================
+.music-horizontal-scroll {
+  // Ẩn thanh scrollbar nhưng vẫn cuộn được
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE và Edge */
+
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+}
+
+// ==================== THÊM MŨI TÊN CHO PHẦN TIẾP TỤC NGHE VÀ DÀNH CHO BẠN ====================
+.music-section {
+  position: relative;
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+
+
+    h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: white;
+      margin: 0;
+    }
+
+    .view-all {
+      font-size: 13px;
+      color: #fafafa;
+      cursor: pointer;
+      transition: opacity 0.2s;
+
+      &:hover {
+        text-decoration: underline;
+        opacity: 0.8;
+      }
+    }
+  }
+
+  // Container có chứa scroll và arrows
+  .scroll-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  // Nút mũi tên
+  .scroll-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(107, 107, 107, 0.09);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.13);
+
+    ion-icon {
+      font-size: 20px;
+      color: white;
+    }
+
+
+    &:active {
+      transform: translateY(-50%) scale(0.95);
+    }
+
+    &.prev-arrow-scroll {
+      left: -10px;
+    }
+
+    &.next-arrow-scroll {
+      right: -10px;
+    }
+  }
+
+  .music-horizontal-scroll {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: visible;
+    padding-bottom: 16px;
+    scroll-behavior: smooth;
+    gap: 5px;
+
+    // Ẩn scrollbar
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    app-music-card {
+      flex-shrink: 0;
+      width: 200px;
+      display: block;
+      transition: transform 0.2s ease;
+
+      &:hover {
+        transform: translateY(-4px);
+      }
+    }
+  }
+}
+
+// Responsive cho mũi tên
+@media (max-width: 767px) {
+  .music-section {
+    .scroll-arrow {
+      width: 30px;
+      height: 30px;
+
+      ion-icon {
+        font-size: 16px;
+      }
+
+      &.prev-arrow-scroll {
+        left: -5px;
+      }
+
+      &.next-arrow-scroll {
+        right: -5px;
+      }
+    }
+
+    .music-horizontal-scroll {
+      gap: 12px;
+
+      app-music-card {
+        width: 160px;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .music-section {
+    .music-horizontal-scroll app-music-card {
+      width: 180px;
+    }
+  }
+}
+
+// Responsive cho desktop
+@media (min-width: 1024px) {
+  .music-section {
+    .scroll-arrow {
+      width: 40px;
+      height: 40px;
+
+      ion-icon {
+        font-size: 24px;
+      }
+
+      &.prev-arrow-scroll {
+        left: -20px;
+      }
+
+      &.next-arrow-scroll {
+        right: -20px;
+      }
+    }
+  }
+}
+
+
+//playlist-card

@@ -7,13 +7,14 @@ import { SongItemPage } from '../components/song-item/song-item.page';
 import { Music } from '../models/music.model';
 import { MusicService } from '../services/music.service';
 import { Subscription } from 'rxjs';
+import {LibrarySongItemComponent} from "../components/library-song-item/library-song-item.component";
 
 @Component({
   selector: 'app-favorite',
   templateUrl: './favorite.page.html',
   styleUrls: ['./favorite.page.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, HeaderComponent, IonicModule, SongItemPage]
+  imports: [CommonModule, FormsModule, HeaderComponent, IonicModule, SongItemPage, LibrarySongItemComponent]
 })
 export class FavoritePage implements OnInit, OnDestroy {
 

@@ -27,6 +27,10 @@ export const routes: Routes = [
         loadComponent: () => import('./profile/profile.page').then(m => m.ProfilePage)
       },
       {
+        path: 'category',
+        loadComponent: () => import('./category/category.page').then( m => m.CategoryPage)
+      },
+      {
         path: '',
         redirectTo: 'home',
         pathMatch: 'full'
@@ -59,6 +63,7 @@ export const routes: Routes = [
     path: 'category',
     loadComponent: () => import('./category/category.page').then( m => m.CategoryPage)
   },
+
 
   // ========== MẶC ĐỊNH ==========
   {

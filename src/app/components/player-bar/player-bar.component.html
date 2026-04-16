@@ -1,8 +1,8 @@
-<!-- player-bar.component.html - Thay input range bằng div tùy chỉnh -->
+<!-- player-bar.component.html -->
 <div class="player-bar" *ngIf="currentMusic">
   <div class="player-content">
 
-    <!-- LEFT SECTION -->
+    <!-- LEFT SECTION - Ảnh + tên bài hát & tác giả (hiển thị trên cả desktop và mobile) -->
     <div class="left-section">
       <img [src]="currentMusic.coverUrl" [alt]="currentMusic.title" class="thumbnail">
       <div class="song-info">
@@ -17,7 +17,7 @@
       </button>
     </div>
 
-    <!-- CENTER SECTION -->
+    <!-- CENTER SECTION - Chỉ hiển thị trên desktop -->
     <div class="center-section">
       <div class="controls">
         <button class="control-btn" (click)="onShuffle()">
@@ -39,33 +39,42 @@
 
       <div class="progress-container">
         <span class="time">{{ formatTime(currentTime) }}</span>
-
-        <!-- THANH PROGRESS TÙY CHỈNH -->
         <div class="custom-progress" (click)="onSeekProgress($event)">
           <div class="progress-bg">
             <div class="progress-fill" [style.width.%]="getProgressPercent()"></div>
             <div class="progress-thumb" [style.left.%]="getProgressPercent()"></div>
           </div>
         </div>
-
         <span class="time">{{ formatTime(duration) }}</span>
       </div>
     </div>
 
     <!-- RIGHT SECTION -->
     <div class="right-section">
+      <!-- Volume Control - Chỉ hiển thị trên desktop -->
       <div class="volume-control">
         <button class="volume-btn" (click)="toggleMute()">
           <ion-icon [name]="getVolumeIcon()"></ion-icon>
         </button>
-
-        <!-- THANH ÂM LƯỢNG TÙY CHỈNH -->
         <div class="custom-volume" (click)="onSeekVolume($event)">
           <div class="volume-bg">
             <div class="volume-fill" [style.width.%]="volume"></div>
             <div class="volume-thumb" [style.left.%]="volume"></div>
           </div>
         </div>
+      </div>
+
+      <!-- Mobile Controls - Chỉ hiển thị trên mobile -->
+      <div class="mobile-controls">
+        <button class="mobile-like-btn" (click)="onToggleFavorite()">
+          <ion-icon [name]="isFavorite() ? 'heart' : 'heart-outline'"></ion-icon>
+        </button>
+        <button class="mobile-play-btn" (click)="onPlayPause()">
+          <ion-icon [name]="isPlaying ? 'pause' : 'play'"></ion-icon>
+        </button>
+        <button class="mobile-next-btn" (click)="onNext()">
+          <ion-icon name="play-skip-forward"></ion-icon>
+        </button>
       </div>
     </div>
 

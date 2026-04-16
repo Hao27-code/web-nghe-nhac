@@ -1,0 +1,10 @@
+<div class="playlist-card" (click)="goToPlaylistDetail()">
+  <div class="card-image">
+    <img [src]="playlist.imageUrl" [alt]="playlist.title">
+    <div class="overlay"></div>
+  </div>
+  <div class="card-content">
+    <h3 class="playlist-title">{{ playlist.title }}</h3>
+    <p class="playlist-artists">{{ playlist.artists }}</p>
+  </div>
+</div>

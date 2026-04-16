@@ -1,13 +1,10 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>category</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">category</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <div class="category-container">
+    <!-- Kiểm tra selector đúng -->
+    <app-playlist-slider
+      [playlists]="categoryPlaylists"
+      title="Gợi ý Playlist"
+      categoryRoute="/category">
+    </app-playlist-slider>
+  </div>
 </ion-content>

@@ -14,6 +14,9 @@ import { MusicService } from '../services/music.service';
 import { Music } from '../models/music.model';
 import { Subscription } from 'rxjs';
 import { SongListPage } from '../components/song-list/song-list.page';
+import {Playlist, PlaylistCardComponent} from "../components/playlist-card/playlist-card.component";
+import {PlaylistSliderComponent} from "../components/playlist-slider/playlist-slider.component";
+
 
 interface Slide {
   id: number;
@@ -25,13 +28,53 @@ interface Slide {
   standalone: true,
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [HeaderComponent, IonicModule, NgClass, NgOptimizedImage, CommonModule, PlayerBarComponent, MusicCardComponent, SongListPage],
+  imports: [HeaderComponent, IonicModule, NgClass, NgOptimizedImage, CommonModule, PlayerBarComponent, MusicCardComponent, SongListPage, PlaylistCardComponent, PlaylistSliderComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 
 })
 export class HomePage implements OnInit, AfterViewInit, OnDestroy {
+
   @ViewChild('sliderViewport') sliderViewport!: ElementRef<HTMLDivElement>;
   @ViewChild('sliderTrack') sliderTrack!: ElementRef<HTMLDivElement>;
+
+  @ViewChild('resumeScroll') resumeScroll!: ElementRef;
+  @ViewChild('forYouScroll') forYouScroll!: ElementRef;
+
+  // Hàm cuộn trái
+  scrollLeft(scrollId: string) {
+    let scrollElement: HTMLElement | null = null;
+
+    if (scrollId === 'resumeScroll') {
+      scrollElement = this.resumeScroll?.nativeElement;
+    } else if (scrollId === 'forYouScroll') {
+      scrollElement = this.forYouScroll?.nativeElement;
+    }
+
+    if (scrollElement) {
+      scrollElement.scrollBy({
+        left: -300,
+        behavior: 'smooth'
+      });
+    }
+  }
+
+// Hàm cuộn phải
+  scrollRight(scrollId: string) {
+    let scrollElement: HTMLElement | null = null;
+
+    if (scrollId === 'resumeScroll') {
+      scrollElement = this.resumeScroll?.nativeElement;
+    } else if (scrollId === 'forYouScroll') {
+      scrollElement = this.forYouScroll?.nativeElement;
+    }
+
+    if (scrollElement) {
+      scrollElement.scrollBy({
+        left: 300,
+        behavior: 'smooth'
+      });
+    }
+  }
 
   // ==================== THÊM PHƯƠNG THỨC XEM TẤT CẢ ====================
   viewAllRecentlyPlayed() {
@@ -394,8 +437,14 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-
-
+  homePlaylists: Playlist[] = [
+    { id: 1, title: 'cuối cùng thì mình cũng chia ly', artists: 'Jack - J97, DatKaa, Khang Việt...', imageUrl: 'assets/img/theloai_chill.jpg' },
+    { id: 2, title: 'đã từng xem nhau là tất cả', artists: 'Quân A.P, thao linh, Đặng Thiên Chí...', imageUrl: 'assets/img/theloai_chill1.jpg' },
+    { id: 3, title: 'nếu duyên', artists: 'Thành Đạt, Lê Bảo Bình, Hương Ly...', imageUrl: 'assets/img/theloai_chill2.jpg' },
+    { id: 4, title: 'người thứ ba', artists: 'Văn Mai Hương, Quân A.P, Bảo Anh...', imageUrl: 'assets/img/theloai_chill3.jpg' },
+    { id: 5, title: 'Song Ca V-Pop', artists: 'GREY D, MIN★, VƯƠNG BÌNH...', imageUrl: 'assets/img/theloai_chill4.jpg' },
+    { id: 6, title: 'Nhạc Trẻ Hay Nhất', artists: 'Sơn Tùng M-TP, Hòa Minzy...', imageUrl: 'assets/img/theloai_chill5.jpg' }
+  ];
 }
 
 

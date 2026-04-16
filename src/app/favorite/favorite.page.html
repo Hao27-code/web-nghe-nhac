@@ -1,75 +1,51 @@
 
-<ion-header>
-  <ion-toolbar class="favorites-toolbar">
-    <ion-title class="favorites-header">BÀI HÁT YÊU THÍCH</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<!-- Bỏ (ionChange) - không cần thiết -->
-<ion-content>
+<ion-content [fullscreen]="true">
   <div class="favorites-container">
 
-    <!-- Header với số lượng và nút phát ngẫu nhiên -->
-    <div class="favorites-info-bar">
-      <div class="count-badge">
-        <ion-icon name="heart"></ion-icon>
-        <span>{{ favoriteCount }} bài hát đã lưu</span>
+    <!-- ========== HEADER PLAYLIST ========== -->
+    <div class="playlist-header">
+      <!-- Ảnh playlist -->
+      <div class="playlist-cover">
+        <img src="assets/icon/logo_yeuthich.svg" alt="Playlist cover">
       </div>
 
-      <ion-button
-        class="random-play-btn"
-        (click)="playRandom()"
-        [disabled]="favoriteCount === 0"
-        fill="solid"
-        shape="round">
+      <!-- Thông tin playlist -->
+      <div class="playlist-info">
+        <div class="playlist-label">PLAYLIST</div>
+        <h1 class="playlist-title">Bài hát yêu thích</h1>
+        <div class="playlist-meta">
+          <span class="playlist-count">{{ favoriteCount }} bài hát</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== ACTION BUTTONS ========== -->
+    <div class="playlist-actions">
+      <ion-button class="btn-play-all" (click)="playRandom()" [disabled]="favoriteCount === 0">
         <ion-icon name="shuffle-outline" slot="start"></ion-icon>
-        Phát ngẫu nhiên
+        PHÁT NGẪU NHIÊN
       </ion-button>
     </div>
 
-    <!-- Danh sách bài hát yêu thích -->
-    <div *ngIf="favoriteCount > 0; else emptyState">
-
-      <!-- DESKTOP: Grid 3 cột -->
-      <div class="desktop-view" *ngIf="isDesktop">
-        <div class="grid-3cols">
-          <app-song-item
-            *ngFor="let song of favoriteSongs"
-            [song]="song"
-          ></app-song-item>
-        </div>
+    <!-- ========== DANH SÁCH BÀI HÁT ========== -->
+    <div class="songs-section">
+      <!-- Danh sách -->
+      <div *ngIf="favoriteCount > 0; else emptyState">
+        <app-library-song-item
+          *ngFor="let song of favoriteSongs"
+          [song]="song">
+        </app-library-song-item>
       </div>
 
-      <!-- TABLET: Grid 2 cột -->
-      <div class="tablet-view" *ngIf="isTablet">
-        <div class="grid-2cols">
-          <app-song-item
-            *ngFor="let song of favoriteSongs"
-            [song]="song"
-          ></app-song-item>
+      <!-- Trống -->
+      <ng-template #emptyState>
+        <div class="empty-state">
+          <ion-icon name="heart-outline"></ion-icon>
+          <p>Chưa có bài hát yêu thích</p>
+          <p class="empty-hint">Hãy bấm tim ❤️ để thêm bài hát</p>
         </div>
-      </div>
-
-      <!-- MOBILE: Grid 1 cột -->
-      <div class="mobile-view" *ngIf="isMobile">
-        <div class="grid-1col">
-          <app-song-item
-            *ngFor="let song of favoriteSongs"
-            [song]="song"
-          ></app-song-item>
-        </div>
-      </div>
-
+      </ng-template>
     </div>
-
-    <!-- Trạng thái rỗng -->
-    <ng-template #emptyState>
-      <div class="empty-state">
-        <ion-icon name="heart-outline" class="empty-icon"></ion-icon>
-        <h3>Chưa có bài hát yêu thích</h3>
-        <p>Hãy thêm bài hát từ trang Thư viện bằng cách nhấn vào trái tim nhé!</p>
-      </div>
-    </ng-template>
 
   </div>
 </ion-content>
