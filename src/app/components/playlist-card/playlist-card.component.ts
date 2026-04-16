@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
@@ -11,6 +11,7 @@ export interface Playlist {
   title: string;
   artists: string;
   imageUrl: string;
+  songs?: any[];
 }
 
 
@@ -22,30 +23,18 @@ export interface Playlist {
   imports: [CommonModule, RouterModule, IonicModule],
 })
 export class PlaylistCardComponent {
+  isPlaying = false;
   @Input() playlist!: Playlist;
+  @Output() playClick = new EventEmitter<Playlist>();
 
-  // eslint-disable-next-line @angular-eslint/prefer-inject
-  constructor(private router: Router) {
+  isHovered: boolean = false;
 
-  }
-
-  goToPlaylistDetail(): void {
-    this.router.navigate(['/playlist', this.playlist.id]);
-  }
-  handleImageError(event: any): void {
-    event.target.src = 'assets/default-image.jpg'; // Ảnh mặc định khi lỗi
-  }
-  // Xử lý nút play (ngăn click lan ra ngoài)
-  onPlay(event: Event): void {
+  onPlayClick(event: Event) {
     event.stopPropagation();
-    console.log('Play playlist:', this.playlist.title);
-    // Thêm logic phát nhạc ở đây
+    this.playClick.emit(this.playlist);
   }
 
-  // Xử lý nút tim (ngăn click lan ra ngoài)
-  onToggleFavorite(event: Event): void {
-    event.stopPropagation();
-    console.log('Toggle favorite:', this.playlist.title);
-    // Thêm logic yêu thích ở đây
+  setHover(isHover: boolean) {
+    this.isHovered = isHover;
   }
 }

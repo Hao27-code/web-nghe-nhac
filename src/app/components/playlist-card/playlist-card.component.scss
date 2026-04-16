@@ -21,12 +21,50 @@
     &:hover img {
       transform: scale(1.05);
     }
+
+    // Thêm phần này - Overlay và nút play
+    .play-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+
+      .play-btn {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        transform: scale(0.9);
+        transition: transform 0.2s ease;
+
+        ion-icon {
+          font-size: 48px;
+          color: white;
+          filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+        }
+
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+    }
+
+    // Hiện overlay khi hover
+    &:hover .play-overlay {
+      opacity: 1;
+    }
   }
 
   .card-content {
     padding: 12px 8px;
     background: transparent;
-    position: static; // Không dùng position absolute
+    position: static;
 
     .playlist-title {
       margin: 0 0 6px 0;
@@ -35,7 +73,7 @@
       font-weight: 600;
       line-height: 1.4;
       color: var(--ion-text-color, #ffffff);
-      display: block; // Đổi từ -webkit-box sang block
+      display: block;
       overflow: visible;
       white-space: normal;
       position: static;
@@ -63,3 +101,4 @@
 .playlist-artists {
   transform: none !important;
 }
+

@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { IonTitle } from '@ionic/angular/standalone';
 import {Playlist, PlaylistCardComponent} from "../components/playlist-card/playlist-card.component";
 import {PlaylistSliderComponent} from "../components/playlist-slider/playlist-slider.component";
+import {HeaderComponent} from "../components/header/header.component";
+import {IonicModule} from "@ionic/angular";
 
 
 @Component({
@@ -11,7 +13,7 @@ import {PlaylistSliderComponent} from "../components/playlist-slider/playlist-sl
   templateUrl: './category.page.html',
   styleUrls: ['./category.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, PlaylistSliderComponent,PlaylistCardComponent]
+  imports: [ IonTitle, CommonModule, FormsModule, PlaylistSliderComponent, PlaylistCardComponent, HeaderComponent, IonicModule]
 })
 export class CategoryPage {
   categoryPlaylists: Playlist[] = [

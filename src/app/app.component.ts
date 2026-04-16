@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import {Component, HostListener} from '@angular/core';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
-import {Router} from "@angular/router";
+import {NavigationEnd, Router} from "@angular/router";
 import {NgIf} from "@angular/common";
 import { DesktopHeaderComponent } from './components/desktop-header/desktop-header.component';
+import {filter} from "rxjs";
 
 @Component({
   selector: 'app-root',
@@ -10,38 +11,12 @@ import { DesktopHeaderComponent } from './components/desktop-header/desktop-head
   imports: [IonApp, IonRouterOutlet, NgIf, DesktopHeaderComponent],
 })
 export class AppComponent {
-  isDesktop = false;
+  isDesktop = window.innerWidth >= 992;
 
-  // eslint-disable-next-line @angular-eslint/prefer-inject
-  constructor(private router: Router) {}
-
-  ngOnInit() {
-    this.checkScreen();
-    this.handleRouting();
-
-    window.addEventListener('resize', () => {
-      const prev = this.isDesktop;
-      this.checkScreen();
-
-      if (prev !== this.isDesktop) {
-        this.handleRouting();
-      }
-    });
-  }
-
-  checkScreen() {
+  @HostListener('window:resize')
+  onResize() {
     this.isDesktop = window.innerWidth >= 992;
   }
-
-  handleRouting() {
-    const currentUrl = this.router.url;
-
-    if (currentUrl === '/' || currentUrl === '') {
-      if (this.isDesktop) {
-        this.router.navigateByUrl('/home');
-      } else {
-        this.router.navigateByUrl('/tabs/home');
-      }
-    }
-  }
 }
+
+

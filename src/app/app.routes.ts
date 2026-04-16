@@ -1,9 +1,11 @@
 import { Routes } from '@angular/router';
+import {deviceGuard} from "./guards/device-guard";
 
 export const routes: Routes = [
   // ========== MOBILE (có tabs) ==========
   {
     path: 'tabs',
+    canActivate: [deviceGuard],
     loadComponent: () => import('./tabs/tabs.page').then(m => m.TabsPage),
     children: [
       {
@@ -30,29 +32,35 @@ export const routes: Routes = [
         path: 'category',
         loadComponent: () => import('./category/category.page').then( m => m.CategoryPage)
       },
+      // default trong tabs
       {
         path: '',
         redirectTo: 'home',
         pathMatch: 'full'
-      }
+      },
+
     ]
   },
 
   // ========== DESKTOP (không tabs, trực tiếp) ==========
   {
     path: 'home',
+    canActivate: [deviceGuard],
     loadComponent: () => import('./home/home.page').then(m => m.HomePage)
   },
   {
     path: 'search',
+    canActivate: [deviceGuard],
     loadComponent: () => import('./search/search.page').then(m => m.SearchPage)
   },
   {
     path: 'library',
+    canActivate: [deviceGuard],
     loadComponent: () => import('./library/library.page').then(m => m.LibraryPage)
   },
   {
     path: 'favorite',
+    canActivate: [deviceGuard],
     loadComponent: () => import('./favorite/favorite.page').then(m => m.FavoritePage)
   },
   {
@@ -61,29 +69,27 @@ export const routes: Routes = [
   },
   {
     path: 'category',
+    canActivate: [deviceGuard],
     loadComponent: () => import('./category/category.page').then( m => m.CategoryPage)
   },
 
 
-  // ========== MẶC ĐỊNH ==========
+  // ========== 404 ==========
+  {
+    path: 'not-found',
+    loadComponent: () => import('./not-found/not-found.component').then(m => m.NotFoundComponent)
+  },
+
+  // ========== DEFAULT ==========
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'tabs',
     pathMatch: 'full'
   },
 
-  // Fallback
+  // ========== FALLBACK ==========
   {
     path: '**',
-    redirectTo: '/tabs/home'
-  },
-  {
-    path: 'song-item',
-    loadComponent: () => import('./components/song-item/song-item.page').then(m => m.SongItemPage)
-  },
-  {
-    path: 'song-list',
-    loadComponent: () => import('./components/song-list/song-list.page').then(m => m.SongListPage)
-  },
-
+    redirectTo: 'not-found'
+  }
 ];

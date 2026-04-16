@@ -1,6 +1,6 @@
 .playlist-slider-container {
-  padding: 16px;
   width: 100%;
+  padding-top: 15px;
 
   .slider-header {
     display: flex;
@@ -59,7 +59,8 @@
 // Mobile
 @media (max-width: 576px) {
   .playlist-slider-container {
-    padding: 12px;
+    padding-bottom: 70px;
+
 
     .slider-header {
       margin-bottom: 16px;

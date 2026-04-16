@@ -1,7 +1,15 @@
-<div class="playlist-card" (click)="goToPlaylistDetail()">
-  <div class="card-image">
+<div class="playlist-card">
+  <div class="card-image"
+       (mouseenter)="setHover(true)"
+       (mouseleave)="setHover(false)">
     <img [src]="playlist.imageUrl" [alt]="playlist.title">
-    <div class="overlay"></div>
+    <div class="play-overlay" *ngIf="isHovered">
+      <button class="play-btn" (click)="onPlayClick($event)">
+        <img [src]="isPlaying ? 'assets/icon/play.svg' : 'assets/icon/play.svg'"
+             alt="Play/Pause"
+             class="play-icon">
+      </button>
+    </div>
   </div>
   <div class="card-content">
     <h3 class="playlist-title">{{ playlist.title }}</h3>

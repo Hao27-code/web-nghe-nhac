@@ -1,19 +1,30 @@
+<!--<ion-app>-->
+
+<!--  &lt;!&ndash; DESKTOP &ndash;&gt;-->
+<!--  <ng-container *ngIf="isDesktop; else mobileLayout">-->
+
+<!--    <app-desktop-header></app-desktop-header>-->
+
+<!--    <div class="desktop-container">-->
+<!--      <ion-router-outlet></ion-router-outlet>-->
+<!--    </div>-->
+
+<!--  </ng-container>-->
+
+<!--  &lt;!&ndash; MOBILE &ndash;&gt;-->
+<!--  <ng-template #mobileLayout>-->
+<!--    <ion-router-outlet></ion-router-outlet>-->
+<!--  </ng-template>-->
+
+<!--</ion-app>-->
 <ion-app>
 
-  <!-- DESKTOP -->
-  <ng-container *ngIf="isDesktop; else mobileLayout">
+  <!-- Desktop header -->
+  <app-desktop-header *ngIf="isDesktop"></app-desktop-header>
 
-    <app-desktop-header></app-desktop-header>
-
-    <div class="desktop-container">
-      <ion-router-outlet></ion-router-outlet>
-    </div>
-
-  </ng-container>
-
-  <!-- MOBILE -->
-  <ng-template #mobileLayout>
+  <!-- 1 router outlet duy nhất -->
+  <div [class.desktop-container]="isDesktop">
     <ion-router-outlet></ion-router-outlet>
-  </ng-template>
+  </div>
 
 </ion-app>
