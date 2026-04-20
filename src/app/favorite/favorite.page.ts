@@ -30,13 +30,12 @@ export class FavoritePage implements OnInit, OnDestroy {
   constructor(private musicService: MusicService) {}
 
   ngOnInit() {
-    this.loadFavorites();
     this.checkScreenSize();
 
-    // Lắng nghe thay đổi để cập nhật UI khi có bài được thêm/xóa
     this.subscriptions.add(
-      this.musicService.currentMusic$.subscribe(() => {
-        this.loadFavorites();
+      this.musicService.favorites$.subscribe(favorites => {
+        this.favoriteSongs = favorites;
+        this.favoriteCount = favorites.length;
       })
     );
   }
@@ -66,4 +65,9 @@ export class FavoritePage implements OnInit, OnDestroy {
     this.isTablet = width >= 768 && width < 1024;
     this.isDesktop = width >= 1024;
   }
+  removeSong(songId: number) {
+    this.favoriteSongs = this.favoriteSongs.filter(s => s.id !== songId);
+    this.favoriteCount = this.favoriteSongs.length;
+  }
+
 }

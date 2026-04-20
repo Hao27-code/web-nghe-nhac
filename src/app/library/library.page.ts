@@ -61,4 +61,10 @@ export class LibraryPage implements OnInit {
     this.isTablet = width >= 768 && width < 1024;
     this.isDesktop = width >= 1024;
   }
+
+  removeSong(songId: number): void {
+    this.favoriteSongs = this.favoriteSongs.filter(
+      (s: Music) => s.id !== songId
+    );
+  }
 }

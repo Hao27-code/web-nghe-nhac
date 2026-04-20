@@ -11,7 +11,9 @@ import {filter} from "rxjs";
   imports: [IonApp, IonRouterOutlet, NgIf, DesktopHeaderComponent],
 })
 export class AppComponent {
-  isDesktop = window.innerWidth >= 1200;
+
+
+  isDesktop = window.innerWidth >= 1200 && !('ontouchstart' in window);
   private currentMode = window.innerWidth >= 1200;
   // eslint-disable-next-line @angular-eslint/prefer-inject
   constructor(private router: Router) {}

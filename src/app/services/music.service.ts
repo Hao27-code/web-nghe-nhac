@@ -6,6 +6,9 @@ import { Music, ListeningHistory } from '../models/music.model';
   providedIn: 'root'
 })
 export class MusicService {
+  private favoritesSubject = new BehaviorSubject<Music[]>(this.getFavorites());
+  favorites$ = this.favoritesSubject.asObservable();
+
   private currentMusicSubject = new BehaviorSubject<Music | null>(null);
   currentMusic$ = this.currentMusicSubject.asObservable();
 
@@ -253,7 +256,7 @@ export class MusicService {
   }
 
   toggleFavorite(music: Music) {
-    const favorites = this.getFavorites();
+    let favorites = this.getFavorites();
     const index = favorites.findIndex(f => f.id === music.id);
     if (index !== -1) {
       favorites.splice(index, 1);
@@ -261,6 +264,8 @@ export class MusicService {
       favorites.push(music);
     }
     localStorage.setItem('favorites', JSON.stringify(favorites));
+
+    this.favoritesSubject.next([...favorites]);
   }
 
   isFavorite(music: Music): boolean {
@@ -290,5 +295,9 @@ export class MusicService {
   getFavoritesList(): Music[] {
     const saved = localStorage.getItem('favorites');
     return saved ? JSON.parse(saved) : [];
+  }
+
+  getIsPlayingValue(): boolean {
+    return this.isPlayingSubject.value;
   }
 }

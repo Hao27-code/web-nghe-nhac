@@ -1,5 +1,5 @@
 
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import {Component, Input, OnInit, OnDestroy, Output, EventEmitter} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { Music } from '../../models/music.model';
@@ -16,6 +16,7 @@ import { Subscription } from 'rxjs';
 })
 export class LibrarySongItemComponent implements OnInit, OnDestroy {
 
+
   @Input() song!: Music;
 
   // ========== SAO CHÉP LOGIC TỪ SONG-ITEM ==========
@@ -30,22 +31,51 @@ export class LibrarySongItemComponent implements OnInit, OnDestroy {
   constructor(private musicService: MusicService) {}
 
   ngOnInit() {
-    // Logic y hệt SongItemPage
+
+    // ===== 1. INIT TRẠNG THÁI BAN ĐẦU =====
+    // Khi component render lần đầu (hoặc reload trang),
+    // cần lấy trạng thái tim từ localStorage thông qua service
+    // để tránh bị sai icon (ví dụ reload mất tim)
     this.isLiked = this.musicService.isFavorite(this.song);
 
+    // ===== 2. SUBSCRIBE FAVORITES (ĐỒNG BỘ REALTIME) =====
+    // Lắng nghe mọi thay đổi danh sách bài yêu thích từ service
+    // Khi user bấm tim ở bất kỳ đâu trong app:
+    // → favorites$ emit dữ liệu mới
+    // → component này nhận được và cập nhật lại isLiked
     this.subscriptions.add(
-      this.musicService.currentMusic$.subscribe(currentMusic => {
-        this.isCurrentSong = currentMusic?.id === this.song.id;
-        if (this.isCurrentSong) {
-          this.isPlaying = this.musicService['isPlayingSubject'].value;
-        } else {
-          this.isPlaying = false;
-        }
+      this.musicService.favorites$.subscribe(favorites => {
+        // Kiểm tra xem bài hiện tại có nằm trong favorites không
+        this.isLiked = favorites.some(f => f.id === this.song.id);
       })
     );
 
+    // ===== 3. SUBSCRIBE CURRENT MUSIC =====
+    // Theo dõi bài đang phát hiện tại
+    // Dùng để xác định:
+    // - Bài này có phải đang phát không
+    // - Nếu đúng thì hiển thị trạng thái play/pause
+    this.subscriptions.add(
+      this.musicService.currentMusic$.subscribe(currentMusic => {
+
+        // So sánh id để biết có phải bài hiện tại không
+        this.isCurrentSong = currentMusic?.id === this.song.id;
+
+        // Nếu đúng bài đang phát → lấy trạng thái play/pause
+        // Nếu không → set false
+        this.isPlaying = this.isCurrentSong
+          ? this.musicService.getIsPlayingValue()
+          : false;
+      })
+    );
+
+    // ===== 4. SUBSCRIBE PLAYING STATE =====
+    // Lắng nghe trạng thái play/pause (true/false)
+    // Chỉ cập nhật nếu bài này là bài đang phát
     this.subscriptions.add(
       this.musicService.isPlaying$.subscribe(playing => {
+
+        // Tránh update sai cho các bài khác
         if (this.isCurrentSong) {
           this.isPlaying = playing;
         }
@@ -83,7 +113,6 @@ export class LibrarySongItemComponent implements OnInit, OnDestroy {
   toggleLike(event: Event) {
     event.stopPropagation();
     this.musicService.toggleFavorite(this.song);
-    this.isLiked = this.musicService.isFavorite(this.song);
   }
 
   // Logic 3 chấm (giống SongItemPage)
