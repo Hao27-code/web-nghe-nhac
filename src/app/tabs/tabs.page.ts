@@ -10,13 +10,14 @@ import {HeaderComponent} from "../components/header/header.component";
 import { LibraryPage } from '../library/library.page';
 import { FavoritePage } from '../favorite/favorite.page';
 import {Platform} from "@angular/cdk/platform";
+import {PlayerBarComponent} from "../components/player-bar/player-bar.component";
 
 @Component({
   selector: 'app-tabs',
   templateUrl: './tabs.page.html',
   styleUrls: ['./tabs.page.scss'],
   standalone: true,
-  imports: [IonContent, IonTitle, CommonModule, FormsModule, IonicModule, RouterLink, HeaderComponent, LibraryPage, FavoritePage  ]
+  imports: [IonContent, IonTitle, CommonModule, FormsModule, IonicModule, RouterLink, HeaderComponent, LibraryPage, FavoritePage, PlayerBarComponent]
 })
 export class TabsPage {
 

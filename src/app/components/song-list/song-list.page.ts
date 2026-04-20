@@ -1,4 +1,4 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
@@ -19,12 +19,16 @@ import { MusicService } from '../../services/music.service';
 })
 export class SongListPage implements OnInit {
 
+  @ViewChild('sliderContainer') sliderContainer!: ElementRef;
+
   allSongs: Music[] = [];
   displaySongs: Music[] = [];
   isMobile: boolean = false;
   isTablet: boolean = false;
   isDesktop: boolean = false;
 
+  private startX: number = 0;
+  private isScrolling: boolean = false;
 
   // eslint-disable-next-line @angular-eslint/prefer-inject
   constructor(private musicService: MusicService) {}

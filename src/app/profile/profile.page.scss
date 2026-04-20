@@ -1,0 +1,214 @@
+ion-header {
+  ion-toolbar {
+    --background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    --color: white;
+
+    ion-title {
+      font-weight: 600;
+      font-size: 18px;
+    }
+  }
+}
+
+
+// Responsive container cho desktop/tablet
+@media (min-width: 768px) {
+  ion-content::part(scroll) {
+    display: flex;
+    justify-content: center;
+  }
+
+  .content-container {
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+
+.user-info {
+  text-align: center;
+  margin: 20px 0 30px;
+
+  .user-avatar {
+    width: 90px;
+    height: 90px;
+    margin: 0 auto 15px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+
+    img {
+      border-radius: 50%;
+      object-fit: cover;
+    }
+  }
+
+  .user-name {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 10px 0 5px;
+    color: white;
+    letter-spacing: 0.5px;
+  }
+
+  .user-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(90deg, #00a6ff, #0458f5);
+    padding: 5px 18px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    color: white;
+    margin-top: 5px;
+    letter-spacing: 1px;
+
+    ion-icon {
+      font-size: 14px;
+    }
+  }
+}
+
+.divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 20px 0;
+}
+
+.function-list, .support-list {
+  background: transparent;
+
+  ion-item {
+    --background: rgba(255, 255, 255, 0.05);
+    --border-radius: 12px;
+    --padding-start: 16px;
+    --inner-padding-end: 16px;
+    margin-bottom: 10px;
+    --color: white;
+    transition: all 0.3s ease;
+
+    ion-icon {
+      color: #ffffff;
+      font-size: 22px;
+    }
+
+    ion-label {
+      font-size: 15px;
+      font-weight: 500;
+      color: white;
+    }
+
+    .version {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.5);
+      margin-right: 8px;
+    }
+
+    .arrow-icon {
+      color: rgba(255, 255, 255, 0.3);
+      font-size: 16px;
+    }
+
+    &:hover {
+      --background: rgba(255, 255, 255, 0.1);
+      transform: translateX(4px);
+    }
+  }
+}
+
+.support-list {
+  ion-item {
+    --background: rgba(255, 255, 255, 0.03);
+
+    ion-icon:first-of-type {
+      color: #ffffff;
+    }
+  }
+}
+
+// Desktop & Tablet styles
+@media (min-width: 768px) and (max-width: 1024px) {
+  .user-info {
+    margin: 30px 0 40px;
+
+    .user-avatar {
+      width: 110px;
+      height: 110px;
+    }
+
+    .user-name {
+      font-size: 28px;
+    }
+
+    .user-badge {
+      font-size: 14px;
+      padding: 6px 22px;
+    }
+  }
+
+  .function-list, .support-list {
+    ion-item {
+      --padding-start: 20px;
+      --inner-padding-end: 20px;
+      margin-bottom: 12px;
+
+      ion-icon {
+        font-size: 24px;
+      }
+
+      ion-label {
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+@media (min-width: 1025px) {
+  .user-info {
+    margin: 40px 0 50px;
+
+    .user-avatar {
+      width: 130px;
+      height: 130px;
+      margin: 0 auto 20px;
+    }
+
+    .user-name {
+      font-size: 32px;
+    }
+
+    .user-badge {
+      font-size: 14px;
+      padding: 8px 28px;
+
+      ion-icon {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .divider {
+    margin: 30px 0;
+  }
+
+  .function-list, .support-list {
+    ion-item {
+      --padding-start: 24px;
+      --inner-padding-end: 24px;
+      margin-bottom: 12px;
+      --border-radius: 14px;
+
+      ion-icon {
+        font-size: 26px;
+      }
+
+      ion-label {
+        font-size: 16px;
+      }
+
+      .arrow-icon {
+        font-size: 18px;
+      }
+    }
+  }
+}

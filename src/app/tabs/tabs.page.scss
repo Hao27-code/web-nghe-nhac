@@ -1,100 +1,126 @@
+// tabs.component.scss
 ion-router-outlet {
   position: relative;
   z-index: 1;
 }
-ion-tab-bar {
-  position: relative;
-  z-index: 10;
+
+ion-tab-bar.custom-tab-bar {
+  --background: rgba(0, 31, 75, 0.74); /* nền xanh đậm */
+  backdrop-filter: blur(12px); /* hiệu ứng kính mờ */
+  background: rgba(10, 20, 40, 0.9); /* lớp nền phụ */
+  width: 100%;
+  max-width: 500px;
+  height: 55px;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  padding-bottom: env(safe-area-inset-bottom);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  z-index: 1000;
 }
-ion-router-outlet > *:not(app-tabs) {
-  display: none;
+
+// Thêm padding cho nội dung chính để tránh bị che bởi player bar và tab bar
+.page-content {
+  padding-bottom: 115px;
+
+  @media (max-width: 768px) {
+    padding-bottom: 125px;
+  }
+
+  @media (max-width: 600px) {
+    padding-bottom: 115px;
+  }
+
+  @media (max-width: 400px) {
+    padding-bottom: 105px;
+  }
 }
+
+// Styles cho tab buttons (giữ nguyên như cũ)
 .icon-wrapper {
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 20%;
   transition: all 0.3s ease;
-
 }
+
 .icon-default,
 .icon-active {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   position: absolute;
 }
+
 .icon-active {
   display: none;
 }
+
 ion-tab-button.tab-selected .icon-wrapper {
   background: rgba(0, 224, 255, 0.15);
-  transform: translateY(-4px);
+  transform: translateY(-3px);
   border: 1px solid #0071a1;
 }
+
 ion-tab-button.tab-selected .icon-default {
   display: none;
 }
+
 ion-tab-button.tab-selected .icon-active {
   display: block;
 }
+
 ion-tab-button.tab-selected {
   --color: #01B7E4FF;
 }
+
 .icon-wrapper img {
-  width: 25px;
-  height: 25px;
+  width: 22px;
+  height: 22px;
 }
+
 ion-tab-button {
   --color: #8a9bb5;
 }
-.custom-tab-bar {
-  --background: rgba(0, 31, 75, 0.74); /* nền xanh đậm */
-  backdrop-filter: blur(12px); /* hiệu ứng kính mờ */
 
-  width: 100%;
-
-  background: rgba(10, 20, 40, 0.9);
-
-  max-width: 500px;
-  height: 65px;
-  position: fixed; /* luôn dính đáy */
-  bottom: 0;       /* sát mép */
-  left: 50%;
-  transform: translateX(-50%);
-  padding-bottom: env(safe-area-inset-bottom); /* hỗ trợ iPhone */
-}
 ion-tab-button ion-label {
   color: #8a9bb5;
 }
+
 ion-tab-button.tab-selected ion-label {
   color: #00e0ff;
 }
+
 ion-tab-button ion-label {
   transition: all 0.25s ease;
-}
-ion-tab-button:hover ion-label {
-  color: #4cd9ff;        /* sáng hơn */
-  transform: scale(1.5); /* to lên nhẹ */
+  font-size: 11px;
 }
 
+ion-tab-button:hover ion-label {
+  color: #4cd9ff;
+  transform: scale(1.5);
+}
 
 ion-tab-button:not(.tab-selected):hover ion-label {
   color: #4cd9ff;
-  transform: scale(1.1);
-}
-ion-tab-button:not(.tab-selected):hover .tab-icon-wrapper {
-  background: rgba(0, 224, 255, 0.15);
-}
-ion-tab-button:not(.tab-selected):hover {
-  transform: translateY(-2px);
-}
-ion-tab-button.tab-selected ion-label {
-  color: #00e0ff;
-  transform: scale(1.05);
+  transform: scale(1.08);
 }
 
+ion-tab-button:not(.tab-selected):hover .icon-wrapper {
+  background: rgba(0, 224, 255, 0.15);
+}
+
+ion-tab-button:not(.tab-selected):hover {
+  transform: translateY(-1px);
+}
+
+ion-tab-button.tab-selected ion-label {
+  color: #00e0ff;
+  transform: scale(1.02);
+}
 
 ion-tab-button {
   --ripple-color: transparent;
@@ -102,3 +128,21 @@ ion-tab-button {
   --background-focused: transparent;
 }
 
+// Responsive cho tablet
+@media (min-width: 769px) and (max-width: 1024px) {
+  ion-tab-bar {
+    max-width: 700px;
+    height: 60px;
+  }
+
+  .page-content {
+    padding-bottom: 130px;
+  }
+}
+
+// Responsive cho desktop (ẩn tab bar hoặc giữ nguyên)
+@media (min-width: 1025px) {
+  ion-tab-bar {
+    max-width: 600px;
+  }
+}

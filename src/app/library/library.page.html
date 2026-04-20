@@ -35,7 +35,7 @@
   <!-- Danh sách bài hát -->
   <div class="songs-list">
     <app-library-song-item
-      *ngFor="let song of favoriteSongs"
+      *ngFor="let song of allSongs; trackBy: trackById"
       [song]="song">
     </app-library-song-item>
   </div>
@@ -48,5 +48,4 @@
       <p>Hãy bấm tim ❤️ để thêm bài hát vào thư viện</p>
     </div>
   </ng-template>
-
 </ion-content>

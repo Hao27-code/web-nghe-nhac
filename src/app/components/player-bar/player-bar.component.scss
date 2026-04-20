@@ -255,10 +255,41 @@
   }
 }
 
+// ==================== TABLET STYLES (768px - 1024px) ====================
+@media (min-width: 769px) and (max-width: 1024px) {
+  .player-bar {
+    padding: 10px 20px;
+
+    // Thanh phát nhạc nằm trên tabs
+    bottom: 56px; // Chiều cao của tab bar
+
+    .center-section {
+      max-width: 400px;
+
+      .controls {
+        gap: 12px;
+      }
+    }
+
+    .right-section {
+      min-width: 100px;
+
+      .volume-control {
+        .custom-volume {
+          width: 60px;
+        }
+      }
+    }
+  }
+}
+
 // ==================== MOBILE STYLES (DƯỚI 768px) ====================
 @media (max-width: 768px) {
   .player-bar {
     padding: 10px 16px;
+    // QUAN TRỌNG: Thanh phát nhạc nằm TRÊN tabs
+    bottom: 56px; // Chiều cao của tab bar (65px - 5px margin)
+    z-index: 999; // Thấp hơn tab bar một chút để tab bar có thể tương tác
 
     .player-content {
       display: flex;
@@ -325,7 +356,7 @@
         display: flex !important;
         align-items: center;
         justify-content: flex-end;
-        gap: 20px; // Tăng khoảng cách giữa các icon
+        gap: 20px;
 
         .mobile-like-btn {
           background: none;
@@ -396,8 +427,12 @@
 
 // Mobile vừa (600px - 768px)
 @media (max-width: 768px) and (min-width: 601px) {
-  .player-bar .right-section .mobile-controls {
-    gap: 24px; // Khoảng cách lớn hơn cho màn hình rộng hơn
+  .player-bar {
+    bottom: 60px;
+
+    .right-section .mobile-controls {
+      gap: 24px;
+    }
   }
 }
 
@@ -405,6 +440,7 @@
 @media (max-width: 600px) {
   .player-bar {
     padding: 8px 12px;
+
 
     .left-section {
       gap: 8px;
@@ -425,7 +461,7 @@
     }
 
     .right-section .mobile-controls {
-      gap: 16px; // Khoảng cách vừa phải cho màn hình nhỏ
+      gap: 16px;
 
       .mobile-like-btn ion-icon {
         font-size: 22px;
@@ -450,6 +486,7 @@
 @media (max-width: 400px) {
   .player-bar {
     padding: 8px 10px;
+    bottom: 50px;
 
     .left-section {
       .thumbnail {
@@ -467,7 +504,7 @@
     }
 
     .right-section .mobile-controls {
-      gap: 12px; // Khoảng cách nhỏ hơn cho màn hình siêu nhỏ
+      gap: 12px;
 
       .mobile-like-btn ion-icon {
         font-size: 20px;

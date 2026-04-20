@@ -1,10 +1,110 @@
 <ion-header>
   <ion-toolbar>
-    <app-header></app-header>
+    <ion-title>Cá nhân</ion-title>
   </ion-toolbar>
 </ion-header>
 
+<ion-content class="ion-padding">
+  <div class="content-container">
+    <!-- Thông tin cá nhân -->
+    <div class="user-info">
+      <ion-avatar class="user-avatar">
+        <img src="assets/img/avatar.jpg" alt="avatar">
+      </ion-avatar>
+      <h2 class="user-name">Anh Hào</h2>
+      <p class="user-badge">
+        <ion-icon name="diamond-outline"></ion-icon>
+        BASIC
+      </p>
+    </div>
 
-<ion-content [fullscreen]="true">
+    <div class="divider"></div>
 
+    <!-- Danh sách chức năng -->
+    <ion-list class="function-list">
+      <ion-item lines="none" [button]="true">
+        <ion-icon slot="start" name="play-circle-outline"></ion-icon>
+        <ion-label>Trình phát nhạc</ion-label>
+        <ion-icon slot="end" name="chevron-forward-outline" class="arrow-icon"></ion-icon>
+      </ion-item>
+
+      <ion-item lines="none" [button]="true">
+        <ion-icon slot="start" name="color-palette-outline"></ion-icon>
+        <ion-label>Giao diện chủ đề</ion-label>
+        <ion-icon slot="end" name="chevron-forward-outline" class="arrow-icon"></ion-icon>
+      </ion-item>
+
+      <ion-item lines="none" [button]="true">
+        <ion-icon slot="start" name="download-outline"></ion-icon>
+        <ion-label>Tải nhạc</ion-label>
+        <ion-icon slot="end" name="chevron-forward-outline" class="arrow-icon"></ion-icon>
+      </ion-item>
+
+      <ion-item lines="none" [button]="true">
+        <ion-icon slot="start" name="albums-outline"></ion-icon>
+        <ion-label>Thư viện</ion-label>
+        <ion-icon slot="end" name="chevron-forward-outline" class="arrow-icon"></ion-icon>
+      </ion-item>
+
+      <ion-item lines="none" [button]="true">
+        <ion-icon slot="start" name="videocam-outline"></ion-icon>
+        <ion-label>Video</ion-label>
+        <ion-icon slot="end" name="chevron-forward-outline" class="arrow-icon"></ion-icon>
+      </ion-item>
+
+      <ion-item lines="none" [button]="true">
+        <ion-icon slot="start" name="headset-outline"></ion-icon>
+        <ion-label>Tai nghe & Bluetooth</ion-label>
+        <ion-icon slot="end" name="chevron-forward-outline" class="arrow-icon"></ion-icon>
+      </ion-item>
+
+      <ion-item lines="none" [button]="true">
+        <ion-icon slot="start" name="notifications-outline"></ion-icon>
+        <ion-label>Thông báo</ion-label>
+        <ion-icon slot="end" name="chevron-forward-outline" class="arrow-icon"></ion-icon>
+      </ion-item>
+    </ion-list>
+
+    <div class="divider"></div>
+
+    <!-- Danh sách hỗ trợ -->
+    <ion-list class="support-list">
+      <ion-item lines="none" [button]="true">
+        <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+        <ion-label>Phiên bản</ion-label>
+        <span slot="end" class="version">26.03.02</span>
+        <ion-icon slot="end" name="chevron-forward-outline" class="arrow-icon"></ion-icon>
+      </ion-item>
+
+      <ion-item lines="none" [button]="true">
+        <ion-icon slot="start" name="help-circle-outline"></ion-icon>
+        <ion-label>Trợ giúp và báo lỗi</ion-label>
+        <ion-icon slot="end" name="chevron-forward-outline" class="arrow-icon"></ion-icon>
+      </ion-item>
+
+      <ion-item lines="none" [button]="true">
+        <ion-icon slot="start" name="star-outline"></ion-icon>
+        <ion-label>Bình chọn cho Zing MP3</ion-label>
+        <ion-icon slot="end" name="chevron-forward-outline" class="arrow-icon"></ion-icon>
+      </ion-item>
+
+      <ion-item lines="none" [button]="true">
+        <ion-icon slot="start" name="document-text-outline"></ion-icon>
+        <ion-label>Thỏa thuận sử dụng dịch vụ</ion-label>
+        <ion-icon slot="end" name="chevron-forward-outline" class="arrow-icon"></ion-icon>
+      </ion-item>
+
+      <ion-item lines="none" [button]="true">
+        <ion-icon slot="start" name="shield-outline"></ion-icon>
+        <ion-label>Chính sách bảo mật</ion-label>
+        <ion-icon slot="end" name="chevron-forward-outline" class="arrow-icon"></ion-icon>
+      </ion-item>
+
+      <ion-item lines="none" [button]="true">
+        <ion-icon slot="start" name="business-outline"></ion-icon>
+        <ion-label>Thông tin về Zing MP3</ion-label>
+        <ion-icon slot="end" name="chevron-forward-outline" class="arrow-icon"></ion-icon>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>

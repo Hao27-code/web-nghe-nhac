@@ -32,50 +32,27 @@ export class LibrarySongItemComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    // ===== 1. INIT TRẠNG THÁI BAN ĐẦU =====
-    // Khi component render lần đầu (hoặc reload trang),
-    // cần lấy trạng thái tim từ localStorage thông qua service
-    // để tránh bị sai icon (ví dụ reload mất tim)
-    this.isLiked = this.musicService.isFavorite(this.song);
-
-    // ===== 2. SUBSCRIBE FAVORITES (ĐỒNG BỘ REALTIME) =====
-    // Lắng nghe mọi thay đổi danh sách bài yêu thích từ service
-    // Khi user bấm tim ở bất kỳ đâu trong app:
-    // → favorites$ emit dữ liệu mới
-    // → component này nhận được và cập nhật lại isLiked
+    // ===== FAVORITES (nguồn chính) =====
     this.subscriptions.add(
       this.musicService.favorites$.subscribe(favorites => {
-        // Kiểm tra xem bài hiện tại có nằm trong favorites không
         this.isLiked = favorites.some(f => f.id === this.song.id);
       })
     );
 
-    // ===== 3. SUBSCRIBE CURRENT MUSIC =====
-    // Theo dõi bài đang phát hiện tại
-    // Dùng để xác định:
-    // - Bài này có phải đang phát không
-    // - Nếu đúng thì hiển thị trạng thái play/pause
+    // ===== CURRENT MUSIC =====
     this.subscriptions.add(
       this.musicService.currentMusic$.subscribe(currentMusic => {
-
-        // So sánh id để biết có phải bài hiện tại không
         this.isCurrentSong = currentMusic?.id === this.song.id;
 
-        // Nếu đúng bài đang phát → lấy trạng thái play/pause
-        // Nếu không → set false
         this.isPlaying = this.isCurrentSong
           ? this.musicService.getIsPlayingValue()
           : false;
       })
     );
 
-    // ===== 4. SUBSCRIBE PLAYING STATE =====
-    // Lắng nghe trạng thái play/pause (true/false)
-    // Chỉ cập nhật nếu bài này là bài đang phát
+    // ===== PLAYING STATE =====
     this.subscriptions.add(
       this.musicService.isPlaying$.subscribe(playing => {
-
-        // Tránh update sai cho các bài khác
         if (this.isCurrentSong) {
           this.isPlaying = playing;
         }

@@ -202,22 +202,22 @@
   border-radius: 2px;
 }
 
-.btn-login {
-  background: linear-gradient(90deg, #00a6ff, #0458f5);
-
-  border: none;
-  padding: 10px 20px;
-  border-radius: 999px; /* 🔥 bo tròn full */
-
-  color: white;
-  font-size: 14px;
-  font-weight: 600;
-
+// Avatar thay cho button đăng nhập
+.avatar-login {
+  width: 46px;
+  height: 46px;
   cursor: pointer;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+  margin-left: 8px;
 
-  transition: transform 0.25s ease, filter 0.25s ease;
-}
-.btn-login:hover {
-  filter: brightness(1.2);
-  transform: scale(1.05) translateY(-2px);
+  img {
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+    border-color: #00a6ff;
+  }
 }

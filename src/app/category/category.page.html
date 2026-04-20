@@ -7,9 +7,22 @@
   <div class="category-container">
     <!-- Kiểm tra selector đúng -->
     <app-playlist-slider
-      [playlists]="categoryPlaylists"
-      title="Gợi ý Playlist"
+      [playlists]="categoryPlaylistsTop100"
+      title="Top 100"
       categoryRoute="/category">
     </app-playlist-slider>
+
+    <app-playlist-slider
+      [playlists]="categoryPlaylists"
+      title="Chill"
+      categoryRoute="/category">
+    </app-playlist-slider>
+
+    <app-playlist-slider
+      [playlists]="categoryPlaylists"
+      title="Nghe Sao kể chuyện"
+      categoryRoute="/category">
+    </app-playlist-slider>
+
   </div>
 </ion-content>

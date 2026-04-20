@@ -20,40 +20,24 @@ import { Subscription } from 'rxjs';
 })
 export class LibraryPage implements OnInit {
 
-  favoriteSongs: Music[] = [];
-  favoriteCount: number = 0;
-  isMobile: boolean = false;  // ← Thêm dòng này
-  isTablet: boolean = false;   // ← Thêm nếu cần
-  isDesktop: boolean = false;  // ← Thêm nếu cần
+  allSongs: Music[] = [];
+  isMobile: boolean = false;
+  isTablet: boolean = false;
+  isDesktop: boolean = false;
 
-  private subscription: Subscription = new Subscription();
 
   // eslint-disable-next-line @angular-eslint/prefer-inject
   constructor(private musicService: MusicService) {}
 
   ngOnInit() {
-    this.loadFavorites();
+    this.allSongs = this.musicService.getMusicList();
     this.checkScreenSize();
-
-    // Lắng nghe khi có thay đổi yêu thích
-    this.subscription.add(
-      this.musicService.currentMusic$.subscribe(() => {
-        this.loadFavorites();
-      })
-    );
   }
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
-
-  @HostListener('window:resize', ['$event'])
+  @HostListener('window:resize')
   onResize() {
     this.checkScreenSize();
   }
-  loadFavorites() {
-    this.favoriteSongs = this.musicService.getFavoritesList();
-    this.favoriteCount = this.favoriteSongs.length;
-  }
+
 
   checkScreenSize() {
     const width = window.innerWidth;
@@ -62,9 +46,7 @@ export class LibraryPage implements OnInit {
     this.isDesktop = width >= 1024;
   }
 
-  removeSong(songId: number): void {
-    this.favoriteSongs = this.favoriteSongs.filter(
-      (s: Music) => s.id !== songId
-    );
+  trackById(index: number, item: Music) {
+    return item.id;
   }
 }

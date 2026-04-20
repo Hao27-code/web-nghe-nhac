@@ -40,5 +40,9 @@ export class DesktopHeaderComponent {
       offsetY: 8
     }
   ];
+
+  goToProfile() {
+    this.router.navigate(['/profile']);
+  }
 }
 

@@ -446,6 +446,15 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
     { id: 6, title: 'Nhạc Trẻ Hay Nhất', artists: 'Sơn Tùng M-TP, Hòa Minzy...', imageUrl: 'assets/img/theloai_chill5.jpg' },
     { id: 7, title: 'Nhạc Trẻ Hay Nhất', artists: 'Sơn Tùng M-TP, Hòa Minzy...', imageUrl: 'assets/img/theloai_chill5.jpg' }
   ];
+
+  homePlayliststop100: Playlist[] = [
+    { id: 1, title: 'Top 100 Nhạc V-Pop Hay Nhất', artists: 'Dương Domic, Quang Hùng MasterD, Tăng Duy Tân...', imageUrl: 'assets/img/top100_1.jpg' },
+    { id: 2, title: 'Top 100 Pop Âu Mỹ Hay Nhất', artists: 'Taylor Swift, Sabrina Carpenter, Lady Gaga...', imageUrl: 'assets/img/top100_2.jpg' },
+    { id: 3, title: 'Top 100 Nhạc', artists: 'Alan Walker, Martin Garrix, Avicii...', imageUrl: 'assets/img/top100_3.jpg' },
+    { id: 4, title: 'Top 100 Nhạc Rap Việt Nam', artists: 'HIEUTHUHAI, RHYDER, Bray...', imageUrl: 'assets/img/top100_4.jpg' },
+    { id: 5, title: 'Top 100 Nhạc Hàn Quốc Hay', artists: 'BABYMONSTER, aespa...', imageUrl: 'assets/img/top100_5.jpg' },
+    { id: 6, title: 'Top 100 Nhạc Phim Việt Nam', artists: 'ERIK, Phan Mạnh Quỳnh...', imageUrl: 'assets/img/top100_6.jpg' }
+  ];
 }
 
 

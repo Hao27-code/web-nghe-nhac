@@ -1,43 +1,3 @@
-<!--<div class="song-list-container">-->
-
-<!--  &lt;!&ndash; DESKTOP: Grid 3 cột &ndash;&gt;-->
-<!--  <div class="desktop-grid" *ngIf="isDesktop">-->
-<!--    <div class="grid-3cols">-->
-<!--      <app-song-item-->
-<!--        *ngFor="let song of displaySongs"-->
-<!--        [song]="song"-->
-<!--      ></app-song-item>-->
-<!--    </div>-->
-<!--  </div>-->
-
-<!--  &lt;!&ndash; TABLET: Grid 2 cột, bỏ 3 cái cuối &ndash;&gt;-->
-<!--  <div class="tablet-grid" *ngIf="isTablet">-->
-<!--    <div class="grid-2cols">-->
-<!--      <app-song-item-->
-<!--        *ngFor="let song of displaySongs"-->
-<!--        [song]="song"-->
-<!--      ></app-song-item>-->
-<!--    </div>-->
-<!--  </div>-->
-
-<!--  &lt;!&ndash; MOBILE: Slide ngang, mỗi slide có 3 bài (3 hàng) &ndash;&gt;-->
-<!--  <div class="mobile-slider" *ngIf="isMobile">-->
-<!--    <div class="slider-container">-->
-<!--      <div class="slider-track">-->
-<!--        &lt;!&ndash; Mỗi slide là 1 group có 3 bài &ndash;&gt;-->
-<!--        <div class="slider-slide" *ngFor="let group of getSongGroups()">-->
-<!--          <div class="slide-content">-->
-<!--            <app-song-item-->
-<!--              *ngFor="let song of group"-->
-<!--              [song]="song"-->
-<!--            ></app-song-item>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-
-<!--</div>-->
 <div class="song-list-container">
 
   <!-- DESKTOP: Grid 3 cột -->
@@ -60,7 +20,7 @@
     </div>
   </div>
 
-  <!-- MOBILE: Slide ngang, mỗi slide 3 bài -->
+  <!-- MOBILE: Slide ngang -->
   <div class="mobile-slider" *ngIf="isMobile">
     <div class="slider-container">
       <div class="slider-track">
@@ -77,4 +37,3 @@
   </div>
 
 </div>
-

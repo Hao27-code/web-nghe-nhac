@@ -6,6 +6,8 @@ import { Music, ListeningHistory } from '../models/music.model';
   providedIn: 'root'
 })
 export class MusicService {
+
+
   private favoritesSubject = new BehaviorSubject<Music[]>(this.getFavorites());
   favorites$ = this.favoritesSubject.asObservable();
 
@@ -30,7 +32,7 @@ export class MusicService {
     return this.audio;
   }
   private audio: HTMLAudioElement | null = null;
-
+  private isMobile: boolean = false;
   private sampleMusic: Music[] = [
     {
       id: 1,
@@ -133,6 +135,10 @@ export class MusicService {
   constructor() {
     this.loadHistory();
   }
+  private checkMobileDevice(): void {
+    this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    console.log('Is mobile device:', this.isMobile);
+  }
   getAudio(): HTMLAudioElement | null {
     return this.audio;
   }
@@ -149,37 +155,80 @@ export class MusicService {
     return uniqueIds.map(id => this.sampleMusic.find(m => m.id === id)).filter(m => m) as Music[];
   }
 
-  playMusic(music: Music, startTime?: number) {
-    if (this.audio) {
-      this.audio.pause();
+  // PHƯƠNG THỨC CHÍNH ĐỂ PHÁT NHẠC
+  async playMusic(music: Music, startTime?: number): Promise<void> {
+    console.log('🎵 playMusic called:', music.title);
+
+    try {
+      // Dừng audio cũ nếu có
+      if (this.audio) {
+        this.audio.pause();
+        this.audio = null;
+      }
+
+      // Tạo audio mới
+      this.audio = new Audio(music.audioUrl);
+
+      // Set current time
+      const savedTime = this.getSavedTime(music.id);
+      const initialTime = startTime !== undefined ? startTime : savedTime;
+      this.audio.currentTime = initialTime;
+      this.currentTimeSubject.next(initialTime);
+
+      // Set current music
+      this.currentMusicSubject.next(music);
+
+      // Lắng nghe sự kiện
+      this.audio.addEventListener('loadedmetadata', () => {
+        if (this.audio) {
+          this.durationSubject.next(this.audio.duration);
+          console.log('Duration:', this.audio.duration);
+        }
+      });
+
+      this.audio.addEventListener('timeupdate', () => {
+        if (this.audio) {
+          this.currentTimeSubject.next(this.audio.currentTime);
+        }
+      });
+
+      this.audio.addEventListener('ended', () => {
+        console.log('Audio ended');
+        this.isPlayingSubject.next(false);
+        this.saveProgress(music.id, 0);
+      });
+
+      this.audio.addEventListener('error', (e) => {
+        console.error('Audio error:', e);
+      });
+
+      this.audio.addEventListener('canplay', () => {
+        console.log('Audio can play');
+      });
+
+      // QUAN TRỌNG: Phát nhạc
+      const playPromise = this.audio.play();
+
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            console.log('✅ Play success:', music.title);
+            this.isPlayingSubject.next(true);
+            this.saveToHistory(music.id, initialTime);
+          })
+          .catch(error => {
+            console.error('❌ Play failed:', error);
+            this.isPlayingSubject.next(false);
+
+            // Thử resume trên mobile nếu cần
+            if (this.isMobile && error.name === 'NotAllowedError') {
+              console.log('Mobile: Need user interaction first');
+            }
+          });
+      }
+    } catch (error) {
+      console.error('❌ Error in playMusic:', error);
     }
-
-    this.audio = new Audio(music.audioUrl);
-    this.currentMusicSubject.next(music);
-
-    const savedTime = this.getSavedTime(music.id);
-    const initialTime = startTime !== undefined ? startTime : savedTime;
-
-    this.audio.currentTime = initialTime;
-    this.currentTimeSubject.next(initialTime);
-
-    this.audio.addEventListener('loadedmetadata', () => {
-      this.durationSubject.next(this.audio!.duration);
-    });
-
-    this.audio.addEventListener('timeupdate', () => {
-      this.currentTimeSubject.next(this.audio!.currentTime);
-    });
-
-    this.audio.addEventListener('ended', () => {
-      this.isPlayingSubject.next(false);
-      this.saveProgress(music.id, 0);
-    });
-
-    this.audio.play();
-    this.isPlayingSubject.next(true);
-
-    this.saveToHistory(music.id, initialTime);
   }
 
   pauseMusic() {
@@ -291,13 +340,34 @@ export class MusicService {
     this.playMusic(randomSong, savedTime);
   }
 
-// Lấy danh sách yêu thích (public)
-  getFavoritesList(): Music[] {
-    const saved = localStorage.getItem('favorites');
-    return saved ? JSON.parse(saved) : [];
-  }
-
   getIsPlayingValue(): boolean {
     return this.isPlayingSubject.value;
   }
+  setMusic(music: Music) {
+    this.currentMusicSubject.next(music);
+  }
+// Khởi tạo audio context cho mobile
+  async initAudioContext(): Promise<void> {
+    console.log('initAudioContext called');
+    try {
+      // @ts-ignore
+      if (window.AudioContext || window.webkitAudioContext) {
+        // @ts-ignore
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        const audioContext = new AudioCtx();
+
+        if (audioContext.state === 'suspended') {
+          await audioContext.resume();
+          console.log('✅ AudioContext resumed successfully');
+        } else {
+          console.log('AudioContext state:', audioContext.state);
+        }
+      } else {
+        console.log('AudioContext not supported');
+      }
+    } catch (error) {
+      console.error('❌ Error initializing AudioContext:', error);
+    }
+  }
+
 }

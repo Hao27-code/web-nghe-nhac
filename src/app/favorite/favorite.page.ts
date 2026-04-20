@@ -44,10 +44,6 @@ export class FavoritePage implements OnInit, OnDestroy {
     this.subscriptions.unsubscribe();
   }
 
-  loadFavorites() {
-    this.favoriteSongs = this.musicService.getFavoritesList();
-    this.favoriteCount = this.favoriteSongs.length;
-  }
 
   playRandom() {
     if (this.favoriteCount === 0) return;
@@ -64,10 +60,6 @@ export class FavoritePage implements OnInit, OnDestroy {
     this.isMobile = width < 768;
     this.isTablet = width >= 768 && width < 1024;
     this.isDesktop = width >= 1024;
-  }
-  removeSong(songId: number) {
-    this.favoriteSongs = this.favoriteSongs.filter(s => s.id !== songId);
-    this.favoriteCount = this.favoriteSongs.length;
   }
 
 }

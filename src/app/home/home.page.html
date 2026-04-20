@@ -136,10 +136,22 @@
   </div>
 
   <app-playlist-slider
-    [playlists]="homePlaylists"
-    title="Gợi ý Playlist"
+    [playlists]="homePlayliststop100"
+    title="Top 100"
     categoryRoute="/category">
   </app-playlist-slider>
 
+  <app-playlist-slider
+    [playlists]="homePlaylists"
+    title="Chill"
+    categoryRoute="/category">
+  </app-playlist-slider>
+
+
+  <app-playlist-slider
+    [playlists]="homePlaylists"
+    title="Nghe Sao kể chuyện"
+    categoryRoute="/category">
+  </app-playlist-slider>
 </ion-content>
 <app-player-bar></app-player-bar>
