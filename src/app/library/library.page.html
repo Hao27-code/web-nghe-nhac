@@ -5,47 +5,51 @@
 </ion-header>
 <ion-content class="ion-padding">
 
-  <!-- Tiêu đề trong content -->
-  <!-- ========== HEADER PLAYLIST ========== -->
-  <div class="library-header">
-    <!-- Ảnh playlist -->
-    <div class="library-cover">
-      <img src="assets/icon/logo_yeuthich.svg" alt="Playlist cover">
+  <div library-container>
+    <!-- Tiêu đề trong content -->
+    <!-- ========== HEADER PLAYLIST ========== -->
+    <div class="library-header">
+      <!-- Ảnh playlist -->
+      <div class="library-cover">
+        <img src="assets/icon/logo_yeuthich.svg" alt="Playlist cover">
+      </div>
+
+      <!-- Thông tin playlist -->
+      <div class="library-info">
+
+        <h1 class="library-title">Thư viện bài hát</h1>
+      </div>
     </div>
 
-    <!-- Thông tin playlist -->
-    <div class="library-info">
-
-      <h1 class="library-title">Thư viện bài hát</h1>
+    <div class="table-library" *ngIf="!isMobile">
+      <div class="col-song-library">BÀI HÁT</div>
+      <div class="col-album-library">ALBUM</div>
     </div>
-  </div>
 
-  <div class="table-library" *ngIf="!isMobile">
-    <div class="col-song-library">BÀI HÁT</div>
-    <div class="col-album-library">ALBUM</div>
-  </div>
-
-  <!-- Header bảng (chỉ hiển thị trên desktop/tablet) -->
-  <div class="table-header" *ngIf="!isMobile">
-    <div class="col-song">BÀI HÁT</div>
-    <div class="col-album">ALBUM</div>
-    <div class="col-time">THỜI GIAN</div>
-  </div>
-
-  <!-- Danh sách bài hát -->
-  <div class="songs-list">
-    <app-library-song-item
-      *ngFor="let song of allSongs; trackBy: trackById"
-      [song]="song">
-    </app-library-song-item>
-  </div>
-
-  <!-- Trống -->
-  <ng-template #emptyState>
-    <div class="empty-state">
-      <ion-icon name="heart-outline"></ion-icon>
-      <h3>Thư viện trống</h3>
-      <p>Hãy bấm tim ❤️ để thêm bài hát vào thư viện</p>
+    <!-- Header bảng (chỉ hiển thị trên desktop/tablet) -->
+    <div class="table-header" *ngIf="!isMobile">
+      <div class="col-song">BÀI HÁT</div>
+      <div class="col-album">ALBUM</div>
+      <div class="col-time">THỜI GIAN</div>
     </div>
-  </ng-template>
+
+    <!-- Danh sách bài hát -->
+    <div class="songs-list">
+      <app-library-song-item
+        *ngFor="let song of allSongs; trackBy: trackById"
+        [song]="song">
+      </app-library-song-item>
+    </div>
+
+    <!-- Trống -->
+    <ng-template #emptyState>
+      <div class="empty-state">
+        <ion-icon name="heart-outline"></ion-icon>
+        <h3>Thư viện trống</h3>
+        <p>Hãy bấm tim ❤️ để thêm bài hát vào thư viện</p>
+      </div>
+    </ng-template>
+
+  </div>
+
 </ion-content>

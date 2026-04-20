@@ -426,6 +426,10 @@ ion-content {
 
 @media (max-width: 767px) {
 
+  .custom-slider-container{
+    padding-top: 50px;
+  }
+
   .slider-track {
     gap: 0; /* bỏ khoảng cách */
   }
@@ -444,6 +448,7 @@ ion-content {
     height: 200px !important;// giảm chiều cao
     flex: 0 0 100% !important;
     width: 100% !important;
+
   }
 
   .slide-item {
@@ -456,11 +461,14 @@ ion-content {
     height: 100%;
     width: 100%;
     object-fit: cover;
+
+
   }
   .custom-slider-container {
     width: 100%;
     margin: 0;
   }
+
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
