@@ -2,11 +2,11 @@
   display: flex;
   gap: 12px;
   background: transparent;
-  padding: 8px;
   border-radius: 12px;
   transition: all 0.2s ease;
   cursor: pointer;
   align-items: center;
+  padding: 8px 0;
 }
 
 .song-card:hover {

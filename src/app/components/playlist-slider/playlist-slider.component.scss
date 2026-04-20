@@ -56,7 +56,7 @@
   }
 }
 
-// Mobile
+
 @media (max-width: 576px) {
   .playlist-slider-container {
     padding-bottom: 70px;
@@ -99,8 +99,7 @@
   }
 }
 
-// Desktop: grid
-@media (min-width: 769px) {
+@media (min-width: 1200px) {
   .playlist-slider-container {
     .slider-wrapper {
       .slider-track-container {
@@ -108,7 +107,7 @@
 
         .slider-track {
           display: grid !important;
-          grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+          grid-template-columns: repeat(6, 1fr);
           gap: 30px;
           width: 100%;
 
@@ -118,5 +117,8 @@
         }
       }
     }
+  }
+  .slide-item:nth-child(n+7) {
+    display: none; // 👈 Ẩn từ item thứ 7 trở đi
   }
 }

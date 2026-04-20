@@ -443,7 +443,8 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
     { id: 3, title: 'nếu duyên', artists: 'Thành Đạt, Lê Bảo Bình, Hương Ly...', imageUrl: 'assets/img/theloai_chill2.jpg' },
     { id: 4, title: 'người thứ ba', artists: 'Văn Mai Hương, Quân A.P, Bảo Anh...', imageUrl: 'assets/img/theloai_chill3.jpg' },
     { id: 5, title: 'Song Ca V-Pop', artists: 'GREY D, MIN★, VƯƠNG BÌNH...', imageUrl: 'assets/img/theloai_chill4.jpg' },
-    { id: 6, title: 'Nhạc Trẻ Hay Nhất', artists: 'Sơn Tùng M-TP, Hòa Minzy...', imageUrl: 'assets/img/theloai_chill5.jpg' }
+    { id: 6, title: 'Nhạc Trẻ Hay Nhất', artists: 'Sơn Tùng M-TP, Hòa Minzy...', imageUrl: 'assets/img/theloai_chill5.jpg' },
+    { id: 7, title: 'Nhạc Trẻ Hay Nhất', artists: 'Sơn Tùng M-TP, Hòa Minzy...', imageUrl: 'assets/img/theloai_chill5.jpg' }
   ];
 }
 

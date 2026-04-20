@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
-import {deviceGuard} from "./guards/device-guard";
+import {desktopOnlyGuard, mobileOnlyGuard} from "./guards/device-guard";
 
 export const routes: Routes = [
   // ========== MOBILE (có tabs) ==========
   {
     path: 'tabs',
-    canActivate: [deviceGuard],
+    canMatch: [mobileOnlyGuard],
     loadComponent: () => import('./tabs/tabs.page').then(m => m.TabsPage),
     children: [
       {
@@ -45,22 +45,22 @@ export const routes: Routes = [
   // ========== DESKTOP (không tabs, trực tiếp) ==========
   {
     path: 'home',
-    canActivate: [deviceGuard],
+    canMatch: [desktopOnlyGuard],
     loadComponent: () => import('./home/home.page').then(m => m.HomePage)
   },
   {
     path: 'search',
-    canActivate: [deviceGuard],
+    canMatch: [desktopOnlyGuard],
     loadComponent: () => import('./search/search.page').then(m => m.SearchPage)
   },
   {
     path: 'library',
-    canActivate: [deviceGuard],
+    canMatch: [desktopOnlyGuard],
     loadComponent: () => import('./library/library.page').then(m => m.LibraryPage)
   },
   {
     path: 'favorite',
-    canActivate: [deviceGuard],
+    canMatch: [desktopOnlyGuard],
     loadComponent: () => import('./favorite/favorite.page').then(m => m.FavoritePage)
   },
   {
@@ -69,7 +69,7 @@ export const routes: Routes = [
   },
   {
     path: 'category',
-    canActivate: [deviceGuard],
+    canMatch: [desktopOnlyGuard],
     loadComponent: () => import('./category/category.page').then( m => m.CategoryPage)
   },
 
@@ -83,7 +83,7 @@ export const routes: Routes = [
   // ========== DEFAULT ==========
   {
     path: '',
-    redirectTo: 'tabs',
+    redirectTo: 'tabs/home',
     pathMatch: 'full'
   },
 

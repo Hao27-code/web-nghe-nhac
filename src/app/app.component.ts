@@ -11,11 +11,20 @@ import {filter} from "rxjs";
   imports: [IonApp, IonRouterOutlet, NgIf, DesktopHeaderComponent],
 })
 export class AppComponent {
-  isDesktop = window.innerWidth >= 992;
+  isDesktop = window.innerWidth >= 1200;
+  private currentMode = window.innerWidth >= 1200;
+  // eslint-disable-next-line @angular-eslint/prefer-inject
+  constructor(private router: Router) {}
 
   @HostListener('window:resize')
   onResize() {
-    this.isDesktop = window.innerWidth >= 992;
+    this.isDesktop = window.matchMedia('(min-width: 1200px)').matches;
+
+    if (this.isDesktop) {
+      this.router.navigate(['/home']);
+    } else {
+      this.router.navigate(['/tabs/home']);
+    }
   }
 }
 

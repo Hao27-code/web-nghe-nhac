@@ -90,6 +90,10 @@ ion-content::part(scroll)::-webkit-scrollbar {
   .volume-control .volume-slider {
     width: 60px;
   }
+  ion-content::part(scroll) {
+    scrollbar-width: none;
+    padding: 60px 15px;
+  }
 }
 
 
@@ -122,3 +126,9 @@ ion-content {
   }
 }
 
+@media (min-width: 768px) and (max-width: 1199px) {
+  ion-content::part(scroll) {
+    scrollbar-width: none;
+    padding: 60px 20px;
+  }
+}

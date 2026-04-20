@@ -52,18 +52,17 @@ ion-tab-button {
 .custom-tab-bar {
   --background: rgba(0, 31, 75, 0.74); /* nền xanh đậm */
   backdrop-filter: blur(12px); /* hiệu ứng kính mờ */
-  border-top: 1px solid rgba(54, 54, 54, 0.7); /* viền nhẹ */
+
   width: 100%;
 
   background: rgba(10, 20, 40, 0.9);
 
   max-width: 500px;
-  height: 70px;
+  height: 65px;
   position: fixed; /* luôn dính đáy */
   bottom: 0;       /* sát mép */
-  left: 0;
-  right: 0;
-
+  left: 50%;
+  transform: translateX(-50%);
   padding-bottom: env(safe-area-inset-bottom); /* hỗ trợ iPhone */
 }
 ion-tab-button ion-label {
@@ -101,9 +100,5 @@ ion-tab-button {
   --ripple-color: transparent;
   --background-activated: transparent;
   --background-focused: transparent;
-}
-
-ion-router-outlet {
-  margin-top: 60px; // chiều cao header
 }
 
