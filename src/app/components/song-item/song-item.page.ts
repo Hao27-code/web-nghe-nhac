@@ -78,7 +78,7 @@ export class SongItemPage implements OnInit, OnDestroy {
   toggleLike(event: Event): void {
     event.stopPropagation();
     event.preventDefault();
-    console.log('❤️ Like button clicked:', this.song.title);
+    console.log('Like button clicked:', this.song.title);
     this.musicService.toggleFavorite(this.song);
     this.isLiked = this.musicService.isFavorite(this.song);
   }
@@ -87,29 +87,29 @@ export class SongItemPage implements OnInit, OnDestroy {
   showOptions(event: Event): void {
     event.stopPropagation();
     event.preventDefault();
-    console.log('🔧 Options clicked:', this.song.title);
+    console.log(' Options clicked:', this.song.title);
     // Thêm action sheet ở đây nếu cần
   }
 
   // Hàm phát nhạc chính
   private playMusic(): void {
-    console.log('🎵 playMusic called for:', this.song.title);
+    console.log(' playMusic called for:', this.song.title);
 
     try {
       if (this.isCurrentSong && this.isPlaying) {
-        console.log('⏸️ Pausing current song');
+        console.log(' Pausing current song');
         this.musicService.pauseMusic();
       } else if (this.isCurrentSong && !this.isPlaying) {
-        console.log('▶️ Resuming current song');
+        console.log(' Resuming current song');
         this.musicService.resumeMusic();
       } else {
-        console.log('🆕 Playing new song');
+        console.log(' Playing new song');
         const savedTime = this.musicService.getSavedTime(this.song.id);
-        console.log('⏱️ Saved time:', savedTime);
+        console.log(' Saved time:', savedTime);
         this.musicService.playMusic(this.song, savedTime);
       }
     } catch (error) {
-      console.error('❌ Error in playMusic:', error);
+      console.error(' Error in playMusic:', error);
     }
   }
 }

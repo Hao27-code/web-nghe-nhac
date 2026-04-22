@@ -1,18 +1,29 @@
-<div class="playlist-card">
-  <div class="card-image"
-       (mouseenter)="setHover(true)"
-       (mouseleave)="setHover(false)">
+<div class="playlist-card" (click)="onCardClick($event)">
+  <div class="card-image" [class.is-playing]="isCurrentPlaylist && isPlaying">
     <img [src]="playlist.imageUrl" [alt]="playlist.title">
-    <div class="play-overlay" *ngIf="isHovered">
+
+    <!-- Overlay và nút play/pause dùng img -->
+    <div class="play-overlay">
       <button class="play-btn" (click)="onPlayClick($event)">
-        <img [src]="isPlaying ? 'assets/icon/play.svg' : 'assets/icon/play.svg'"
+        <img [src]="(isCurrentPlaylist && isPlaying) ? 'assets/icon/pause.svg' : 'assets/icon/play.svg'"
              alt="Play/Pause"
              class="play-icon">
       </button>
     </div>
+
+    <!-- Indicator đang phát -->
+    <div class="playing-indicator" *ngIf="isCurrentPlaylist && isPlaying">
+      <ion-icon name="volume-high"></ion-icon>
+      <span class="playing-wave">
+        <span></span><span></span><span></span>
+      </span>
+    </div>
   </div>
   <div class="card-content">
-    <h3 class="playlist-title">{{ playlist.title }}</h3>
+    <h3 class="playlist-title">
+      {{ playlist.title }}
+
+    </h3>
     <p class="playlist-artists">{{ playlist.artists }}</p>
   </div>
 </div>

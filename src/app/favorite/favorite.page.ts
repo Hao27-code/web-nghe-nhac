@@ -8,13 +8,14 @@ import { Music } from '../models/music.model';
 import { MusicService } from '../services/music.service';
 import { Subscription } from 'rxjs';
 import {LibrarySongItemComponent} from "../components/library-song-item/library-song-item.component";
+import {PlayerBarComponent} from "../components/player-bar/player-bar.component";
 
 @Component({
   selector: 'app-favorite',
   templateUrl: './favorite.page.html',
   styleUrls: ['./favorite.page.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, HeaderComponent, IonicModule, SongItemPage, LibrarySongItemComponent]
+  imports: [CommonModule, FormsModule, HeaderComponent, IonicModule, SongItemPage, LibrarySongItemComponent, PlayerBarComponent]
 })
 export class FavoritePage implements OnInit, OnDestroy {
 

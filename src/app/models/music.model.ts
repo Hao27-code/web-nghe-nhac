@@ -6,6 +6,7 @@ export interface Music {
   coverUrl: string;   // URL ảnh bìa
   audioUrl: string;   // URL file nhạc
   album?: string;     // Thêm album (tùy chọn, vì có bài không có album)
+  playlistId?: number;
 }
 
 export interface ListeningHistory {

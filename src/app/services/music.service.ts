@@ -7,6 +7,8 @@ import { Music, ListeningHistory } from '../models/music.model';
 })
 export class MusicService {
 
+  private currentPlaylistIdSubject = new BehaviorSubject<number | null>(null);
+  currentPlaylistId$ = this.currentPlaylistIdSubject.asObservable();
 
   private favoritesSubject = new BehaviorSubject<Music[]>(this.getFavorites());
   favorites$ = this.favoritesSubject.asObservable();
@@ -27,6 +29,13 @@ export class MusicService {
   private listeningHistory: ListeningHistory[] = [];
   private recentlyPlayedSubject = new BehaviorSubject<Music[]>([]);
   recentlyPlayed$ = this.recentlyPlayedSubject.asObservable();
+
+  setCurrentPlaylistId(playlistId: number | null) {
+    this.currentPlaylistIdSubject.next(playlistId);
+  }
+  getCurrentPlaylistId(): number | null {
+    return this.currentPlaylistIdSubject.value;
+  }
 
   getAudioElement(): HTMLAudioElement | null {
     return this.audio;
@@ -134,6 +143,7 @@ export class MusicService {
 
   constructor() {
     this.loadHistory();
+    this.checkMobileDevice();
   }
   private checkMobileDevice(): void {
     this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -156,8 +166,14 @@ export class MusicService {
   }
 
   // PHƯƠNG THỨC CHÍNH ĐỂ PHÁT NHẠC
-  async playMusic(music: Music, startTime?: number): Promise<void> {
+  async playMusic(music: Music, startTime?: number, playlistId?: number | null): Promise<void> {
+    // 👈 THÊM tham số playlistId, không tự động reset
+    if (playlistId !== undefined) {
+      this.setCurrentPlaylistId(playlistId);
+    }
+
     console.log('🎵 playMusic called:', music.title);
+    console.log('Playlist ID:', playlistId);
 
     try {
       // Dừng audio cũ nếu có
@@ -206,28 +222,27 @@ export class MusicService {
         console.log('Audio can play');
       });
 
-      // QUAN TRỌNG: Phát nhạc
+      // Phát nhạc
       const playPromise = this.audio.play();
 
       if (playPromise !== undefined) {
         playPromise
           .then(() => {
-            console.log('✅ Play success:', music.title);
+            console.log('Play success:', music.title);
             this.isPlayingSubject.next(true);
             this.saveToHistory(music.id, initialTime);
           })
           .catch(error => {
-            console.error('❌ Play failed:', error);
+            console.error('Play failed:', error);
             this.isPlayingSubject.next(false);
 
-            // Thử resume trên mobile nếu cần
             if (this.isMobile && error.name === 'NotAllowedError') {
               console.log('Mobile: Need user interaction first');
             }
           });
       }
     } catch (error) {
-      console.error('❌ Error in playMusic:', error);
+      console.error('Error in playMusic:', error);
     }
   }
 
@@ -366,7 +381,7 @@ export class MusicService {
         console.log('AudioContext not supported');
       }
     } catch (error) {
-      console.error('❌ Error initializing AudioContext:', error);
+      console.error('Error initializing AudioContext:', error);
     }
   }
 

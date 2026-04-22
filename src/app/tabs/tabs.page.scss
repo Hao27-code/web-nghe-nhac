@@ -5,16 +5,15 @@ ion-router-outlet {
 }
 
 ion-tab-bar.custom-tab-bar {
-  --background: rgba(0, 31, 75, 0.74); /* nền xanh đậm */
+  --background: rgba(14, 26, 66, 0.9); /* nền xanh đậm */
   backdrop-filter: blur(12px); /* hiệu ứng kính mờ */
-  background: rgba(10, 20, 40, 0.9); /* lớp nền phụ */
+  background: rgba(14, 26, 66, 0.9); /* lớp nền phụ */
   width: 100%;
-  max-width: 500px;
   height: 55px;
   position: fixed;
   bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  right: 0;
   padding-bottom: env(safe-area-inset-bottom);
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   z-index: 1000;
@@ -131,13 +130,17 @@ ion-tab-button {
 // Responsive cho tablet
 @media (min-width: 769px) and (max-width: 1024px) {
   ion-tab-bar {
-    max-width: 700px;
     height: 60px;
   }
 
   .page-content {
     padding-bottom: 130px;
   }
+
+  ion-tab-bar.custom-tab-bar {
+    max-width: 100%; // Full width
+  }
+
 }
 
 // Responsive cho desktop (ẩn tab bar hoặc giữ nguyên)

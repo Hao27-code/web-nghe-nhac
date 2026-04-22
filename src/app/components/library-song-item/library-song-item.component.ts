@@ -64,13 +64,16 @@ export class LibrarySongItemComponent implements OnInit, OnDestroy {
     this.subscriptions.unsubscribe();
   }
 
-  // Format thời gian (giống SongItemPage)
-  formatDuration(seconds: number): string {
-    if (!seconds || isNaN(seconds)) return '0:00';
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  onRowClick(event: Event): void {
+    const target = event.target as HTMLElement;
+    // Bỏ qua nếu click vào action buttons hoặc play button
+    if (target.closest('.action-btn') || target.closest('.play-icon-btn')) {
+      return;
+    }
+    console.log('🎵 Row clicked:', this.song.title);
+    this.playMusic();
   }
+
 
   // Logic play/pause (giống SongItemPage)
   handlePlayClick(event: Event) {
@@ -89,6 +92,7 @@ export class LibrarySongItemComponent implements OnInit, OnDestroy {
   // Logic yêu thích (giống SongItemPage)
   toggleLike(event: Event) {
     event.stopPropagation();
+    console.log('Like button clicked:', this.song.title);
     this.musicService.toggleFavorite(this.song);
   }
 
@@ -98,4 +102,26 @@ export class LibrarySongItemComponent implements OnInit, OnDestroy {
     console.log('Options:', this.song.title);
     // Có thể mở action sheet
   }
+  // Hàm phát nhạc chính
+  private playMusic(): void {
+    if (this.isCurrentSong && this.isPlaying) {
+      console.log('⏸️ Pausing:', this.song.title);
+      this.musicService.pauseMusic();
+    } else if (this.isCurrentSong && !this.isPlaying) {
+      console.log('▶️ Resuming:', this.song.title);
+      this.musicService.resumeMusic();
+    } else {
+      console.log('🆕 Playing new:', this.song.title);
+      const savedTime = this.musicService.getSavedTime(this.song.id);
+      this.musicService.playMusic(this.song, savedTime);
+    }
+  }
+  // Format thời gian
+  formatDuration(seconds: number): string {
+    if (!seconds || isNaN(seconds)) return '0:00';
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  }
+
 }

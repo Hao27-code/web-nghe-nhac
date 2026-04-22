@@ -1,15 +1,15 @@
+<div class="song-row" (click)="onRowClick($event)">
 
-<div class="song-row">
-
-  <!-- Cột 1: BÀI Hát (ảnh + tên + ca sĩ) -->
+  <!-- Cột 1: BÀI HÁT (ảnh + tên + ca sĩ) -->
   <div class="col-song">
     <div class="song-cover-wrapper"
          (mouseenter)="isHovered = true"
          (mouseleave)="isHovered = false">
       <img [src]="song.coverUrl" class="song-cover">
       <div class="play-overlay" *ngIf="isHovered">
-        <ion-icon [name]="isCurrentSong && isPlaying ? 'pause' : 'play'"
-                  (click)="handlePlayClick($event)"></ion-icon>
+        <div class="play-icon-btn" (click)="handlePlayClick($event)">
+          <ion-icon [name]="isCurrentSong && isPlaying ? 'pause' : 'play'"></ion-icon>
+        </div>
       </div>
     </div>
     <div class="song-info">
@@ -27,10 +27,12 @@
   <div class="col-time">
     <span class="duration">{{ formatDuration(song.duration) }}</span>
     <div class="action-icons">
-      <ion-icon [name]="isLiked ? 'heart' : 'heart-outline'"
-                (click)="toggleLike($event)"></ion-icon>
-      <ion-icon name="ellipsis-horizontal"
-                (click)="showOptions($event)"></ion-icon>
+      <div class="action-btn" (click)="toggleLike($event)">
+        <ion-icon [name]="isLiked ? 'heart' : 'heart-outline'"></ion-icon>
+      </div>
+      <div class="action-btn" (click)="showOptions($event)">
+        <ion-icon name="ellipsis-horizontal"></ion-icon>
+      </div>
     </div>
   </div>
 

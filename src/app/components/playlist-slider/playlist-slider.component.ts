@@ -4,6 +4,7 @@ import {Playlist, PlaylistCardComponent} from '../playlist-card/playlist-card.co
 import {IonicModule} from "@ionic/angular";
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import {MusicService} from "../../services/music.service";
 
 @Component({
   selector: 'app-playlist-slider',
@@ -21,6 +22,7 @@ export class PlaylistSliderComponent implements OnInit, AfterViewInit, OnDestroy
   @Input() playlists: Playlist[] = [];
   @Input() title: string = 'Gợi ý Playlist';
   @Input() categoryRoute: string = '/category';
+  @Input() categoryId: string = '';
 
   @ViewChild('sliderTrack') sliderTrack!: ElementRef;
 
@@ -34,7 +36,8 @@ export class PlaylistSliderComponent implements OnInit, AfterViewInit, OnDestroy
   isDragging: boolean = false;
   startTranslate: number = 0;
 
-  constructor() {}
+  // eslint-disable-next-line @angular-eslint/prefer-inject
+  constructor(private musicService: MusicService) {}
 
   ngOnInit() {
     this.updateSlidesToShow();
@@ -148,10 +151,14 @@ export class PlaylistSliderComponent implements OnInit, AfterViewInit, OnDestroy
     console.log('Go to category:', this.categoryRoute);
   }
 
-  getTransformValue(): string {
-    const cardWidth = 210;
-    const gap = 16;
-    const translateX = this.currentIndex * (cardWidth + gap);
-    return `translateX(-${translateX}px)`;
+  onPlayClick(playlist: Playlist) {
+    console.log('Play playlist:', playlist.title);
+
+    if (playlist.songs && playlist.songs.length > 0) {
+      const firstSong = playlist.songs[0];
+      const savedTime = this.musicService.getSavedTime(firstSong.id);
+      this.musicService.playMusic(firstSong, savedTime);
+    }
   }
+
 }
