@@ -5,18 +5,36 @@
 </ion-header>
 <ion-content>
   <div class="category-container">
-    <!-- Kiểm tra selector đúng -->
-    <app-playlist-slider
-      [playlists]="categoryPlaylistsTop100"
-      title="Top 100"
-      categoryRoute="/category">
-    </app-playlist-slider>
 
-    <app-playlist-slider
-      [playlists]="categoryPlaylists"
-      title="Chill"
-      categoryRoute="/category">
-    </app-playlist-slider>
+    <!-- ========== SKELETON LOADING ========== -->
+    <app-skeleton-loader
+      *ngIf="isLoading"
+      [hasHeader]="true"
+      [hasCover]="true"
+      [hasTableHeader]="true"
+      [hasAvatar]="true"
+      [hasSubtitle]="true">
+    </app-skeleton-loader>
+
+    <!-- ========== NỘI DUNG THẬT ========== -->
+    <ng-container *ngIf="!isLoading">
+
+      <!-- Top 100 section -->
+      <app-playlist-slider
+        [playlists]="categoryPlaylistsTop100"
+        title="Top 100"
+        categoryRoute="/category">
+      </app-playlist-slider>
+
+      <!-- Chill section -->
+      <app-playlist-slider
+        [playlists]="categoryPlaylists"
+        title="Chill"
+        categoryRoute="/category">
+      </app-playlist-slider>
+
+    </ng-container>
+
   </div>
 </ion-content>
 <app-player-bar></app-player-bar>

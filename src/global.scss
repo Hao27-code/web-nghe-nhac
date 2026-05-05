@@ -45,10 +45,6 @@
 
 
 
-ion-content::part(scroll)::-webkit-scrollbar {
-  display: none; /* Chrome */
-}
-
 // ========== CUSTOM CSS ĐỂ HIỂN THỊ % CHO VOLUME ==========
 // Thêm vào component hoặc global styles
 .progress-bar, .volume-slider {
@@ -91,7 +87,6 @@ ion-content::part(scroll)::-webkit-scrollbar {
     width: 60px;
   }
   ion-content::part(scroll) {
-    scrollbar-width: none;
     padding: 20px 15px 180px 15px;
   }
 }
@@ -111,27 +106,26 @@ app-desktop-header {
 
 // Tất cả các trang ion-content đều có padding-top
 ion-content {
-
   --background: radial-gradient(circle at 20% 30%, #1f2a3b, #0c1017);
+  background: var(--background);
 }
 
 @media (min-width: 1024px) {
   ion-content::part(scroll) {
-    scrollbar-width: none;
     padding: 70px 60px 160px 60px;
+    -webkit-overflow-scrolling: touch;
   }
 }
 
 @media (min-width: 768px) and (max-width: 1199px) {
   ion-content::part(scroll) {
-    scrollbar-width: none;
     padding: 60px 20px 200px 20px;
+    -webkit-overflow-scrolling: touch;
   }
 }
 // Fix cho mobile touch events
 * {
   -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
 }
 
 // Đảm bảo các element có thể click được
@@ -159,4 +153,7 @@ ion-icon {
     align-items: center;
     justify-content: center;
   }
+}
+ion-content::part(scroll) {
+  overflow-y: auto !important;
 }

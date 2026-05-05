@@ -1,11 +1,11 @@
-.ion-padding{
-
+.ion-padding {
 }
 
 .library-container {
   margin: 0 auto;
   padding-top: 10px;
 }
+
 // Header bảng
 .table-header {
   display: flex;
@@ -30,7 +30,7 @@
   .col-time {
     flex: 1;
     text-align: right;
-    padding-right: 10px;  // Căn chỉnh với action buttons
+    padding-right: 10px;
   }
 }
 
@@ -52,7 +52,6 @@
   margin-bottom: 50px;
 }
 
-
 .library-header {
   display: flex;
   gap: 32px;
@@ -61,7 +60,6 @@
   border-radius: 8px;
   height: 48%;
   align-items: center;
-
 
   .library-cover {
     width: 200px;
@@ -87,7 +85,6 @@
     justify-content: flex-start;
     padding-top: 20px;
 
-
     .library-title {
       font-size: 40px;
       font-weight: 700;
@@ -97,6 +94,7 @@
     }
   }
 }
+
 @media (min-width: 1024px) {
   .library-header {
     .library-cover {
@@ -112,13 +110,12 @@
     }
   }
 }
-@media (max-width: 768px) {
 
+@media (max-width: 768px) {
   .library-container {
     padding: 10px;
   }
 
-  // Header playlist - chuyển thành cột
   .library-header {
     flex-direction: column;
     align-items: center;
@@ -138,18 +135,18 @@
         font-size: 28px;
       }
 
-      .library-title h1{
+      .library-title h1 {
         padding-bottom: 30px;
       }
     }
   }
-
 }
-@media (min-width: 768px) and (max-width: 1024px) {
 
+@media (min-width: 768px) and (max-width: 1024px) {
   .library-container {
     padding: 20px;
   }
+
   .library-header {
     gap: 24px;
     padding: 20px;
@@ -165,5 +162,447 @@
       }
     }
   }
+}
 
+
+
+/* ==================== ANIMATION MỚI ==================== */
+
+/* 1. HIỆU ỨNG XUẤT HIỆN TOÀN BỘ NỘI DUNG */
+.content-fade-in {
+  animation: contentReveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes contentReveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 2. HIỆU ỨNG THANH XANH - ẤN TƯỢNG, KHÔNG GIẬT */
+.library-header {
+  position: relative;
+  overflow: hidden;
+  animation: headerGlowEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+  transform: scale(0.95);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+@keyframes headerGlowEntrance {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+    box-shadow: 0 0 0 rgba(0, 166, 255, 0);
+  }
+  40% {
+    opacity: 0.9;
+    transform: scale(1.01);
+    box-shadow: 0 0 25px rgba(0, 166, 255, 0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* Ánh sáng bùng nổ từ tâm */
+.library-header::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.4), transparent);
+  transform: translate(-50%, -50%);
+  animation: lightBurst 0.7s ease-out 0.2s forwards;
+  pointer-events: none;
+  border-radius: 50%;
+}
+
+@keyframes lightBurst {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 0.8;
+  }
+  100% {
+    width: 600px;
+    height: 600px;
+    opacity: 0;
+  }
+}
+
+/* Viền sáng chạy quanh */
+.library-header::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    #00a6ff 30%,
+    #0458f5 50%,
+    #764ba2 70%,
+    transparent 100%);
+  border-radius: 10px;
+  opacity: 0;
+  animation: borderGlow 1.2s ease-in-out 0.3s forwards;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes borderGlow {
+  0% {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  30% {
+    opacity: 0.7;
+  }
+  60% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+/* Hover thanh xanh - MƯỢT, KHÔNG GIẬT */
+.library-header:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 166, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+/* 3. HIỆU ỨNG ẢNH BÌA */
+.library-cover img {
+  animation: coverSimple 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1) 0.2s forwards;
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+@keyframes coverSimple {
+  0% {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 4. HIỆU ỨNG TIÊU ĐỀ */
+.library-title {
+  animation: titleSimple 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1) 0.15s forwards;
+  opacity: 0;
+  transform: translateX(-15px);
+}
+
+@keyframes titleSimple {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* 5. HIỆU ỨNG BẢNG */
+.table-library, .table-header {
+  animation: fadeSimple 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
+  opacity: 0;
+}
+
+.table-library {
+  animation-delay: 0.1s;
+}
+
+.table-header {
+  animation-delay: 0.15s;
+}
+
+@keyframes fadeSimple {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* ==================== HIỆU ỨNG CARD GIỐNG FAVORITE ==================== */
+
+/* Card xuất hiện với hiệu ứng trượt từ phải sang trái */
+app-library-song-item {
+  animation: slideFromRight 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation-delay: calc(var(--song-index, 0) * 0.04s);
+  opacity: 0;
+  transform: translateX(60px);
+  display: block;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes slideFromRight {
+  0% {
+    opacity: 0;
+    transform: translateX(80px);
+  }
+  60% {
+    opacity: 0.6;
+    transform: translateX(-5px);
+  }
+  80% {
+    transform: translateX(3px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Hover card */
+app-library-song-item:hover {
+  transform: translateX(8px);
+  background: linear-gradient(90deg, rgba(0, 166, 255, 0.08), transparent);
+  border-radius: 12px;
+}
+
+/* ==================== SCROLL REVEAL CHO CARD ==================== */
+
+/* Khi cuộn, card mới hiện */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateX(60px);
+  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Card trong scroll reveal - hiện lần lượt */
+.reveal-on-scroll app-library-song-item {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition-delay: calc(var(--song-index, 0) * 0.05s);
+}
+
+.reveal-on-scroll.revealed app-library-song-item {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Bỏ animation tự động khi load, chỉ dùng scroll reveal */
+.songs-list app-library-song-item {
+  animation: none;
+}
+/* 8. EMPTY STATE */
+.empty-state {
+  animation: emptyFade 0.5s ease-out 0.2s forwards;
+  opacity: 0;
+  text-align: center;
+  padding: 60px 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 20px;
+  margin-top: 40px;
+}
+
+@keyframes emptyFade {
+  to {
+    opacity: 1;
+  }
+}
+
+.empty-state ion-icon {
+  font-size: 80px;
+  color: #00c6ff;
+  margin-bottom: 20px;
+}
+
+.empty-state h3 {
+  font-size: 24px;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.empty-state p {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .empty-state ion-icon {
+    font-size: 60px;
+  }
+  .empty-state h3 {
+    font-size: 20px;
+  }
+
+  app-library-song-item {
+    animation: cardSlideFromRight 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
+    animation-delay: calc(var(--song-index, 0) * 0.02s);
+  }
+}
+/* ==================== HIỆU ỨNG CHO CARD BÀI HÁT ==================== */
+
+/* Card xuất hiện với hiệu ứng đổ từ phải sang trái */
+app-library-song-item {
+  animation: cardSlideIn 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
+  animation-delay: calc(var(--song-index, 0) * 0.04s);
+  opacity: 0;
+  transform: translateX(40px);
+  display: block;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+}
+
+@keyframes cardSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(60px);
+  }
+  40% {
+    opacity: 0.5;
+    transform: translateX(-8px);
+  }
+  70% {
+    transform: translateX(3px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Hover card - hiệu ứng nổi lên */
+app-library-song-item:hover {
+  transform: translateX(8px) scale(1.01);
+  background: linear-gradient(90deg, rgba(0, 166, 255, 0.1), transparent);
+  border-radius: 12px;
+  transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+}
+
+/* Hiệu ứng ripple nhẹ khi hover */
+app-library-song-item:hover::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 0% 50%, rgba(0, 166, 255, 0.15), transparent);
+  border-radius: 12px;
+  animation: ripple 0.4s ease-out;
+  pointer-events: none;
+}
+
+@keyframes ripple {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ==================== CARD BÀI HÁT - ĐỔ TỪ PHẢI SANG TRÁI ==================== */
+
+/* Animation chính: card trượt từ phải qua trái */
+app-library-song-item {
+  animation: slideFromRight 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation-delay: calc(var(--song-index, 0) * 0.05s);
+  opacity: 0;
+  transform: translateX(80px);
+  display: block;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+@keyframes slideFromRight {
+  0% {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  60% {
+    opacity: 0.7;
+    transform: translateX(-10px);
+  }
+  80% {
+    transform: translateX(5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Hiệu ứng hover nhẹ */
+app-library-song-item:hover {
+  transform: translateX(5px);
+  background: linear-gradient(90deg, rgba(0, 166, 255, 0.08), transparent);
+  border-radius: 12px;
+}
+
+/* ==================== SCROLL REVEAL - CHỈ HIỆN KHI CUỘN TỚI ==================== */
+
+/* Trạng thái ban đầu - ẩn và ở bên phải */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateX(60px);
+  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Khi được cuộn tới - hiện ra */
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Card bài hát - từng cái hiện lần lượt khi cuộn tới */
+.reveal-on-scroll app-library-song-item {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition-delay: calc(var(--song-index, 0) * 0.05s);
+  display: block;
+}
+
+/* Khi section được reveal, các card hiện ra lần lượt */
+.reveal-on-scroll.revealed app-library-song-item {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ==================== ANIMATION KHÔNG CẦN TỰ ĐỘNG ==================== */
+/* Bỏ animation tự động khi load trang, chỉ dùng scroll reveal */
+app-library-song-item {
+  display: block;
+  transition: all 0.3s ease;
+}
+
+/* Hover vẫn giữ */
+app-library-song-item:hover {
+  transform: translateX(5px);
+  background: linear-gradient(90deg, rgba(0, 166, 255, 0.08), transparent);
+  border-radius: 12px;
 }

@@ -1,14 +1,23 @@
 <ion-app>
 
+  <!-- LOADING LẦN ĐẦU - CHỈ HIỆN KHI isLoading = true -->
+  <div class="global-loading" *ngIf="isLoading">
+    <div class="loading-content">
+      <div class="loading-spinner"></div>
+      <div class="loading-logo">SoundWave</div>
+      <div class="loading-dots">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- NỘI DUNG CHÍNH - LUÔN HIỆN -->
   <!-- DESKTOP -->
   <ng-container *ngIf="isDesktop; else mobileLayout">
-
     <app-desktop-header></app-desktop-header>
-
     <div class="desktop-container">
       <ion-router-outlet></ion-router-outlet>
     </div>
-
   </ng-container>
 
   <!-- MOBILE -->
@@ -17,4 +26,3 @@
   </ng-template>
 
 </ion-app>
-

@@ -6,49 +6,48 @@
 <ion-content class="ion-padding">
 
   <div library-container>
-    <!-- Tiêu đề trong content -->
-    <!-- ========== HEADER PLAYLIST ========== -->
-    <div class="library-header">
-      <!-- Ảnh playlist -->
-      <div class="library-cover">
-        <img src="assets/icon/logo_yeuthich.svg" alt="Playlist cover">
+
+    <!-- Skeleton Loading -->
+    <app-skeleton-loader
+      *ngIf="isLoading"
+      [hasHeader]="true"
+      [hasCover]="true"
+      [hasTableHeader]="true"
+      [hasAvatar]="true"
+      [hasSubtitle]="true">
+    </app-skeleton-loader>
+
+    <!-- Nội dung thật -->
+    <ng-container *ngIf="!isLoading">
+
+      <div class="library-header">
+        <div class="library-cover">
+          <img src="assets/icon/logo_yeuthich.svg" alt="Playlist cover">
+        </div>
+        <div class="library-info">
+          <h1 class="library-title">Thư viện bài hát</h1>
+        </div>
       </div>
 
-      <!-- Thông tin playlist -->
-      <div class="library-info">
-
-        <h1 class="library-title">Thư viện bài hát</h1>
+      <div class="table-library" *ngIf="!isMobile">
+        <div class="col-song-library">BÀI HÁT</div>
+        <div class="col-album-library">ALBUM</div>
       </div>
-    </div>
 
-    <div class="table-library" *ngIf="!isMobile">
-      <div class="col-song-library">BÀI HÁT</div>
-      <div class="col-album-library">ALBUM</div>
-    </div>
-
-    <!-- Header bảng (chỉ hiển thị trên desktop/tablet) -->
-    <div class="table-header" *ngIf="!isMobile">
-      <div class="col-song">BÀI HÁT</div>
-      <div class="col-album">ALBUM</div>
-      <div class="col-time">THỜI GIAN</div>
-    </div>
-
-    <!-- Danh sách bài hát -->
-    <div class="songs-list">
-      <app-library-song-item
-        *ngFor="let song of allSongs; trackBy: trackById"
-        [song]="song">
-      </app-library-song-item>
-    </div>
-
-    <!-- Trống -->
-    <ng-template #emptyState>
-      <div class="empty-state">
-        <ion-icon name="heart-outline"></ion-icon>
-        <h3>Thư viện trống</h3>
-        <p>Hãy bấm tim ❤️ để thêm bài hát vào thư viện</p>
+      <div class="table-header" *ngIf="!isMobile">
+        <div class="col-song">BÀI HÁT</div>
+        <div class="col-album">ALBUM</div>
+        <div class="col-time">THỜI GIAN</div>
       </div>
-    </ng-template>
+
+      <div class="songs-list">
+        <app-library-song-item
+          *ngFor="let song of allSongs; trackBy: trackById"
+          [song]="song">
+        </app-library-song-item>
+      </div>
+
+    </ng-container>
 
   </div>
 

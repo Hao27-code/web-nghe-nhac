@@ -1,10 +1,9 @@
-
-
 // ========== CONTAINER CHÍNH ==========
 .favorites-container {
   margin: 0 auto;
   padding-top: 60px;
 }
+
 
 // ========== PLAYLIST HEADER ==========
 .playlist-header {
@@ -193,7 +192,6 @@
   .favorites-container {
   }
 
-  // Header playlist - chuyển thành cột
   .playlist-header {
     flex-direction: column;
     align-items: center;
@@ -220,7 +218,6 @@
     }
   }
 
-  // Action buttons - chuyển thành cột
   .playlist-actions {
     flex-direction: column;
     gap: 12px;
@@ -232,12 +229,10 @@
     }
   }
 
-  // Ẩn header bảng trên mobile
   .songs-section .section-header {
     display: none;
   }
 
-  // Empty state
   .empty-state {
     padding: 60px 20px;
 
@@ -268,3 +263,141 @@
   }
 }
 
+/* ==================== SKELETON LOADING ==================== */
+/* Giữ nguyên skeleton loading không thay đổi */
+
+/* ==================== SCROLL REVEAL ANIMATION ==================== */
+
+/* Scroll reveal cho các phần tử */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==================== HIỆU ỨNG CARD BÀI HÁT (GIỐNG LIBRARY) ==================== */
+
+/* Card xuất hiện với hiệu ứng trượt từ phải sang trái */
+app-library-song-item {
+  animation: slideFromRight 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation-delay: calc(var(--song-index, 0) * 0.04s);
+  opacity: 0;
+  transform: translateX(60px);
+  display: block;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes slideFromRight {
+  0% {
+    opacity: 0;
+    transform: translateX(80px);
+  }
+  60% {
+    opacity: 0.6;
+    transform: translateX(-5px);
+  }
+  80% {
+    transform: translateX(3px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Stagger delay cho các bài hát */
+app-library-song-item {
+  transition-delay: calc(var(--song-index, 0) * 0.05s);
+}
+
+/* Hiệu ứng hover cho bài hát */
+app-library-song-item:hover {
+  transform: translateX(8px);
+  background: linear-gradient(90deg, rgba(0, 166, 255, 0.08), transparent);
+  border-radius: 12px;
+}
+
+/* ==================== SCROLL REVEAL CHO CARD ==================== */
+
+/* Card trong scroll reveal - hiện lần lượt khi cuộn tới */
+.reveal-on-scroll app-library-song-item {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition-delay: calc(var(--song-index, 0) * 0.05s);
+}
+
+.reveal-on-scroll.revealed app-library-song-item {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ==================== HIỆU ỨNG SHIMMER CHO HEADER ==================== */
+.playlist-header {
+  position: relative;
+  overflow: hidden;
+}
+
+.playlist-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.15), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite;
+  pointer-events: none;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Hiệu ứng hover cho header */
+.playlist-header:hover {
+  transform: translateY(-3px);
+  transition: transform 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Hiệu ứng hover cho ảnh */
+.playlist-cover img {
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.playlist-cover img:hover {
+  transform: scale(1.05);
+}
+
+/* Animation cho empty state */
+.empty-state {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive cho mobile */
+@media (max-width: 768px) {
+  app-library-song-item {
+    animation: slideFromRight 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    animation-delay: calc(var(--song-index, 0) * 0.02s);
+  }
+}

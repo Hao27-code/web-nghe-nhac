@@ -5,21 +5,21 @@ import { Injectable } from '@angular/core';
 })
 export class SearchService {
   suggestions = [
-    'hoa nở bên đường',
-    'hoàng dũng',
-    'hoa có lau',
-    'cô dại và hoa dành dành'
+    'Đom Đóm',
+    'Liễu thanh yên',
+    'Mạnh bà',
+    'Cuối cùng thì'
   ];
   history = [
     {
-      name: 'Sóng Gió',
-      artist: 'Jack, K-ICM',
-      image: 'assets/img/song1.jpg'
+      name: 'Đứa Trẻ Mùa Đông Chí',
+      artist: 'Jack-J97',
+      image: 'assets/img/duatremuadongchi.jpg'
     },
     {
-      name: 'Bạc Phận',
-      artist: 'Jack, K-ICM',
-      image: 'assets/img/bac_phan.jpg',
+      name: 'Mạnh Bà',
+      artist: 'Linh Hương Luz',
+      image: 'assets/img/manhba.jpg',
     }
   ];
   //lọc

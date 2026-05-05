@@ -6,50 +6,66 @@
 <ion-content [fullscreen]="true">
   <div class="favorites-container">
 
-    <!-- ========== HEADER PLAYLIST ========== -->
-    <div class="playlist-header">
-      <!-- Ảnh playlist -->
-      <div class="playlist-cover">
-        <img src="assets/icon/logo_yeuthich.svg" alt="Playlist cover">
-      </div>
+    <!-- ========== SKELETON LOADING ========== -->
+    <app-skeleton-loader
+      *ngIf="isLoading"
+      [hasHeader]="true"
+      [hasCover]="true"
+      [hasDesc]="true"
+      [hasTableHeader]="true"
+      [hasAvatar]="true"
+      [hasSubtitle]="true">
+    </app-skeleton-loader>
 
-      <!-- Thông tin playlist -->
-      <div class="playlist-info">
-        <div class="playlist-label">PLAYLIST</div>
-        <h1 class="playlist-title">Bài hát yêu thích</h1>
-        <div class="playlist-meta">
-          <span class="playlist-count">{{ favoriteCount }} bài hát</span>
+    <!-- ========== NỘI DUNG THẬT ========== -->
+    <ng-container *ngIf="!isLoading">
+
+      <!-- Thêm class content-fade-in để có hiệu ứng xuất hiện -->
+      <div class="content-fade-in">
+
+        <!-- HEADER PLAYLIST -->
+        <div class="playlist-header">
+          <div class="playlist-cover">
+            <img src="assets/icon/logo_yeuthich.svg" alt="Playlist cover">
+          </div>
+          <div class="playlist-info">
+            <div class="playlist-label">PLAYLIST</div>
+            <h1 class="playlist-title">Bài hát yêu thích</h1>
+            <div class="playlist-meta">
+              <span class="playlist-count">{{ favoriteCount }} bài hát</span>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
 
-    <!-- ========== ACTION BUTTONS ========== -->
-    <div class="playlist-actions">
-      <ion-button class="btn-play-all" (click)="playRandom()" [disabled]="favoriteCount === 0">
-        <ion-icon name="shuffle-outline" slot="start"></ion-icon>
-        PHÁT NGẪU NHIÊN
-      </ion-button>
-    </div>
-
-    <!-- ========== DANH SÁCH BÀI HÁT ========== -->
-    <div class="songs-section">
-      <!-- Danh sách -->
-      <div *ngIf="favoriteCount > 0; else emptyState">
-        <app-library-song-item
-          *ngFor="let song of favoriteSongs"
-          [song]="song">
-        </app-library-song-item>
-      </div>
-
-      <!-- Trống -->
-      <ng-template #emptyState>
-        <div class="empty-state">
-          <ion-icon name="heart-outline"></ion-icon>
-          <p>Chưa có bài hát yêu thích</p>
-          <p class="empty-hint">Hãy bấm tim ❤️ để thêm bài hát</p>
+        <!-- ACTION BUTTONS -->
+        <div class="playlist-actions">
+          <ion-button class="btn-play-all" (click)="playRandom()" [disabled]="favoriteCount === 0">
+            <ion-icon name="shuffle-outline" slot="start"></ion-icon>
+            PHÁT NGẪU NHIÊN
+          </ion-button>
         </div>
-      </ng-template>
-    </div>
+
+        <!-- DANH SÁCH BÀI HÁT (thêm class reveal-on-scroll) -->
+        <div class="songs-section reveal-on-scroll">
+          <div *ngIf="favoriteCount > 0; else emptyState">
+            <app-library-song-item
+              *ngFor="let song of favoriteSongs; trackBy: trackById"
+              [song]="song">
+            </app-library-song-item>
+          </div>
+
+          <ng-template #emptyState>
+            <div class="empty-state">
+              <ion-icon name="heart-outline"></ion-icon>
+              <p>Chưa có bài hát yêu thích</p>
+              <p class="empty-hint">Hãy bấm tim ❤️ để thêm bài hát</p>
+            </div>
+          </ng-template>
+        </div>
+
+      </div>
+
+    </ng-container>
 
   </div>
 </ion-content>

@@ -193,6 +193,7 @@ export class MusicService {
 
       // Set current music
       this.currentMusicSubject.next(music);
+      this.saveToHistory(music.id, initialTime);
 
       // Lắng nghe sự kiện
       this.audio.addEventListener('loadedmetadata', () => {
@@ -230,7 +231,6 @@ export class MusicService {
           .then(() => {
             console.log('Play success:', music.title);
             this.isPlayingSubject.next(true);
-            this.saveToHistory(music.id, initialTime);
           })
           .catch(error => {
             console.error('Play failed:', error);

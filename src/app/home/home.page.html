@@ -4,13 +4,14 @@
 </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content>
+  <div class="home-content">
   <section class="home-section">
-    <div class="greeting">
+    <div class="greeting fade-down">
       {{greeting}}
     </div>
 
-    <div class="custom-slider-container">
+    <div class="custom-slider-container fade-down">
       <!-- Navigation Arrows -->
       <div class="nav-arrow prev-arrow" (click)="prevSlide()">
         <ion-icon name="chevron-back-outline"></ion-icon>
@@ -78,7 +79,7 @@
 
   </div>
   <!-- ==================== TIẾP TỤC NGHE ==================== -->
-  <section class="music-section resume-section" *ngIf="recentlyPlayed.length > 0">
+  <section class="music-section resume-section  reveal-on-scroll" *ngIf="recentlyPlayed.length > 0">
     <div class="section-header">
       <h2>Tiếp tục nghe</h2>
 
@@ -100,14 +101,14 @@
       </div>
 
       <!-- Mũi tên phải -->
-      <div class="scroll-arrow next-arrow-scroll" (click)="scrollRight('resumeScroll')">
+        <div class="scroll-arrow next-arrow-scroll" (click)="scrollRight('resumeScroll')">
         <ion-icon name="chevron-forward-outline"></ion-icon>
       </div>
     </div>
   </section>
 
   <!-- ==================== DÀNH CHO BẠN ==================== -->
-  <div class="music-section">
+  <div class="music-section  reveal-on-scroll">
     <div class="section-header">
       <h2>Dành cho bạn</h2>
 
@@ -136,6 +137,7 @@
   </div>
 
   <app-playlist-slider
+    class="reveal-on-scroll"
     [playlists]="homePlayliststop100"
     title="Top 100"
     categoryRoute="/category">
@@ -146,6 +148,7 @@
     title="Chill"
     categoryRoute="/category">
   </app-playlist-slider>
+  </div>
 
 
 </ion-content>
